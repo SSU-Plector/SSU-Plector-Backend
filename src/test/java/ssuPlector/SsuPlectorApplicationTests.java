@@ -1,10 +1,10 @@
-package ssuplector;
+package ssuPlector;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SsuplectorApplicationTests {
+class SsuPlectorApplicationTests {
 
 	@Test
 	void contextLoads() {
