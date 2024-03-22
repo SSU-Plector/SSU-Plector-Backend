@@ -1,4 +1,16 @@
-# JPA
+#
+spring:
+  application:
+    name: SSUPlector
+  profiles:
+    active: local
+springdoc:
+  swagger-ui:
+    tags-sorter: alpha
+    operations-sorter: alpha
+  use-fqn: true
+---
+# LOCAL
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
