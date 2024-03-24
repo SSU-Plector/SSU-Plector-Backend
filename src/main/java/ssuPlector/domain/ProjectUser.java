@@ -1,26 +1,33 @@
-package ssuPlector;
+package ssuPlector.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
 
-import java.util.List;
+import lombok.Builder;
+import lombok.Getter;
+import ssuPlector.domain.category.Part;
 
 @Entity
 @Getter
+@Builder
 public class ProjectUser {
     @Id
     @GeneratedValue
     @Column(name = "project_user_id")
     private Long id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
     private Project project;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-    @ElementCollection(targetClass = Part.class)
-    @CollectionTable(name = "part_list", joinColumns = @JoinColumn(name = "id"))
+
     @Enumerated(EnumType.STRING)
-    private List<Part> partList;
+    private Part part1;
+
+    @Enumerated(EnumType.STRING)
+    private Part part2;
+
     private boolean isTeamLeader;
 }
