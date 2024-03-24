@@ -1,0 +1,300 @@
+Index: src/main/java/ssuPlector/Category.java
+===================================================================
+diff --git a/src/main/java/ssuPlector/Category.java b/src/main/java/ssuPlector/Category.java
+deleted file mode 100644
+--- a/src/main/java/ssuPlector/Category.java	(revision 84454111e8e633ef465825a30af573bfc6ccd781)
++++ /dev/null	(revision 84454111e8e633ef465825a30af573bfc6ccd781)
+@@ -1,5 +0,0 @@
+-package ssuPlector;
+-
+-public enum Category {
+-    SERVICE, AI, NETWORK, GAME
+-}
+Index: src/main/java/ssuPlector/domain/category/DevTools.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ssuPlector/domain/category/DevTools.java b/src/main/java/ssuPlector/domain/category/DevTools.java
+new file mode 100644
+--- /dev/null	(date 1711070879302)
++++ b/src/main/java/ssuPlector/domain/category/DevTools.java	(date 1711070879302)
+@@ -0,0 +1,11 @@
++package ssuPlector.domain.category;
++
++public enum DevTools {
++    NOTION, GITHUB, SLACK, JIRA, MS_TEAMS,
++    JANDI, ZOOM, GOOGLE_MEET, GOOGLE_WORKSPACE, TRELLO,
++    FIGMA, NAVER_WORKS, FLOW, YAMMER, AZIT,
++    COLLABY, CUP, DROPBOX_BUSINESS, COLLABORATOR, STUDIO_3T,
++    SQL_SENTRY, DB_SCHEMA, VS_CODE, INTELLIJ, ECLIPSE,
++    VISUAL_STUDIO, PYCHARM, GOOGLE_SPREADSHEET, ASANA, GOOGLE_DRIVE,
++    DROPBOX, RESCUETIME, WORKPLACE
++}
+Index: src/main/java/ssuPlector/domain/category/Category.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ssuPlector/domain/category/Category.java b/src/main/java/ssuPlector/domain/category/Category.java
+new file mode 100644
+--- /dev/null	(date 1711067120138)
++++ b/src/main/java/ssuPlector/domain/category/Category.java	(date 1711067120138)
+@@ -0,0 +1,10 @@
++package ssuPlector.domain.category;
++
++public enum Category {
++    SERVICE, SECURITY, FINANCE, PLATFORM, GAME,
++    MOBILE_APP, WEB_APPLICATION, DATA_ANALYTICS, AI, ML,
++    IOT, CLOUD_COMPUTING, BLOCKCHAIN, E_COMMERCE, HEALTHCARE_IT,
++    ED_TECH, SOCIAL_MEDIA, CRM, ERP, BI,
++    CPS, AR, VR, AUTOMATION, ROBOTICS,
++    OTHER
++}
+Index: src/main/java/ssuPlector/domain/category/DevLanguage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ssuPlector/domain/category/DevLanguage.java b/src/main/java/ssuPlector/domain/category/DevLanguage.java
+new file mode 100644
+--- /dev/null	(date 1711069561199)
++++ b/src/main/java/ssuPlector/domain/category/DevLanguage.java	(date 1711069561199)
+@@ -0,0 +1,14 @@
++package ssuPlector.domain.category;
++
++public enum DevLanguage {
++    ADA, ABAP, ACTIONSCRIPT, APL, AWK,
++    BASIC, C, CPP, CS, COFFEESCRIPT,
++    COBOL, D, DART, ELIXIR, ERLANG,
++    FORTH, FORTRAN, GO, GROOVY, HASKELL,
++    JAVA, JS, TS, JULIA, KOTLIN,
++    LISP, LUA, MATLAB, ML, OCAML,
++    FSHARP, PERL, PHP, PROLOG, PYTHON,
++    PASCAL, R, RUBY, RUST, SCALA,
++    SWIFT, VB, VBDOTNET, SQL, HTML,
++    CSS, SCSS, XML
++}
+Index: src/main/java/ssuPlector/Part.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ssuPlector/Part.java b/src/main/java/ssuPlector/domain/category/Part.java
+rename from src/main/java/ssuPlector/Part.java
+rename to src/main/java/ssuPlector/domain/category/Part.java
+--- a/src/main/java/ssuPlector/Part.java	(revision 84454111e8e633ef465825a30af573bfc6ccd781)
++++ b/src/main/java/ssuPlector/domain/category/Part.java	(date 1711070517251)
+@@ -1,6 +1,8 @@
+-package ssuPlector;
++package ssuPlector.domain.category;
+ 
+-//개발 분야
+ public enum Part {
+-    BACKEND, FRONTEND, DESIGNER, PLANNER, PM
++    FRONTEND, BACKEND, FULLSTACK, PM, PO,
++    BUSINESS_ANALYST, SYSTEMS_ANALYST, SOFTWARE_ARCHITECT,
++    QUALITY_ASSURANCE_ENGINEER, DEVOPS_ENGINEER, TECHNICAL_WRITER,
++    DATABASE_ADMINISTRATOR, NETWORK_ENGINEER, SECURITY_ANALYST
+ }
+Index: src/main/java/ssuPlector/domain/category/TechStack.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ssuPlector/domain/category/TechStack.java b/src/main/java/ssuPlector/domain/category/TechStack.java
+new file mode 100644
+--- /dev/null	(date 1711072659292)
++++ b/src/main/java/ssuPlector/domain/category/TechStack.java	(date 1711072659292)
+@@ -0,0 +1,11 @@
++package ssuPlector.domain.category;
++
++public enum TechStack {
++    DJANGO, RUBY_ON_RAILS, FLASK, SPRING, ANGULAR,
++    REACT, VUE, EMBER, LARAVEL, SYMFONY,
++    EXPRESS, NODE_JS, DOT_NET, XAMARIN, IONIC,
++    GRAFANA, ASP_NET_CORE, SERVERLESS, MICROSERVICES, KUBERNETES,
++    DOCKER, AWS, AZURE, GOOGLE_CLOUD, FIREBASE,
++    HEROKU, DIGITALOCEAN, VAGRANT, ANSIBLE, TERRAFORM,
++    JENKINS, TRAVIS_CI, CIRCLECI, GITLAB_CI
++}
+Index: src/main/java/ssuPlector/ProjectUser.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ssuPlector/ProjectUser.java b/src/main/java/ssuPlector/domain/ProjectUser.java
+rename from src/main/java/ssuPlector/ProjectUser.java
+rename to src/main/java/ssuPlector/domain/ProjectUser.java
+--- a/src/main/java/ssuPlector/ProjectUser.java	(revision 84454111e8e633ef465825a30af573bfc6ccd781)
++++ b/src/main/java/ssuPlector/domain/ProjectUser.java	(date 1711073950427)
+@@ -1,9 +1,9 @@
+-package ssuPlector;
++package ssuPlector.domain;
+ 
+ import jakarta.persistence.*;
+ import lombok.Getter;
++import ssuPlector.domain.category.Part;
+ 
+-import java.util.List;
+ 
+ @Entity
+ @Getter
+@@ -18,9 +18,9 @@
+     @ManyToOne(fetch = FetchType.LAZY)
+     @JoinColumn(name = "user_id")
+     private User user;
+-    @ElementCollection(targetClass = Part.class)
+-    @CollectionTable(name = "part_list", joinColumns = @JoinColumn(name = "id"))
+     @Enumerated(EnumType.STRING)
+-    private List<Part> partList;
++    private Part part1;
++    @Enumerated(EnumType.STRING)
++    private Part part2;
+     private boolean isTeamLeader;
+ }
+Index: src/main/java/ssuPlector/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ssuPlector/User.java b/src/main/java/ssuPlector/domain/User.java
+rename from src/main/java/ssuPlector/User.java
+rename to src/main/java/ssuPlector/domain/User.java
+--- a/src/main/java/ssuPlector/User.java	(revision 84454111e8e633ef465825a30af573bfc6ccd781)
++++ b/src/main/java/ssuPlector/domain/User.java	(date 1711076694654)
+@@ -1,7 +1,10 @@
+-package ssuPlector;
++package ssuPlector.domain;
+ 
+ import jakarta.persistence.*;
+ import lombok.Getter;
++import ssuPlector.domain.category.DevLanguage;
++import ssuPlector.domain.category.DevTools;
++import ssuPlector.domain.category.TechStack;
+ 
+ import java.util.List;
+ 
+@@ -13,16 +16,23 @@
+     @Column(name = "user_id")
+     private Long id;
+     private String name;
++    private String mainImage;
++    private List<String> imageList;
++    private String shortIntro;
++    private String university;
++    private String major;
++    private String studentNumber;
+     private String email;
+-    private String password;
+-    private boolean isDeveloper;
+-    private String phoneNumber;
+     private String kakaoId;
+-    private String githubId;
++    private String githubLink;
++    private boolean isDeveloper;
+     private List<String> linkList;
+-
+-    @ElementCollection(targetClass = Part.class)
+-    @CollectionTable(name = "part_list", joinColumns = @JoinColumn(name = "id"))
++    @OneToMany(mappedBy = "user")
++    private List<ProjectUser> projectUserList;
++    @Enumerated(EnumType.STRING)
++    private List<DevLanguage> languageList;
+     @Enumerated(EnumType.STRING)
+-    private List<Part> partList;
++    private List<DevTools> devToolList;
++    @Enumerated(EnumType.STRING)
++    private List<TechStack> techStackList;
+ }
+Index: src/main/java/ssuPlector/Image.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ssuPlector/Image.java b/src/main/java/ssuPlector/domain/Image.java
+rename from src/main/java/ssuPlector/Image.java
+rename to src/main/java/ssuPlector/domain/Image.java
+--- a/src/main/java/ssuPlector/Image.java	(revision 84454111e8e633ef465825a30af573bfc6ccd781)
++++ b/src/main/java/ssuPlector/domain/Image.java	(date 1711077304128)
+@@ -1,4 +1,4 @@
+-package ssuPlector;
++package ssuPlector.domain;
+ 
+ import jakarta.persistence.*;
+ import lombok.Getter;
+@@ -10,13 +10,13 @@
+     @GeneratedValue
+     @Column(name = "image_id")
+     private Long id;
+-    private String imageUrl;
++    private String imagePath;
+     private boolean isMainImage;
+-    @ManyToOne(fetch = FetchType.LAZY)
+-    @JoinColumn(name = "user_id")
+-    private User user;
+-    @ManyToOne(fetch = FetchType.LAZY)
+-    @JoinColumn(name = "project_id")
+-    private Project project;
++//    @ManyToOne(fetch = FetchType.LAZY)
++//    @JoinColumn(name = "user_id")
++//    private User user;
++//    @ManyToOne(fetch = FetchType.LAZY)
++//    @JoinColumn(name = "project_id")
++//    private Project project;
+ 
+ }
+Index: src/main/java/ssuPlector/Project.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ssuPlector/Project.java b/src/main/java/ssuPlector/domain/Project.java
+rename from src/main/java/ssuPlector/Project.java
+rename to src/main/java/ssuPlector/domain/Project.java
+--- a/src/main/java/ssuPlector/Project.java	(revision 84454111e8e633ef465825a30af573bfc6ccd781)
++++ b/src/main/java/ssuPlector/domain/Project.java	(date 1711075324534)
+@@ -1,7 +1,11 @@
+-package ssuPlector;
++package ssuPlector.domain;
+ 
+ import jakarta.persistence.*;
+ import lombok.Getter;
++import ssuPlector.domain.category.Category;
++import ssuPlector.domain.category.DevLanguage;
++import ssuPlector.domain.category.DevTools;
++import ssuPlector.domain.category.TechStack;
+ 
+ import java.util.List;
+ 
+@@ -13,19 +17,21 @@
+     @Column(name = "project_id")
+     private Long id;
+     private String name;
+-    @OneToMany(mappedBy = "project")
+-    private List<Image> imageList;
++    private String mainImage;
++    private List<String> imageList;
+     @OneToMany(mappedBy = "project")
+     private List<ProjectUser> projectUserList;
+     private String shortIntro;
+     private String longIntro;
+-    private String techStack;
+-    @ElementCollection(targetClass = Category.class)
+-    @CollectionTable(name = "category_list", joinColumns = @JoinColumn(name = "id"))
+     @Enumerated(EnumType.STRING)
+-    private List<Category> categoryList;
+-    private String websiteLink;
++    private Category category;
++    private String infoPageLink;
++    private String webLink;
+     private String appLink;
+-    private String landingPageLink;
+-    private String infoPageLink;
++    @Enumerated(EnumType.STRING)
++    private List<DevLanguage> languageList;
++    @Enumerated(EnumType.STRING)
++    private List<DevTools> devToolList;
++    @Enumerated(EnumType.STRING)
++    private List<TechStack> techStackList;
+ }

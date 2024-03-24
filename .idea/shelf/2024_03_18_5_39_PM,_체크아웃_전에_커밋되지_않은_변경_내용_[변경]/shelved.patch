@@ -1,0 +1,149 @@
+Index: src/main/java/ssuPlector/SsuPlectorApplication.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ssuplector;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class SsuplectorApplication {\n\n\tpublic static void main(String[] args) {\n\t\tSpringApplication.run(SsuplectorApplication.class, args);\n\t}\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ssuPlector/SsuPlectorApplication.java b/src/main/java/ssuPlector/SsuPlectorApplication.java
+--- a/src/main/java/ssuPlector/SsuPlectorApplication.java	
++++ b/src/main/java/ssuPlector/SsuPlectorApplication.java	
+@@ -4,10 +4,10 @@
+ import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 
+ @SpringBootApplication
+-public class SsuplectorApplication {
++public class SsuPlectorApplication {
+ 
+ 	public static void main(String[] args) {
+-		SpringApplication.run(SsuplectorApplication.class, args);
++		SpringApplication.run(ssuplector.SsuPlectorApplication.class, args);
+ 	}
+ 
+ }
+Index: src/main/java/ssuPlector/ProjectUser.java
+===================================================================
+diff --git a/src/main/java/ssuPlector/ProjectUser.java b/src/main/java/ssuPlector/ProjectUser.java
+new file mode 100644
+--- /dev/null	
++++ b/src/main/java/ssuPlector/ProjectUser.java	
+@@ -0,0 +1,26 @@
++package ssuPlector;
++
++import jakarta.persistence.*;
++import lombok.Getter;
++
++import java.util.List;
++import java.util.Set;
++
++@Entity
++@Getter
++public class ProjectUser {
++    @Id
++    @GeneratedValue
++    private Long projectUserId;
++    @ManyToOne(fetch = FetchType.LAZY)
++    @JoinColumn(name = "project_id")
++    private Project project;
++    @ManyToOne(fetch = FetchType.LAZY)
++    @JoinColumn(name = "user_id")
++    private User user;
++    @Enumerated(EnumType.STRING)
++    @Column(name = "part_list")
++    private List<Part> partList;
++    @Column(name = "is_team_leader")
++    private boolean isTeamLeader;
++}
+\ No newline at end of file
+Index: src/main/java/ssuPlector/Part.java
+===================================================================
+diff --git a/src/main/java/ssuPlector/Part.java b/src/main/java/ssuPlector/Part.java
+new file mode 100644
+--- /dev/null	
++++ b/src/main/java/ssuPlector/Part.java	
+@@ -0,0 +1,5 @@
++package ssuPlector;
++
++public enum Part {
++    BACKEND, FRONTEND, DESIGNER, PLANNER, PM
++}
+Index: src/main/java/ssuPlector/User.java
+===================================================================
+diff --git a/src/main/java/ssuPlector/User.java b/src/main/java/ssuPlector/User.java
+new file mode 100644
+--- /dev/null	
++++ b/src/main/java/ssuPlector/User.java	
+@@ -0,0 +1,4 @@
++package ssuPlector;
++
++public class User {
++}
+Index: src/test/java/ssuPlector/SsuPlectorApplicationTests.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ssuplector;\n\nimport org.junit.jupiter.api.Test;\nimport org.springframework.boot.test.context.SpringBootTest;\n\n@SpringBootTest\nclass SsuplectorApplicationTests {\n\n\t@Test\n\tvoid contextLoads() {\n\t}\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/ssuPlector/SsuPlectorApplicationTests.java b/src/test/java/ssuPlector/SsuPlectorApplicationTests.java
+--- a/src/test/java/ssuPlector/SsuPlectorApplicationTests.java	
++++ b/src/test/java/ssuPlector/SsuPlectorApplicationTests.java	
+@@ -4,7 +4,7 @@
+ import org.springframework.boot.test.context.SpringBootTest;
+ 
+ @SpringBootTest
+-class SsuplectorApplicationTests {
++class SsuPlectorApplicationTests {
+ 
+ 	@Test
+ 	void contextLoads() {
+Index: src/main/java/ssuPlector/Project.java
+===================================================================
+diff --git a/src/main/java/ssuPlector/Project.java b/src/main/java/ssuPlector/Project.java
+new file mode 100644
+--- /dev/null	
++++ b/src/main/java/ssuPlector/Project.java	
+@@ -0,0 +1,31 @@
++package ssuPlector;
++
++import jakarta.persistence.*;
++import lombok.Getter;
++
++import java.util.List;
++
++@Entity
++@Getter
++public class Project {
++    @Id
++    @GeneratedValue
++    @Column(name = "category_id")
++    private Long id;
++    private String name;
++    @Column(name = "app_image")
++    private Image appImage;
++    private String appIntroImage;
++    private String shortIntro;
++    private String longIntro;
++    private String techStack;
++    private String category;
++    private String websiteLink;
++    private String appLink;
++    private String landingPageLink;
++    private String infoPageLink;
++    @OneToMany(mappedBy = "project")
++    private List<ProjectUser> projectUserList;
++    @OneToMany(mappedBy = "project")
++    private List<Image> images;
++}
+\ No newline at end of file
+Index: src/main/java/ssuPlector/Image.java
+===================================================================
+diff --git a/src/main/java/ssuPlector/Image.java b/src/main/java/ssuPlector/Image.java
+new file mode 100644
+--- /dev/null	
++++ b/src/main/java/ssuPlector/Image.java	
+@@ -0,0 +1,4 @@
++package ssuPlector;
++
++public class Image {
++}
