@@ -16,14 +16,17 @@ import java.util.List;
 public class Project {
     @Id
     @GeneratedValue
-    @Column(name = "project_id")
+    @Column(name = "project_id", columnDefinition = "bigint")
     private Long id;
+    @Column(columnDefinition = "varchar(30)")
     private String name;
     @OneToMany(mappedBy = "project")
     private List<Image> imageList;
     @OneToMany(mappedBy = "project")
     private List<ProjectUser> projectUserList;
+    @Column(columnDefinition = "varchar(101)")
     private String shortIntro;
+    @Column(columnDefinition = "text")
     private String longIntro;
     @Enumerated(EnumType.STRING)
     private Category category;
@@ -36,4 +39,16 @@ public class Project {
     private List<DevTools> devToolList;
     @Enumerated(EnumType.STRING)
     private List<TechStack> techStackList;
+
+
+    //==연관관계 메서드==//
+    public void addProjectUser(ProjectUser projectUser) {
+        projectUser.setProject(this);
+        this.projectUserList.add(projectUser);
+    }
+
+    public void addImage(Image image) {
+        image.setProject(this);
+        this.imageList.add(image);
+    }
 }
