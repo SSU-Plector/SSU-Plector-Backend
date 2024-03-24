@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import ssuPlector.domain.category.Part;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Builder
@@ -12,7 +14,7 @@ import ssuPlector.domain.category.Part;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ProjectUser {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "project_user_id", columnDefinition = "bigint")
     private Long id;
 
@@ -27,10 +29,7 @@ public class ProjectUser {
     private User user;
 
     @Enumerated(EnumType.STRING)
-    private Part part1; //개발 참여 분야 1
-
-    @Enumerated(EnumType.STRING)
-    private Part part2; //개발 참여 분야 2
+    private List<Part> partList; //개발 참여 분야
 
     @Column(columnDefinition = "tinyint(1)")
     private boolean isTeamLeader;
