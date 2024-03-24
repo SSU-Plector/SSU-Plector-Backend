@@ -2,14 +2,14 @@ package ssuPlector.domain;
 
 import jakarta.persistence.*;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import ssuPlector.domain.category.Part;
 
 @Entity
 @Getter
 @Builder
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ProjectUser {
     @Id
     @GeneratedValue

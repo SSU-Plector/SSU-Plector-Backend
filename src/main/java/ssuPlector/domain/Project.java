@@ -1,8 +1,7 @@
 package ssuPlector.domain;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 import ssuPlector.domain.category.Category;
 import ssuPlector.domain.category.DevLanguage;
 import ssuPlector.domain.category.DevTools;
@@ -13,6 +12,8 @@ import java.util.List;
 @Entity
 @Getter
 @Builder
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Project {
     @Id
     @GeneratedValue
