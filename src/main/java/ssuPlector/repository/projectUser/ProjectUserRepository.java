@@ -1,4 +1,4 @@
-package ssuPlector.repository;
+package ssuPlector.repository.projectUser;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
