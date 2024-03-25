@@ -17,7 +17,7 @@ import java.util.List;
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "project_id", columnDefinition = "bigint")
+    @Column(name = "project_id")
     private Long id;
     @Column(columnDefinition = "varchar(30)")
     private String name;
@@ -31,8 +31,7 @@ public class Project {
     private String longIntro;
     @Enumerated(EnumType.STRING)
     private Category category;
-    @Column(columnDefinition = "bigint")
-    private Long hits;
+    private long hits;
     private String infoPageLink;
     private String webLink;
     private String appLink;

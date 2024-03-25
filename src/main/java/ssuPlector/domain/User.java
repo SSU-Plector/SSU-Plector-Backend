@@ -16,7 +16,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", columnDefinition = "bigint")
+    @Column(name = "user_id")
     private Long id;
 
     @Column(columnDefinition = "varchar(20)")
@@ -36,8 +36,7 @@ public class User {
 
     @Column(columnDefinition = "varchar(50)")
     private String email;
-    @Column(columnDefinition = "bigint")
-    private Long hits;
+    private long hits;
 
     @Column(columnDefinition = "varchar(20)")
     private String kakaoId;
