@@ -1,9 +1,9 @@
-package ssuPlector.service;
+package ssuPlector.service.project;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class DeveloperService {
+public class ProjectServiceImpl implements ProjectService{
 }
