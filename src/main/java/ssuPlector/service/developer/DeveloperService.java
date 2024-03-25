@@ -1,7 +1,9 @@
 package ssuPlector.service.developer;
 
+import ssuPlector.domain.User;
+
 public interface DeveloperService {
-    /**
-     * 함수 정의 필요
-     */
+    User getDeveloper(Long id);
+
+    boolean existsByDeveloperId(Long id);
 }
