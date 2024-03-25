@@ -31,6 +31,8 @@ public class Project {
     private String longIntro;
     @Enumerated(EnumType.STRING)
     private Category category;
+    @Column(columnDefinition = "bigint")
+    private Long hits;
     private String infoPageLink;
     private String webLink;
     private String appLink;

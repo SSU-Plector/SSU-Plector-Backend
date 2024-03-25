@@ -36,6 +36,8 @@ public class User {
 
     @Column(columnDefinition = "varchar(50)")
     private String email;
+    @Column(columnDefinition = "bigint")
+    private Long hits;
 
     @Column(columnDefinition = "varchar(20)")
     private String kakaoId;
