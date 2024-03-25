@@ -27,6 +27,8 @@ public class ProjectUser extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+    @Column(columnDefinition = "varchar(20)")
+    private String name;
 
     @Enumerated(EnumType.STRING)
     private List<Part> partList; //개발 참여 분야
