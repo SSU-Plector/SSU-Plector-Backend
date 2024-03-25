@@ -1,12 +1,13 @@
 package ssuPlector.domain;
 
+import java.util.List;
+
 import jakarta.persistence.*;
+
 import lombok.*;
 import ssuPlector.domain.category.DevLanguage;
 import ssuPlector.domain.category.DevTools;
 import ssuPlector.domain.category.TechStack;
-
-import java.util.List;
 
 @Entity
 @Getter
@@ -36,31 +37,35 @@ public class User extends BaseEntity {
 
     @Column(columnDefinition = "varchar(50)")
     private String email;
+
     private long hits;
 
     @Column(columnDefinition = "varchar(20)")
     private String kakaoId;
+
     private String githubLink;
+
     @Column(columnDefinition = "tinyint(1)")
     private boolean isDeveloper;
 
-    @ElementCollection
-    private List<String> linkList;
+    @ElementCollection private List<String> linkList;
 
     @OneToMany(mappedBy = "user")
     private List<Image> imageList;
 
     @OneToMany(mappedBy = "user")
     private List<ProjectUser> projectUserList;
+
     @Enumerated(EnumType.STRING)
     private List<DevLanguage> languageList;
+
     @Enumerated(EnumType.STRING)
     private List<DevTools> devToolList;
+
     @Enumerated(EnumType.STRING)
     private List<TechStack> techStackList;
 
-
-    //==연관관계 메서드==//
+    // ==연관관계 메서드==//
     public void addProjectUser(ProjectUser projectUser) {
         projectUser.setUser(this);
         this.projectUserList.add(projectUser);

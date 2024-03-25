@@ -1,4 +1,3 @@
 package ssuPlector.repository.project;
 
-public interface ProjectRepositoryCustom {
-}
+public interface ProjectRepositoryCustom {}
