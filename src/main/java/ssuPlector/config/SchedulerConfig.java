@@ -21,7 +21,7 @@ public class SchedulerConfig {
     private final DeveloperService developerService;
 
     @Scheduled(cron = "0 */10 * * * *") // 10분 마다 수행
-    public void updateFlowViewCount() {
+    public void updateDeveloperViewCount() {
 
         List<Long> developerIdList = developerHitsService.getAllDeveloperIds();
         List<Long> targetDeveloperIdList =
