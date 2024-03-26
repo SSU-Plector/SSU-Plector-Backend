@@ -36,4 +36,13 @@ public class DeveloperDTO {
         List<DevTools> devToolList;
         List<TechStack> techStackList;
     }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class DeveloperPreviewDTO {
+        Long id;
+        String name;
+    }
 }

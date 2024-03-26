@@ -4,8 +4,10 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
+import ssuPlector.domain.ProjectUser;
 import ssuPlector.domain.User;
 import ssuPlector.dto.response.DeveloperDTO.DeveloperDetailDTO;
+import ssuPlector.dto.response.DeveloperDTO.DeveloperPreviewDTO;
 
 @Component
 public class UserConverter {
@@ -32,6 +34,13 @@ public class UserConverter {
                         user.getProjectUserList().stream()
                                 .map(ProjectConverter::toProjectPreviewDTO)
                                 .collect(Collectors.toList()))
+                .build();
+    }
+
+    public static DeveloperPreviewDTO toDeveloperPreviewDTO(ProjectUser projectUser) {
+        return DeveloperPreviewDTO.builder()
+                .id(projectUser.getId())
+                .name(projectUser.getName())
                 .build();
     }
 }
