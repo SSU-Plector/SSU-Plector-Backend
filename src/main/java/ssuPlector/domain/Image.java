@@ -1,6 +1,7 @@
 package ssuPlector.domain;
 
 import jakarta.persistence.*;
+
 import lombok.*;
 
 @Entity
@@ -13,16 +14,19 @@ public class Image extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "image_id")
     private Long id;
+
     private String imagePath;
+
     @Column(columnDefinition = "tinyint(1)")
     private boolean isMainImage;
+
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
     private Project project;
-
 }

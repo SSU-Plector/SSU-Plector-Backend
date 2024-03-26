@@ -1,11 +1,11 @@
 package ssuPlector.domain;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 import lombok.*;
 import ssuPlector.domain.category.Part;
-
-import java.util.List;
 
 @Entity
 @Getter
@@ -27,11 +27,12 @@ public class ProjectUser extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
     @Column(columnDefinition = "varchar(20)")
     private String name;
 
     @Enumerated(EnumType.STRING)
-    private List<Part> partList; //개발 참여 분야
+    private List<Part> partList; // 개발 참여 분야
 
     @Column(columnDefinition = "tinyint(1)")
     private boolean isTeamLeader;
