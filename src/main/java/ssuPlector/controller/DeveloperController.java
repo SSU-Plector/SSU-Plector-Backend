@@ -11,7 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import ssuPlector.converter.UserConverter;
 import ssuPlector.domain.User;
-import ssuPlector.dto.Response.DeveloperDTO.DeveloperDetailDTO;
+import ssuPlector.dto.response.DeveloperDTO.DeveloperDetailDTO;
 import ssuPlector.global.response.ApiResponse;
 import ssuPlector.service.developer.DeveloperService;
 import ssuPlector.validation.annotation.ExistDeveloper;
@@ -20,7 +20,7 @@ import ssuPlector.validation.annotation.ExistDeveloper;
 @RequiredArgsConstructor
 @Validated
 @RequestMapping("/api/developers")
-@Tag(name = "Developer", description = "개발자 관련 API")
+@Tag(name = "Developer 🖥️", description = "개발자 관련 API")
 public class DeveloperController {
     private final DeveloperService developerService;
 
@@ -29,6 +29,6 @@ public class DeveloperController {
     public ApiResponse<DeveloperDetailDTO> getDeveloperDetail(
             @ExistDeveloper @PathVariable("developerId") Long developerId) {
         User user = developerService.getDeveloper(developerId);
-        return ApiResponse.onSuccess("", UserConverter.toDescriptionDTO(user));
+        return ApiResponse.onSuccess("개발자 상세조회 완료.", UserConverter.toDeveloperDetailDTO(user));
     }
 }

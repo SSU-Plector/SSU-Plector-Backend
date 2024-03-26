@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import ssuPlector.domain.Project;
 import ssuPlector.domain.ProjectUser;
-import ssuPlector.dto.Response.ProjectDTO.ProjectPreviewDTO;
+import ssuPlector.dto.response.ProjectDTO.ProjectPreviewDTO;
 
 @Component
 public class ProjectConverter {

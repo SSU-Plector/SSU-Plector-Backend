@@ -1,8 +1,7 @@
-package ssuPlector.dto.Response;
+package ssuPlector.dto.response;
 
 import java.util.List;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,13 +10,13 @@ import ssuPlector.domain.Image;
 import ssuPlector.domain.category.DevLanguage;
 import ssuPlector.domain.category.DevTools;
 import ssuPlector.domain.category.TechStack;
-import ssuPlector.dto.Response.ProjectDTO.ProjectPreviewDTO;
+import ssuPlector.dto.response.ProjectDTO.ProjectPreviewDTO;
 
 public class DeveloperDTO {
     @Getter
     @Builder
-    @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    @AllArgsConstructor(access = AccessLevel.PROTECTED)
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class DeveloperDetailDTO {
         Long id;
         String name;

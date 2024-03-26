@@ -1,8 +1,7 @@
-package ssuPlector.dto.Response;
+package ssuPlector.dto.response;
 
 import java.util.List;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,8 +12,8 @@ import ssuPlector.domain.category.Category;
 public class ProjectDTO {
     @Getter
     @Builder
-    @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    @AllArgsConstructor(access = AccessLevel.PROTECTED)
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class ProjectPreviewDTO {
         Long id;
         String name;

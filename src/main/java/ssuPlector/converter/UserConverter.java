@@ -5,12 +5,12 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import ssuPlector.domain.User;
-import ssuPlector.dto.Response.DeveloperDTO.DeveloperDetailDTO;
+import ssuPlector.dto.response.DeveloperDTO.DeveloperDetailDTO;
 
 @Component
 public class UserConverter {
 
-    public static DeveloperDetailDTO toDescriptionDTO(User user) {
+    public static DeveloperDetailDTO toDeveloperDetailDTO(User user) {
         return DeveloperDetailDTO.builder()
                 .id(user.getId())
                 .name(user.getName())
