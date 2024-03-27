@@ -12,7 +12,6 @@ import ssuPlector.global.response.code.GlobalErrorCode;
 import ssuPlector.redis.service.DeveloperHitsService;
 import ssuPlector.repository.user.UserRepository;
 
-
 @Service
 @RequiredArgsConstructor
 public class DeveloperServiceImpl implements DeveloperService {

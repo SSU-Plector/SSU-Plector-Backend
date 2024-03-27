@@ -1,23 +1,23 @@
 package ssuPlector.controller;
 
+import jakarta.validation.Valid;
+
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import jakarta.validation.Valid;
-
-import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.Operation;
-import lombok.RequiredArgsConstructor;
-import ssuPlector.global.response.ApiResponse;
-import ssuPlector.service.project.ProjectService;
-
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import ssuPlector.converter.ProjectConverter;
 import ssuPlector.domain.Project;
+import ssuPlector.dto.request.ProjectDTO.ProjectListRequestDto;
 import ssuPlector.dto.response.ProjectDTO.ProjectDetailDTO;
+import ssuPlector.global.response.ApiResponse;
+import ssuPlector.service.project.ProjectService;
 import ssuPlector.validation.annotation.ExistProject;
 
 @RestController
@@ -35,6 +35,7 @@ public class ProjectController {
         Project project = projectService.getProject(projectId);
         return ApiResponse.onSuccess("프로젝트 상세조회 완료.", ProjectConverter.toProjectDetailDTO(project));
     }
+
     @Operation(summary = "프로젝트 리스트 조회")
     @GetMapping("/list")
     public ApiResponse getSubject(
