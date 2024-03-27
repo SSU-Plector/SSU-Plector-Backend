@@ -38,9 +38,9 @@ public class ProjectRepositoryCustomImpl implements ProjectRepositoryCustom {
             } else if (sortType.equals("old")) {
                 query.orderBy(project.updatedDate.asc());
             } else if (sortType.equals("high")) {
-                query.orderBy(project.hits.asc());
-            } else if (sortType.equals("low")) {
                 query.orderBy(project.hits.desc());
+            } else if (sortType.equals("low")) {
+                query.orderBy(project.hits.asc());
             }
         }
 
