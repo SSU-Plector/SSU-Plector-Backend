@@ -43,8 +43,10 @@ public class ProjectListResponseDto {
         public ProjectResponseDto(Project project) {
             this.id = project.getId();
             this.name = project.getName();
-            for (Image image : project.getImageList())
-                if (image.isMainImage()) this.imagePath = image.getImagePath();
+            if (project.getImageList() == null) this.imagePath = null;
+            else
+                for (Image image : project.getImageList())
+                    if (image.isMainImage()) this.imagePath = image.getImagePath();
             this.shortIntro = project.getShortIntro();
             this.category = project.getCategory().name();
             this.hits = project.getHits();
