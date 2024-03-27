@@ -20,6 +20,10 @@ public class ProjectConverter {
                 .name(project.getName())
                 .shortIntro(project.getShortIntro())
                 .category(project.getCategory())
+                .imageList(
+                        project.getImageList().stream()
+                                .map(ImageConverter::toImagePreviewDTO)
+                                .collect(Collectors.toList()))
                 .build();
     }
 

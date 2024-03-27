@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import ssuPlector.domain.Image;
 import ssuPlector.domain.category.Category;
 import ssuPlector.domain.category.DevLanguage;
 import ssuPlector.domain.category.DevTools;
@@ -22,7 +21,7 @@ public class ProjectDTO {
     public static class ProjectPreviewDTO {
         Long id;
         String name;
-        List<Image> imageList;
+        List<ImagePreviewDTO> imageList;
         String shortIntro;
         Category category;
         long hits;
