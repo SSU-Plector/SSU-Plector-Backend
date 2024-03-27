@@ -13,8 +13,8 @@ import ssuPlector.domain.Project;
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long>, ProjectRepositoryCustom {
     @Modifying
-    @Query("UPDATE Project p SET p.hits = p.hits + :hits WHERE p.id = :id")
-    void incrementHitsById(@Param("id") Long id, @Param("hits") Long hits);
+    @Query("UPDATE Project p SET p.hits = :hits WHERE p.id = :id")
+    void updateHitsById(@Param("id") Long id, @Param("hits") Long hits);
 
     List<Project> findAllByIdIn(List<Long> id);
 }

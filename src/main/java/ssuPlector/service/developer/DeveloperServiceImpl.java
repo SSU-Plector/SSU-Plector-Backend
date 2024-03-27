@@ -36,7 +36,7 @@ public class DeveloperServiceImpl implements DeveloperService {
     @Override
     @Transactional
     public void updateDeveloperHits(Long developerId, Long hit) {
-        userRepository.incrementHitsById(developerId, hit);
+        userRepository.updateHitsById(developerId, hit);
     }
 
     @Override

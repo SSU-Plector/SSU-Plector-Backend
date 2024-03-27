@@ -31,7 +31,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     @Transactional
     public void updateProjectHits(Long projectId, Long hit) {
-        projectRepository.incrementHitsById(projectId, hit);
+        projectRepository.updateHitsById(projectId, hit);
     }
 
     @Override

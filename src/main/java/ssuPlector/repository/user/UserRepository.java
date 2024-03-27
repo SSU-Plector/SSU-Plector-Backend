@@ -13,8 +13,8 @@ import ssuPlector.domain.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
-    @Query("UPDATE User u SET u.hits = u.hits + :hits WHERE u.id = :id")
-    void incrementHitsById(@Param("id") Long id, @Param("hits") Long hits);
+    @Query("UPDATE User u SET u.hits = :hits WHERE u.id = :id")
+    void updateHitsById(@Param("id") Long id, @Param("hits") Long hits);
 
     List<User> findAllByIdIn(List<Long> id);
 }
