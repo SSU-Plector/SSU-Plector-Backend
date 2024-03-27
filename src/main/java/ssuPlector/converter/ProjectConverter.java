@@ -27,7 +27,10 @@ public class ProjectConverter {
         return ProjectDetailDTO.builder()
                 .id(project.getId())
                 .name(project.getName())
-                .imageList(project.getImageList())
+                .imageList(
+                        project.getImageList().stream()
+                                .map(ImageConverter::toImagePreviewDTO)
+                                .collect(Collectors.toList()))
                 .hits(project.getHits())
                 .developerList(
                         project.getProjectUserList().stream()

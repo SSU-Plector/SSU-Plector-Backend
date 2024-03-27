@@ -26,7 +26,10 @@ public class UserConverter {
                 .githubLink(user.getGithubLink())
                 .isDeveloper(user.isDeveloper())
                 .linkList(user.getLinkList())
-                .imageList(user.getImageList())
+                .imageList(
+                        user.getImageList().stream()
+                                .map(ImageConverter::toImagePreviewDTO)
+                                .collect(Collectors.toList()))
                 .languageList(user.getLanguageList())
                 .devToolList(user.getDevToolList())
                 .techStackList(user.getTechStackList())

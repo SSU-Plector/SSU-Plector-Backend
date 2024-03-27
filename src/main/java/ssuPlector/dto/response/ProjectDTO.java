@@ -12,6 +12,7 @@ import ssuPlector.domain.category.DevLanguage;
 import ssuPlector.domain.category.DevTools;
 import ssuPlector.domain.category.TechStack;
 import ssuPlector.dto.response.DeveloperDTO.DeveloperPreviewDTO;
+import ssuPlector.dto.response.ImageDTO.ImagePreviewDTO;
 
 public class ProjectDTO {
     @Getter
@@ -34,7 +35,7 @@ public class ProjectDTO {
     public static class ProjectDetailDTO {
         Long id;
         String name;
-        List<Image> imageList;
+        List<ImagePreviewDTO> imageList;
         List<DeveloperPreviewDTO> developerList;
         String shortIntro;
         String longIntro;
