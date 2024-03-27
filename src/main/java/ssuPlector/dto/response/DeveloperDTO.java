@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import ssuPlector.domain.Image;
 import ssuPlector.domain.category.DevLanguage;
 import ssuPlector.domain.category.DevTools;
+import ssuPlector.domain.category.Part;
 import ssuPlector.domain.category.TechStack;
 import ssuPlector.dto.response.ProjectDTO.ProjectPreviewDTO;
 
@@ -44,5 +45,6 @@ public class DeveloperDTO {
     public static class DeveloperPreviewDTO {
         Long id;
         String name;
+        List<Part> partList;
     }
 }

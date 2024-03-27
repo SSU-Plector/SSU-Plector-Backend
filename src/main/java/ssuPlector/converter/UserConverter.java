@@ -41,6 +41,7 @@ public class UserConverter {
         return DeveloperPreviewDTO.builder()
                 .id(projectUser.getId())
                 .name(projectUser.getName())
+                .partList(projectUser.getPartList())
                 .build();
     }
 }
