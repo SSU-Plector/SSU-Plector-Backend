@@ -46,7 +46,11 @@ tasks.named('test') {
 tasks.register('updateGitHooks', Copy) {
 	from new File(rootProject.rootDir, '.script/pre-commit')
 	into { new File(rootProject.rootDir, '.git/hooks') }
-	Runtime.getRuntime().exec("cmd /c chmod -R +x .git/hooks/")
+	if (System.getProperty('os.name').toLowerCase().contains('windows')) {
+		Runtime.getRuntime().exec("cmd /c chmod -R +x .git/hooks/")
+	} else {
+		Runtime.getRuntime().exec("chmod -R +x .git/hooks/")
+	}
 }
 
 tasks.named('compileJava') {
