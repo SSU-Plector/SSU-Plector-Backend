@@ -1,5 +1,15 @@
 package ssuPlector.service.developer;
 
+import java.util.List;
+
+import ssuPlector.domain.User;
+
 public interface DeveloperService {
-    /** 함수 정의 필요 */
+    User getDeveloper(Long id);
+
+    boolean existsByDeveloperId(Long id);
+
+    void updateDeveloperHits(Long developerId, Long hit);
+
+    List<Long> getUpdateTargetDeveloperIds(List<Long> DeveloperIdList);
 }

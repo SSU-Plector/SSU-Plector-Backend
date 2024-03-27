@@ -12,6 +12,9 @@ springdoc:
 ---
 # LOCAL
 spring:
+  config:
+    activate:
+      on-profile: local
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${SPRING_DATASOURCE_URL}
@@ -26,3 +29,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
