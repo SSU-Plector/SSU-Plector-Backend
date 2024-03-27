@@ -1,5 +1,7 @@
 package ssuPlector.dto.requestDto;
 
+import jakarta.annotation.Nullable;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProjectListRequestDto {
-    private String searchString;
-    private String category;
-    private String sortType; // recent, old, high, low
+    @Nullable private String searchString;
+    @Nullable private String category;
+    @Nullable private String sortType; // recent, old, high, low
 }
