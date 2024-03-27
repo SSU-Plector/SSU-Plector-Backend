@@ -1,22 +1,19 @@
 package ssuPlector.service.project;
 
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import java.util.List;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import ssuPlector.domain.Project;
+import ssuPlector.dto.request.ProjectDTO.ProjectListRequestDto;
+import ssuPlector.dto.response.ProjectDTO.ProjectListResponseDto;
 import ssuPlector.global.exception.GlobalException;
 import ssuPlector.global.response.code.GlobalErrorCode;
 import ssuPlector.redis.service.ProjectHitsService;
-import ssuPlector.repository.project.ProjectRepository;
-
-import lombok.RequiredArgsConstructor;
-import ssuPlector.dto.requestDto.ProjectListRequestDto;
-import ssuPlector.dto.responseDto.ProjectListResponseDto;
 import ssuPlector.repository.project.ProjectRepository;
 
 @Service
@@ -50,8 +47,6 @@ public class ProjectServiceImpl implements ProjectService {
     public boolean existsByProjectId(Long id) {
         return projectRepository.existsById(id);
     }
-public class ProjectServiceImpl implements ProjectService {
-    private final ProjectRepository projectRepository;
 
     @Override
     public ProjectListResponseDto getProjectList(ProjectListRequestDto requestDto, int page) {

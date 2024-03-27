@@ -3,9 +3,8 @@ package ssuPlector.service.project;
 import java.util.List;
 
 import ssuPlector.domain.Project;
-
-import ssuPlector.dto.requestDto.ProjectListRequestDto;
-import ssuPlector.dto.responseDto.ProjectListResponseDto;
+import ssuPlector.dto.request.ProjectDTO.ProjectListRequestDto;
+import ssuPlector.dto.response.ProjectDTO.ProjectListResponseDto;
 
 public interface ProjectService {
     Project getProject(Long projectId);
