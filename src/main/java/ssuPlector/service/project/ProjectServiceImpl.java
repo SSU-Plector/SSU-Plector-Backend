@@ -1,5 +1,7 @@
 package ssuPlector.service.project;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -10,6 +12,11 @@ import ssuPlector.domain.Project;
 import ssuPlector.global.exception.GlobalException;
 import ssuPlector.global.response.code.GlobalErrorCode;
 import ssuPlector.redis.service.ProjectHitsService;
+import ssuPlector.repository.project.ProjectRepository;
+
+import lombok.RequiredArgsConstructor;
+import ssuPlector.dto.requestDto.ProjectListRequestDto;
+import ssuPlector.dto.responseDto.ProjectListResponseDto;
 import ssuPlector.repository.project.ProjectRepository;
 
 @Service
@@ -42,5 +49,18 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public boolean existsByProjectId(Long id) {
         return projectRepository.existsById(id);
+    }
+public class ProjectServiceImpl implements ProjectService {
+    private final ProjectRepository projectRepository;
+
+    @Override
+    public ProjectListResponseDto getProjectList(ProjectListRequestDto requestDto, int page) {
+        Pageable pageable = PageRequest.of(page, 30);
+        return new ProjectListResponseDto(
+                projectRepository.findProjects(
+                        requestDto.getSearchString(),
+                        requestDto.getCategory(),
+                        requestDto.getSortType(),
+                        pageable));
     }
 }
