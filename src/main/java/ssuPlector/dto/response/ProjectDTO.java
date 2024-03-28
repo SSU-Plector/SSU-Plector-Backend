@@ -91,7 +91,7 @@ public class ProjectDTO {
             if (project.getImageList() == null) this.imagePath = null;
             else
                 for (Image image : project.getImageList())
-                    if (image.isMainImage()) this.imagePath = image.getImagePath();
+                    if (image.getIsMainImage()) this.imagePath = image.getImagePath();
             this.shortIntro = project.getShortIntro();
             this.category = project.getCategory().name();
             this.hits = project.getHits();

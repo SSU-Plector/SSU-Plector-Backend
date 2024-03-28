@@ -1,6 +1,7 @@
 package ssuPlector.repository.user;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -17,4 +18,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     void updateHitsById(@Param("id") Long id, @Param("hits") Long hits);
 
     List<User> findAllByIdIn(List<Long> id);
+
+    Optional<User> findByEmail(String email);
 }

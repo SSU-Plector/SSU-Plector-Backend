@@ -1,5 +1,6 @@
 package ssuPlector.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -46,7 +47,7 @@ public class User extends BaseEntity {
     private String githubLink;
 
     @Column(columnDefinition = "tinyint(1)")
-    private boolean isDeveloper;
+    private Boolean isDeveloper;
 
     @ElementCollection private List<String> linkList;
 
@@ -68,11 +69,13 @@ public class User extends BaseEntity {
     // ==연관관계 메서드==//
     public void addProjectUser(ProjectUser projectUser) {
         projectUser.setUser(this);
+        if (this.projectUserList == null) this.projectUserList = new ArrayList<>();
         this.projectUserList.add(projectUser);
     }
 
     public void addImage(Image image) {
         image.setUser(this);
+        if (this.imageList == null) this.imageList = new ArrayList<>();
         this.imageList.add(image);
     }
 }

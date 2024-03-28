@@ -24,7 +24,7 @@ public class UserConverter {
                 .hits(user.getHits())
                 .kakaoId(user.getKakaoId())
                 .githubLink(user.getGithubLink())
-                .isDeveloper(user.isDeveloper())
+                .isDeveloper(user.getIsDeveloper())
                 .linkList(user.getLinkList())
                 .imageList(
                         user.getImageList().stream()

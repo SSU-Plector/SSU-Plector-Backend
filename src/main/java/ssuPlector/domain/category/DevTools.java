@@ -1,5 +1,10 @@
 package ssuPlector.domain.category;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
+import ssuPlector.global.exception.GlobalException;
+import ssuPlector.global.response.code.GlobalErrorCode;
+
 public enum DevTools {
     NOTION,
     GITHUB,
@@ -33,5 +38,15 @@ public enum DevTools {
     GOOGLE_DRIVE,
     DROPBOX,
     RESCUETIME,
-    WORKPLACE
+    WORKPLACE;
+
+    @JsonCreator
+    public static DevTools fromDevTools(String devToolsString) {
+        for (DevTools devTools : DevTools.values()) {
+            if (devTools.name().equals(devToolsString)) {
+                return devTools;
+            }
+        }
+        throw new GlobalException(GlobalErrorCode.DEV_TOOLS_NOT_FOUND);
+    }
 }

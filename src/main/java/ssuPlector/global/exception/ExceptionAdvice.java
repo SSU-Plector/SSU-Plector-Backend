@@ -4,7 +4,9 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -39,6 +41,16 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
 
         return handleExceptionInternalConstraint(
                 e, GlobalErrorCode.valueOf(errorMessage), HttpHeaders.EMPTY, request);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException e,
+            HttpHeaders headers,
+            HttpStatusCode status,
+            WebRequest request) {
+        return ResponseEntity.badRequest()
+                .body(ApiResponse.onFailure(GlobalErrorCode._BAD_REQUEST, ""));
     }
 
     private ResponseEntity<Object> handleExceptionInternalConstraint(
