@@ -14,8 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import ssuPlector.domain.Project;
 import ssuPlector.domain.category.Category;
-import ssuPlector.dto.requestDto.ProjectListRequestDto;
-import ssuPlector.dto.responseDto.ProjectListResponseDto;
+import ssuPlector.dto.request.ProjectDTO;
 import ssuPlector.repository.project.ProjectRepository;
 import ssuPlector.service.project.ProjectService;
 
@@ -39,11 +38,13 @@ public class ProjectServiceTest {
     @Test
     public void getProjectListTest() {
         // 테스트 데이터 생성
-        ProjectListRequestDto requestDto =
-                new ProjectListRequestDto("테스트", Category.SERVICE.name(), "recent"); // 조건 수정 가능
+        ProjectDTO.ProjectListRequestDto requestDto =
+                new ProjectDTO.ProjectListRequestDto(
+                        "테스트", Category.SERVICE.name(), "recent"); // 조건 수정 가능
 
         // 메소드 호출
-        ProjectListResponseDto result = projectService.getProjectList(requestDto, 0);
+        ssuPlector.dto.response.ProjectDTO.ProjectListResponseDto result =
+                projectService.getProjectList(requestDto, 0);
 
         // 결과 검증
         assertThat(result).isNotNull();
