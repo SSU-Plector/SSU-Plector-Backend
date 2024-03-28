@@ -18,7 +18,7 @@ public class Image extends BaseEntity {
     private String imagePath;
 
     @Column(columnDefinition = "tinyint(1)")
-    private boolean isMainImage;
+    private Boolean isMainImage;
 
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
@@ -26,7 +26,7 @@ public class Image extends BaseEntity {
     private User user;
 
     @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
 }
