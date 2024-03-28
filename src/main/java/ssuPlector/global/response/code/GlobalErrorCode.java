@@ -18,7 +18,13 @@ public enum GlobalErrorCode {
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "USER4001", "해당 유저를 찾을 수 없습니다"),
 
     // PROJECT 관련
-    PROJECT_NOT_FOUND(HttpStatus.NOT_FOUND, "PROJECT4001", "해당 프로젝트를 찾을 수 없습니다");
+    PROJECT_NOT_FOUND(HttpStatus.NOT_FOUND, "PROJECT4001", "해당 프로젝트를 찾을 수 없습니다"),
+    // CATEGORY 관련
+    CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "CATEGORY4001", "해당 카테고리를 찾을 수 없습니다"),
+    DEV_LANGUAGE_NOT_FOUND(HttpStatus.NOT_FOUND, "DEVLANGUAGE4001", "해당 개발 언어를 찾을 수 없습니다"),
+    DEV_TOOLS_NOT_FOUND(HttpStatus.NOT_FOUND, "DEVTOOLS4001", "해당 개발 툴을 찾을 수 없습니다"),
+    PART_NOT_FOUND(HttpStatus.NOT_FOUND, "PART4001", "해당 개발 파트를 찾을 수 없습니다"),
+    TECH_STACK_NOT_FOUND(HttpStatus.NOT_FOUND, "TECHSTACK4001", "해당 기술 스택을 찾을 수 없습니다");
 
     private final HttpStatus httpStatus;
 
