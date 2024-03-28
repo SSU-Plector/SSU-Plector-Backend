@@ -6,11 +6,13 @@ import org.springframework.stereotype.Component;
 
 import ssuPlector.domain.Project;
 import ssuPlector.domain.ProjectUser;
+import ssuPlector.dto.request.ProjectDTO.ProjectDetailRequestDTO;
 import ssuPlector.dto.response.ProjectDTO.ProjectDetailDTO;
 import ssuPlector.dto.response.ProjectDTO.ProjectPreviewDTO;
 
 @Component
 public class ProjectConverter {
+
     public static ProjectPreviewDTO toProjectPreviewDTO(ProjectUser projectuser) {
         Project project = projectuser.getProject();
 
@@ -49,6 +51,21 @@ public class ProjectConverter {
                 .languageList(project.getLanguageList())
                 .devToolList(project.getDevToolList())
                 .techStackList(project.getTechStackList())
+                .build();
+    }
+
+    public static Project toProject(ProjectDetailRequestDTO requestDTO) {
+        return Project.builder()
+                .name(requestDTO.getName())
+                .shortIntro(requestDTO.getShortIntro())
+                .longIntro(requestDTO.getLongIntro())
+                .infoPageLink(requestDTO.getInfoPageLink())
+                .webLink(requestDTO.getWebLink())
+                .appLink(requestDTO.getAppLink())
+                .category(requestDTO.getCategory())
+                .languageList(requestDTO.getLanguageList())
+                .devToolList(requestDTO.getDevToolList())
+                .techStackList(requestDTO.getTechStackList())
                 .build();
     }
 }
