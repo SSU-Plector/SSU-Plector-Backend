@@ -3,14 +3,14 @@ package ssuPlector.dto.request;
 import jakarta.annotation.Nullable;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 public class ProjectDTO {
-    @Getter
+    @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public class ProjectListRequestDto {
+    public static class ProjectListRequestDto {
         @Nullable private String searchString;
         @Nullable private String category;
         @Nullable private String sortType; // recent, old, high, low
