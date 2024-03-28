@@ -1,5 +1,7 @@
 package ssuPlector.controller;
 
+import static ssuPlector.dto.request.ProjectDTO.*;
+
 import jakarta.validation.Valid;
 
 import org.springframework.validation.annotation.Validated;
@@ -43,5 +45,12 @@ public class ProjectController {
             @RequestParam(value = "page", defaultValue = "0", required = false) int page) {
         return ApiResponse.onSuccess(
                 "프로젝트 리스트 조회 성공", projectService.getProjectList(requestDto, page));
+    }
+
+    @Operation(summary = "프로젝트 생성, 저장 API", description = "프로젝트를 생성 후 저장합니다.")
+    @PostMapping
+    public ApiResponse createProject(@RequestBody @Valid ProjectDetailRequestDTO requestDTO) {
+        Long projectId = projectService.createProject(requestDTO);
+        return ApiResponse.onSuccess("프로젝트 생성 및 저장 완료.", projectId);
     }
 }
