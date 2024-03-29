@@ -17,7 +17,7 @@ public class ImageConverter {
                 .build();
     }
 
-    public static Image toImage(ImageDetailRequestDTO requestDTO) {
+    public static Image toImage(ImageRequestDTO requestDTO) {
         return Image.builder()
                 .imagePath(requestDTO.getImagePath())
                 .isMainImage(requestDTO.getIsMainImage())

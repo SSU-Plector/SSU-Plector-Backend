@@ -45,7 +45,7 @@ public class ProjectController {
 
     @Operation(summary = "프로젝트 생성, 저장 API", description = "프로젝트를 생성 후 저장합니다.")
     @PostMapping
-    public ApiResponse createProject(@RequestBody @Valid ProjectDetailRequestDTO requestDTO) {
+    public ApiResponse createProject(@RequestBody @Valid ProjectRequestDTO requestDTO) {
         Long projectId = projectService.createProject(requestDTO);
         return ApiResponse.onSuccess("프로젝트 생성 및 저장 완료.", projectId);
     }

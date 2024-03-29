@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import ssuPlector.domain.Project;
 import ssuPlector.domain.ProjectUser;
-import ssuPlector.dto.request.ProjectDTO.ProjectDetailRequestDTO;
+import ssuPlector.dto.request.ProjectDTO;
 import ssuPlector.dto.response.ProjectDTO.ProjectDetailDTO;
 import ssuPlector.dto.response.ProjectDTO.ProjectPreviewDTO;
 
@@ -54,7 +54,7 @@ public class ProjectConverter {
                 .build();
     }
 
-    public static Project toProject(ProjectDetailRequestDTO requestDTO) {
+    public static Project toProject(ProjectDTO.ProjectRequestDTO requestDTO) {
         return Project.builder()
                 .name(requestDTO.getName())
                 .shortIntro(requestDTO.getShortIntro())
