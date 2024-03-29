@@ -74,6 +74,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    @Transactional
     public Long createProject(ProjectDetailRequestDTO requestDTO) {
 
         Project newProject = ProjectConverter.toProject(requestDTO);
