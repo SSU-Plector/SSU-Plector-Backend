@@ -5,6 +5,8 @@ import java.util.List;
 
 import jakarta.persistence.*;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import lombok.*;
 import ssuPlector.domain.category.Category;
 import ssuPlector.domain.category.DevLanguage;
@@ -40,7 +42,9 @@ public class Project extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Category category;
 
+    @ColumnDefault("0L")
     private long hits;
+
     private String infoPageLink;
     private String webLink;
     private String appLink;
