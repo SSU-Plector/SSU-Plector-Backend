@@ -47,7 +47,7 @@ public class User extends BaseEntity {
     private String githubLink;
 
     @Column(columnDefinition = "tinyint(1)")
-    private Boolean isDeveloper;
+    private boolean isDeveloper;
 
     @ElementCollection private List<String> linkList;
 
@@ -77,5 +77,9 @@ public class User extends BaseEntity {
         image.setUser(this);
         if (this.imageList == null) this.imageList = new ArrayList<>();
         this.imageList.add(image);
+    }
+
+    public boolean getIsDeveloper() {
+        return this.isDeveloper;
     }
 }

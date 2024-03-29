@@ -35,5 +35,9 @@ public class ProjectUser extends BaseEntity {
     private List<Part> partList; // 개발 참여 분야
 
     @Column(columnDefinition = "tinyint(1)")
-    private Boolean isTeamLeader;
+    private boolean isTeamLeader;
+
+    public boolean getIsTeamLeader() {
+        return this.isTeamLeader;
+    }
 }

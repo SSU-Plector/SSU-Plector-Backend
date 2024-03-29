@@ -6,6 +6,7 @@ import java.util.List;
 
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -31,7 +32,7 @@ public class ProjectDTO {
     @Getter
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class ProjectDetailRequestDTO {
+    public static class ProjectRequestDTO {
 
         @NotBlank(message = "필수 입력값")
         @Size(max = 30, message = "최대 30자")
@@ -59,15 +60,15 @@ public class ProjectDTO {
 
         private List<TechStack> techStackList;
 
-        private List<ImageDetailRequestDTO> imageList;
+        private List<ImageRequestDTO> imageList;
 
-        private List<ProjectUserDetailRequestDTO> projectUserList;
+        private List<ProjectUserRequestDTO> projectUserList;
     }
 
     @Getter
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class ProjectUserDetailRequestDTO {
+    public static class ProjectUserRequestDTO {
 
         @NotBlank(message = "필수 입력값")
         @Size(max = 20, message = "최대 20자")
@@ -77,6 +78,10 @@ public class ProjectDTO {
 
         private List<Part> partList;
 
-        private Boolean isTeamLeader;
+        @NotNull private boolean isTeamLeader;
+
+        public boolean getIsTeamLeader() {
+            return isTeamLeader;
+        }
     }
 }
