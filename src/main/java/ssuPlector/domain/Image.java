@@ -26,7 +26,7 @@ public class Image extends BaseEntity {
     private User user;
 
     @Setter
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
     private Project project;
 }
