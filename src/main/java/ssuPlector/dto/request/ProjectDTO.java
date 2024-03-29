@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import ssuPlector.domain.category.Category;
 import ssuPlector.domain.category.DevLanguage;
@@ -18,10 +18,10 @@ import ssuPlector.domain.category.Part;
 import ssuPlector.domain.category.TechStack;
 
 public class ProjectDTO {
-    @Getter
+    @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public class ProjectListRequestDto {
+    public static class ProjectListRequestDto {
         @Nullable private String searchString;
         @Nullable private String category;
         @Nullable private String sortType; // recent, old, high, low

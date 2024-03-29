@@ -6,6 +6,7 @@ import static ssuPlector.dto.request.ProjectDTO.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.EnumUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import ssuPlector.domain.Image;
 import ssuPlector.domain.Project;
 import ssuPlector.domain.ProjectUser;
 import ssuPlector.domain.User;
+import ssuPlector.domain.category.Category;
 import ssuPlector.dto.request.ProjectDTO.ProjectListRequestDto;
 import ssuPlector.dto.request.ProjectDTO.ProjectUserDetailRequestDTO;
 import ssuPlector.dto.response.ProjectDTO.ProjectListResponseDto;
@@ -65,6 +67,9 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectListResponseDto getProjectList(ProjectListRequestDto requestDto, int page) {
         Pageable pageable = PageRequest.of(page, 30);
+        String category = requestDto.getCategory();
+        if (category != null && !EnumUtils.isValidEnum(Category.class, category))
+            throw new GlobalException(GlobalErrorCode.CATEGORY_NOT_FOUND);
         return new ProjectListResponseDto(
                 projectRepository.findProjects(
                         requestDto.getSearchString(),
