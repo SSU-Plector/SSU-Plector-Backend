@@ -21,7 +21,7 @@ import ssuPlector.domain.ProjectUser;
 import ssuPlector.domain.User;
 import ssuPlector.domain.category.Category;
 import ssuPlector.dto.request.ProjectDTO.ProjectListRequestDto;
-import ssuPlector.dto.request.ProjectDTO.ProjectUserDetailRequestDTO;
+import ssuPlector.dto.request.ProjectDTO.ProjectUserRequestDTO;
 import ssuPlector.dto.response.ProjectDTO.ProjectListResponseDto;
 import ssuPlector.global.exception.GlobalException;
 import ssuPlector.global.response.code.GlobalErrorCode;
@@ -80,7 +80,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     @Transactional
-    public Long createProject(ProjectDetailRequestDTO requestDTO) {
+    public Long createProject(ProjectRequestDTO requestDTO) {
 
         Project newProject = ProjectConverter.toProject(requestDTO);
 
@@ -88,6 +88,9 @@ public class ProjectServiceImpl implements ProjectService {
         projectUserList.forEach(newProject::addProjectUser);
 
         List<Image> imageList = createImageList(requestDTO.getImageList());
+        if (imageList.size() == 1) { // 이미지가 1개인 경우 mainImage 설정
+            imageList.get(0).setMainImage();
+        }
         imageList.forEach(newProject::addImage);
 
         projectRepository.save(newProject);
@@ -96,18 +99,18 @@ public class ProjectServiceImpl implements ProjectService {
         return newProject.getId();
     }
 
-    @Override
-    public List<ProjectUser> createProjectUserList(
-            List<ProjectUserDetailRequestDTO> requestDTOList) {
+    @Transactional
+    private List<ProjectUser> createProjectUserList(List<ProjectUserRequestDTO> requestDTOList) {
         return requestDTOList.stream().map(this::createProjectUser).collect(Collectors.toList());
     }
 
-    public List<Image> createImageList(List<ImageDetailRequestDTO> requestDTOList) {
+    @Transactional
+    private List<Image> createImageList(List<ImageRequestDTO> requestDTOList) {
         return requestDTOList.stream().map(ImageConverter::toImage).collect(Collectors.toList());
     }
 
-    @Override
-    public ProjectUser createProjectUser(ProjectUserDetailRequestDTO requestDTO) {
+    @Transactional
+    private ProjectUser createProjectUser(ProjectUserRequestDTO requestDTO) {
 
         User user = userRepository.findByEmail(requestDTO.getEmail()).orElse(null);
 
