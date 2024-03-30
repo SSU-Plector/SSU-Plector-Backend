@@ -39,7 +39,7 @@ public class ProjectDTO {
         private String name;
 
         @NotBlank(message = "필수 입력값")
-        @Size(max = 101, message = "최대 101자")
+        @Size(max = 101, message = "최대 100자")
         private String shortIntro;
 
         @NotBlank(message = "필수 입력값")
