@@ -40,4 +40,8 @@ public class ProjectUser extends BaseEntity {
     public boolean getIsTeamLeader() {
         return this.isTeamLeader;
     }
+
+    public void update(User user) {
+        this.user = user;
+    }
 }
