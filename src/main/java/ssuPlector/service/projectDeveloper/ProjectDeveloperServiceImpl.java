@@ -21,7 +21,7 @@ public class ProjectDeveloperServiceImpl implements ProjectDeveloperService {
     @Transactional
     public void connectProjectDeveloper(Long projectId) {
         List<ProjectUser> projectUsers =
-                projectUserRepository.findByProject_Id(projectId); // 프로젝트 아이디를 통해 프로젝트 유저찾기
+                projectUserRepository.findByProject_Id(projectId);
         for (ProjectUser projectUser : projectUsers) {
             if (projectUser.getUser() == null) {
                 User user = userRepository.findByName(projectUser.getName());
