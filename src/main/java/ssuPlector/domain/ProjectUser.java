@@ -36,4 +36,8 @@ public class ProjectUser extends BaseEntity {
 
     @Column(columnDefinition = "tinyint(1)")
     private boolean isTeamLeader;
+
+    public boolean getIsTeamLeader() {
+        return this.isTeamLeader;
+    }
 }

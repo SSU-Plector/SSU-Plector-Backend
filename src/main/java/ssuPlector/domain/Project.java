@@ -1,8 +1,11 @@
 package ssuPlector.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
+
+import org.hibernate.annotations.ColumnDefault;
 
 import lombok.*;
 import ssuPlector.domain.category.Category;
@@ -24,7 +27,7 @@ public class Project extends BaseEntity {
     @Column(columnDefinition = "varchar(30)")
     private String name;
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<Image> imageList;
 
     @OneToMany(mappedBy = "project")
@@ -39,7 +42,9 @@ public class Project extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Category category;
 
+    @ColumnDefault("0L")
     private long hits;
+
     private String infoPageLink;
     private String webLink;
     private String appLink;
@@ -56,11 +61,13 @@ public class Project extends BaseEntity {
     // ==연관관계 메서드==//
     public void addProjectUser(ProjectUser projectUser) {
         projectUser.setProject(this);
+        if (this.projectUserList == null) this.projectUserList = new ArrayList<>();
         this.projectUserList.add(projectUser);
     }
 
     public void addImage(Image image) {
         image.setProject(this);
+        if (this.imageList == null) this.imageList = new ArrayList<>();
         this.imageList.add(image);
     }
 }
