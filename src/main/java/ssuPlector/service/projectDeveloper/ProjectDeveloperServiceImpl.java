@@ -20,8 +20,7 @@ public class ProjectDeveloperServiceImpl implements ProjectDeveloperService {
     @Override
     @Transactional
     public void connectProjectDeveloper(Long projectId) {
-        List<ProjectUser> projectUsers =
-                projectUserRepository.findByProject_Id(projectId);
+        List<ProjectUser> projectUsers = projectUserRepository.findByProject_Id(projectId);
         for (ProjectUser projectUser : projectUsers) {
             if (projectUser.getUser() == null) {
                 User user = userRepository.findByKakaoId(projectUser.getKakaoId());
