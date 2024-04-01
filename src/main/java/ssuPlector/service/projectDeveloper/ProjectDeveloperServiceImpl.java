@@ -24,7 +24,7 @@ public class ProjectDeveloperServiceImpl implements ProjectDeveloperService {
                 projectUserRepository.findByProject_Id(projectId);
         for (ProjectUser projectUser : projectUsers) {
             if (projectUser.getUser() == null) {
-                User user = userRepository.findByName(projectUser.getName());
+                User user = userRepository.findByKakaoId(projectUser.getKakaoId());
                 projectUser.update(user);
             }
         }

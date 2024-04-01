@@ -36,6 +36,8 @@ public class ProjectUser extends BaseEntity {
 
     @Column(columnDefinition = "tinyint(1)")
     private boolean isTeamLeader;
+    @Column(columnDefinition = "varchar(20)")
+    private String kakaoId;
 
     public boolean getIsTeamLeader() {
         return this.isTeamLeader;
