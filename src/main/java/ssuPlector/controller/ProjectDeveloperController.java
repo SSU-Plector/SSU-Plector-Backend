@@ -14,8 +14,8 @@ import ssuPlector.validation.annotation.ExistProject;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/projectUser")
-@Tag(name = "Project-User API", description = "프로젝트 유저 관련 API")
+@RequestMapping("/api/projectDeveloper")
+@Tag(name = "Project-Developer API", description = "프로젝트 개발자 관련 API")
 public class ProjectDeveloperController {
     private final ProjectDeveloperService projectDeveloperService;
 

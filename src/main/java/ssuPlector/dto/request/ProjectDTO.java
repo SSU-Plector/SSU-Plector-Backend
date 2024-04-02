@@ -62,13 +62,13 @@ public class ProjectDTO {
 
         private List<ImageRequestDTO> imageList;
 
-        private List<ProjectUserRequestDTO> projectUserList;
+        private List<ProjectDeveloperRequestDTO> projectDevloperList;
     }
 
     @Getter
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class ProjectUserRequestDTO {
+    public static class ProjectDeveloperRequestDTO {
 
         @NotBlank(message = "필수 입력값")
         @Size(max = 20, message = "최대 20자")

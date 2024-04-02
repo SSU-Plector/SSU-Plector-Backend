@@ -15,27 +15,26 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import ssuPlector.converter.ImageConverter;
 import ssuPlector.converter.ProjectConverter;
+import ssuPlector.domain.Developer;
 import ssuPlector.domain.Image;
 import ssuPlector.domain.Project;
-import ssuPlector.domain.ProjectUser;
-import ssuPlector.domain.User;
+import ssuPlector.domain.ProjectDeveloper;
 import ssuPlector.domain.category.Category;
 import ssuPlector.dto.request.ProjectDTO.ProjectListRequestDto;
-import ssuPlector.dto.request.ProjectDTO.ProjectUserRequestDTO;
 import ssuPlector.dto.response.ProjectDTO.ProjectListResponseDto;
 import ssuPlector.global.exception.GlobalException;
 import ssuPlector.global.response.code.GlobalErrorCode;
 import ssuPlector.redis.service.ProjectHitsService;
+import ssuPlector.repository.developer.DeveloperRepository;
 import ssuPlector.repository.project.ProjectRepository;
-import ssuPlector.repository.projectUser.ProjectUserRepository;
-import ssuPlector.repository.user.UserRepository;
+import ssuPlector.repository.projectDevloper.ProjectDeveloperRepository;
 
 @Service
 @RequiredArgsConstructor
 public class ProjectServiceImpl implements ProjectService {
     private final ProjectRepository projectRepository;
-    private final ProjectUserRepository projectUserRepository;
-    private final UserRepository userRepository;
+    private final ProjectDeveloperRepository projectDeveloperRepository;
+    private final DeveloperRepository developerRepository;
     private final ProjectHitsService projectHitsService;
 
     @Override
@@ -84,8 +83,9 @@ public class ProjectServiceImpl implements ProjectService {
 
         Project newProject = ProjectConverter.toProject(requestDTO);
 
-        List<ProjectUser> projectUserList = createProjectUserList(requestDTO.getProjectUserList());
-        projectUserList.forEach(newProject::addProjectUser);
+        List<ProjectDeveloper> projectDeveloperList =
+                createProjectDeveloperList(requestDTO.getProjectDevloperList());
+        projectDeveloperList.forEach(newProject::addProjectDeveloper);
 
         List<Image> imageList = createImageList(requestDTO.getImageList());
         if (imageList.size() == 1) { // 이미지가 1개인 경우 mainImage 설정
@@ -94,14 +94,17 @@ public class ProjectServiceImpl implements ProjectService {
         imageList.forEach(newProject::addImage);
 
         projectRepository.save(newProject);
-        projectUserRepository.saveAll(projectUserList);
+        projectDeveloperRepository.saveAll(projectDeveloperList);
 
         return newProject.getId();
     }
 
     @Transactional
-    private List<ProjectUser> createProjectUserList(List<ProjectUserRequestDTO> requestDTOList) {
-        return requestDTOList.stream().map(this::createProjectUser).collect(Collectors.toList());
+    private List<ProjectDeveloper> createProjectDeveloperList(
+            List<ProjectDeveloperRequestDTO> requestDTOList) {
+        return requestDTOList.stream()
+                .map(this::createProjectDeveloper)
+                .collect(Collectors.toList());
     }
 
     @Transactional
@@ -110,20 +113,20 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Transactional
-    private ProjectUser createProjectUser(ProjectUserRequestDTO requestDTO) {
+    private ProjectDeveloper createProjectDeveloper(ProjectDeveloperRequestDTO requestDTO) {
 
-        User user = userRepository.findByEmail(requestDTO.getEmail()).orElse(null);
+        Developer developer = developerRepository.findByEmail(requestDTO.getEmail()).orElse(null);
 
-        ProjectUser newProjectUser =
-                ProjectUser.builder()
+        ProjectDeveloper newProjectDeveloper =
+                ProjectDeveloper.builder()
                         .name(requestDTO.getName())
                         .partList(requestDTO.getPartList())
                         .isTeamLeader(requestDTO.getIsTeamLeader())
                         .build();
 
-        if (user != null) { // 계정이 있는 프로젝트 부원인 경우
-            user.addProjectUser(newProjectUser);
+        if (developer != null) { // 계정이 있는 프로젝트 부원인 경우
+            developer.addProjectDeveloper(newProjectDeveloper);
         }
-        return newProjectUser;
+        return newProjectDeveloper;
     }
 }

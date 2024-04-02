@@ -12,10 +12,10 @@ import ssuPlector.domain.category.Part;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ProjectUser extends BaseEntity {
+public class ProjectDeveloper extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "project_user_id")
+    @Column(name = "project_developer_id")
     private Long id;
 
     @Setter
@@ -25,8 +25,8 @@ public class ProjectUser extends BaseEntity {
 
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "developer_id")
+    private Developer developer;
 
     @Column(columnDefinition = "varchar(20)")
     private String name;
@@ -44,7 +44,7 @@ public class ProjectUser extends BaseEntity {
         return this.isTeamLeader;
     }
 
-    public void update(User user) {
-        this.user = user;
+    public void update(Developer developer) {
+        this.developer = developer;
     }
 }
