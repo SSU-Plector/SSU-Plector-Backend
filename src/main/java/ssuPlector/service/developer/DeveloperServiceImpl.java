@@ -6,41 +6,44 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import ssuPlector.domain.User;
+import ssuPlector.domain.Developer;
 import ssuPlector.global.exception.GlobalException;
 import ssuPlector.global.response.code.GlobalErrorCode;
 import ssuPlector.redis.service.DeveloperHitsService;
-import ssuPlector.repository.user.UserRepository;
+import ssuPlector.repository.developer.DeveloperRepository;
 
 @Service
 @RequiredArgsConstructor
 public class DeveloperServiceImpl implements DeveloperService {
-    private final UserRepository userRepository;
+    private final DeveloperRepository developerRepository;
     private final DeveloperHitsService developerHitsService;
 
     @Override
-    public User getDeveloper(Long id) {
-        User user =
-                userRepository
+    public Developer getDeveloper(Long id) {
+        Developer developer =
+                developerRepository
                         .findById(id)
-                        .orElseThrow(() -> new GlobalException(GlobalErrorCode.USER_NOT_FOUND));
+                        .orElseThrow(
+                                () -> new GlobalException(GlobalErrorCode.DEVELOPER_NOT_FOUND));
         developerHitsService.incrementHits(id);
-        return user;
+        return developer;
     }
 
     @Override
     public boolean existsByDeveloperId(Long id) {
-        return userRepository.existsById(id);
+        return developerRepository.existsById(id);
     }
 
     @Override
     @Transactional
     public void updateDeveloperHits(Long developerId, Long hit) {
-        userRepository.updateHitsById(developerId, hit);
+        developerRepository.updateHitsById(developerId, hit);
     }
 
     @Override
     public List<Long> getUpdateTargetDeveloperIds(List<Long> developerIdList) {
-        return userRepository.findAllByIdIn(developerIdList).stream().map(User::getId).toList();
+        return developerRepository.findAllByIdIn(developerIdList).stream()
+                .map(Developer::getId)
+                .toList();
     }
 }

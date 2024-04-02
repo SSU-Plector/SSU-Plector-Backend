@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import ssuPlector.domain.Project;
-import ssuPlector.domain.ProjectUser;
+import ssuPlector.domain.ProjectDeveloper;
 import ssuPlector.dto.request.ProjectDTO;
 import ssuPlector.dto.response.ProjectDTO.ProjectDetailDTO;
 import ssuPlector.dto.response.ProjectDTO.ProjectPreviewDTO;
@@ -13,8 +13,8 @@ import ssuPlector.dto.response.ProjectDTO.ProjectPreviewDTO;
 @Component
 public class ProjectConverter {
 
-    public static ProjectPreviewDTO toProjectPreviewDTO(ProjectUser projectuser) {
-        Project project = projectuser.getProject();
+    public static ProjectPreviewDTO toProjectPreviewDTO(ProjectDeveloper projectDeveloper) {
+        Project project = projectDeveloper.getProject();
 
         return ProjectPreviewDTO.builder()
                 .id(project.getId())
@@ -39,8 +39,8 @@ public class ProjectConverter {
                                 .collect(Collectors.toList()))
                 .hits(project.getHits())
                 .developerList(
-                        project.getProjectUserList().stream()
-                                .map(UserConverter::toDeveloperPreviewDTO)
+                        project.getProjectDeveloperList().stream()
+                                .map(DeveloperConverter::toDeveloperPreviewDTO)
                                 .collect(Collectors.toList()))
                 .shortIntro(project.getShortIntro())
                 .longIntro(project.getLongIntro())

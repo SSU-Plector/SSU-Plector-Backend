@@ -29,7 +29,7 @@ public class Project extends BaseEntity {
     private List<Image> imageList;
 
     @OneToMany(mappedBy = "project")
-    private List<ProjectUser> projectUserList;
+    private List<ProjectDeveloper> projectDeveloperList;
 
     @Column(columnDefinition = "varchar(101)")
     private String shortIntro;
@@ -57,10 +57,10 @@ public class Project extends BaseEntity {
     private List<TechStack> techStackList;
 
     // ==연관관계 메서드==//
-    public void addProjectUser(ProjectUser projectUser) {
-        projectUser.setProject(this);
-        if (this.projectUserList == null) this.projectUserList = new ArrayList<>();
-        this.projectUserList.add(projectUser);
+    public void addProjectDeveloper(ProjectDeveloper projectDeveloper) {
+        projectDeveloper.setProject(this);
+        if (this.projectDeveloperList == null) this.projectDeveloperList = new ArrayList<>();
+        this.projectDeveloperList.add(projectDeveloper);
     }
 
     public void addImage(Image image) {

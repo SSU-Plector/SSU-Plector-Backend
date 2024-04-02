@@ -1,4 +1,4 @@
-package ssuPlector.repository.user;
+package ssuPlector.repository.developer;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,17 +9,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import ssuPlector.domain.User;
+import ssuPlector.domain.Developer;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface DeveloperRepository extends JpaRepository<Developer, Long> {
     @Modifying
-    @Query("UPDATE User u SET u.hits = :hits WHERE u.id = :id")
+    @Query("UPDATE Developer d SET d.hits = :hits WHERE d.id = :id")
     void updateHitsById(@Param("id") Long id, @Param("hits") Long hits);
 
-    List<User> findAllByIdIn(List<Long> id);
+    List<Developer> findAllByIdIn(List<Long> id);
 
-    Optional<User> findByEmail(String email);
+    Optional<Developer> findByEmail(String email);
 
-    User findByKakaoId(String kakaoId);
+    Developer findByKakaoId(String kakaoId);
 }

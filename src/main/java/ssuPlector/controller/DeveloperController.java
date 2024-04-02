@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import ssuPlector.converter.UserConverter;
-import ssuPlector.domain.User;
+import ssuPlector.converter.DeveloperConverter;
+import ssuPlector.domain.Developer;
 import ssuPlector.dto.response.DeveloperDTO.DeveloperDetailDTO;
 import ssuPlector.global.response.ApiResponse;
 import ssuPlector.service.developer.DeveloperService;
@@ -28,7 +28,8 @@ public class DeveloperController {
     @GetMapping("{developerId}")
     public ApiResponse<DeveloperDetailDTO> getDeveloperDetail(
             @ExistDeveloper @PathVariable("developerId") Long developerId) {
-        User user = developerService.getDeveloper(developerId);
-        return ApiResponse.onSuccess("개발자 상세조회 완료.", UserConverter.toDeveloperDetailDTO(user));
+        Developer developer = developerService.getDeveloper(developerId);
+        return ApiResponse.onSuccess(
+                "개발자 상세조회 완료.", DeveloperConverter.toDeveloperDetailDTO(developer));
     }
 }

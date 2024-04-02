@@ -2,10 +2,10 @@ package ssuPlector.service.developer;
 
 import java.util.List;
 
-import ssuPlector.domain.User;
+import ssuPlector.domain.Developer;
 
 public interface DeveloperService {
-    User getDeveloper(Long id);
+    Developer getDeveloper(Long id);
 
     boolean existsByDeveloperId(Long id);
 

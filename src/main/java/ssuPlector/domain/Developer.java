@@ -15,10 +15,10 @@ import ssuPlector.domain.category.TechStack;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User extends BaseEntity {
+public class Developer extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "developer_id")
     private Long id;
 
     @Column(columnDefinition = "varchar(20)")
@@ -51,11 +51,11 @@ public class User extends BaseEntity {
 
     @ElementCollection private List<String> linkList;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "developer")
     private List<Image> imageList;
 
-    @OneToMany(mappedBy = "user")
-    private List<ProjectUser> projectUserList;
+    @OneToMany(mappedBy = "developer")
+    private List<ProjectDeveloper> projectDeveloperList;
 
     @Enumerated(EnumType.STRING)
     private List<DevLanguage> languageList;
@@ -67,14 +67,14 @@ public class User extends BaseEntity {
     private List<TechStack> techStackList;
 
     // ==연관관계 메서드==//
-    public void addProjectUser(ProjectUser projectUser) {
-        projectUser.setUser(this);
-        if (this.projectUserList == null) this.projectUserList = new ArrayList<>();
-        this.projectUserList.add(projectUser);
+    public void addProjectDeveloper(ProjectDeveloper projectDeveloper) {
+        projectDeveloper.setDeveloper(this);
+        if (this.projectDeveloperList == null) this.projectDeveloperList = new ArrayList<>();
+        this.projectDeveloperList.add(projectDeveloper);
     }
 
     public void addImage(Image image) {
-        image.setUser(this);
+        image.setDeveloper(this);
         if (this.imageList == null) this.imageList = new ArrayList<>();
         this.imageList.add(image);
     }

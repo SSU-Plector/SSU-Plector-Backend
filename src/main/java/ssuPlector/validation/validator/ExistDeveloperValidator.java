@@ -21,7 +21,8 @@ public class ExistDeveloperValidator implements ConstraintValidator<ExistDevelop
         boolean isValid = developerService.existsByDeveloperId(value);
         if (!isValid) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(GlobalErrorCode.USER_NOT_FOUND.toString())
+            context.buildConstraintViolationWithTemplate(
+                            GlobalErrorCode.DEVELOPER_NOT_FOUND.toString())
                     .addConstraintViolation();
         }
 
