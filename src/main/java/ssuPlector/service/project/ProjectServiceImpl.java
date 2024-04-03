@@ -100,7 +100,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Transactional
-    private List<ProjectDeveloper> createProjectDeveloperList(
+    public List<ProjectDeveloper> createProjectDeveloperList(
             List<ProjectDeveloperRequestDTO> requestDTOList) {
         return requestDTOList.stream()
                 .map(this::createProjectDeveloper)
@@ -108,12 +108,12 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Transactional
-    private List<Image> createImageList(List<ImageRequestDTO> requestDTOList) {
+    public List<Image> createImageList(List<ImageRequestDTO> requestDTOList) {
         return requestDTOList.stream().map(ImageConverter::toImage).collect(Collectors.toList());
     }
 
     @Transactional
-    private ProjectDeveloper createProjectDeveloper(ProjectDeveloperRequestDTO requestDTO) {
+    public ProjectDeveloper createProjectDeveloper(ProjectDeveloperRequestDTO requestDTO) {
 
         Developer developer = developerRepository.findByEmail(requestDTO.getEmail()).orElse(null);
 

@@ -16,6 +16,7 @@ public enum GlobalErrorCode {
 
     // DEVELOPER 관련
     DEVELOPER_NOT_FOUND(HttpStatus.NOT_FOUND, "DEVELOPER4001", "해당 유저를 찾을 수 없습니다"),
+    DEVELOPER_DUPLICATE(HttpStatus.BAD_REQUEST, "DEVELOPER4002", "이미 등록된 개발자입니다"),
 
     // PROJECT 관련
     PROJECT_NOT_FOUND(HttpStatus.NOT_FOUND, "PROJECT4001", "해당 프로젝트를 찾을 수 없습니다"),
