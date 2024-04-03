@@ -39,8 +39,7 @@ public class Developer extends BaseEntity {
     @Column(columnDefinition = "varchar(50)")
     private String email;
 
-    @Builder.Default
-    private long hits = 0;
+    @Builder.Default private long hits = 0;
 
     @Column(columnDefinition = "varchar(20)")
     private String kakaoId;
