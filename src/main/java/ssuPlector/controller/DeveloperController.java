@@ -29,8 +29,7 @@ import ssuPlector.validation.annotation.ExistDeveloper;
 public class DeveloperController {
     private final DeveloperService developerService;
 
-    // 개발자 생성
-    @Operation(summary = "개발자 생성, 저장 API", description = "개발자를 생성합니다.")
+    @Operation(summary = "개발자 생성, 저장 API", description = "개발자를 생성합니다._찬민")
     @PostMapping
     public ApiResponse createDeveloper(@RequestBody @Valid DeveloperRequestDTO requestDTO) {
         Long developerId = developerService.createDeveloper(requestDTO);
