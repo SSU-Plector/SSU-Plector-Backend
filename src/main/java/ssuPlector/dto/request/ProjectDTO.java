@@ -1,7 +1,5 @@
 package ssuPlector.dto.request;
 
-import static ssuPlector.dto.request.ImageDTO.*;
-
 import java.util.List;
 
 import jakarta.annotation.Nullable;
@@ -61,7 +59,7 @@ public class ProjectDTO {
         @MaxSizeThree private List<DevTools> devToolList;
         @MaxSizeThree private List<TechStack> techStackList;
 
-        private ImageRequestDTO image;
+        private String imageLink;
 
         private List<ProjectDeveloperRequestDTO> projectDevloperList;
     }

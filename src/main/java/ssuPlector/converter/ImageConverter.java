@@ -1,7 +1,5 @@
 package ssuPlector.converter;
 
-import static ssuPlector.dto.request.ImageDTO.*;
-
 import org.springframework.stereotype.Component;
 
 import ssuPlector.domain.Image;
@@ -13,7 +11,7 @@ public class ImageConverter {
         return ImagePreviewDTO.builder().imagePath(image.getImagePath()).build();
     }
 
-    public static Image toImage(ImageRequestDTO requestDTO) {
-        return Image.builder().imagePath(requestDTO.getImagePath()).build();
+    public static Image toImage(String imagePath) {
+        return Image.builder().imagePath(imagePath).build();
     }
 }

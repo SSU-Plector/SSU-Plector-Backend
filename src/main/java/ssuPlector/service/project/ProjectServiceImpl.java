@@ -1,6 +1,5 @@
 package ssuPlector.service.project;
 
-import static ssuPlector.dto.request.ImageDTO.*;
 import static ssuPlector.dto.request.ProjectDTO.*;
 
 import java.util.List;
@@ -87,7 +86,7 @@ public class ProjectServiceImpl implements ProjectService {
                 createProjectDeveloperList(requestDTO.getProjectDevloperList());
         projectDeveloperList.forEach(newProject::addProjectDeveloper);
 
-        Image image = ImageConverter.toImage(requestDTO.getImage());
+        Image image = ImageConverter.toImage(requestDTO.getImageLink());
 
         newProject.addImage(image);
 
@@ -105,10 +104,11 @@ public class ProjectServiceImpl implements ProjectService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional
-    public List<Image> createImageList(List<ImageRequestDTO> requestDTOList) {
-        return requestDTOList.stream().map(ImageConverter::toImage).collect(Collectors.toList());
-    }
+    //    @Transactional
+    //    public List<Image> createImageList(List<ImageRequestDTO> requestDTOList) {
+    //        return
+    // requestDTOList.stream().map(ImageConverter::toImage).collect(Collectors.toList());
+    //    }
 
     @Transactional
     public ProjectDeveloper createProjectDeveloper(ProjectDeveloperRequestDTO requestDTO) {
