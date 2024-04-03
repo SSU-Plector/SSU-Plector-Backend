@@ -43,6 +43,7 @@ public class Project extends BaseEntity {
     @Column(name = "hits", columnDefinition = "BIGINT DEFAULT 0")
     private long hits;
 
+    private String githubLink;
     private String infoPageLink;
     private String webLink;
     private String appLink;

@@ -45,6 +45,7 @@ public class ProjectDTO {
         String longIntro;
         Category category;
         long hits;
+        String githubLink;
         String infoPageLink;
         String webLink;
         String appLink;
