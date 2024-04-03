@@ -9,13 +9,13 @@ import java.lang.annotation.Target;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
-import ssuPlector.validation.validator.MaxSizeUnderFourValidator;
+import ssuPlector.validation.validator.MaxSizeThreeValidator;
 
 @Documented
-@Constraint(validatedBy = MaxSizeUnderFourValidator.class)
+@Constraint(validatedBy = MaxSizeThreeValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface MaxSizeUnderFour {
+public @interface MaxSizeThree {
     String message() default " 최소 0개 최대 3개 범위를 넘었습니다.";
 
     Class<?>[] groups() default {};
