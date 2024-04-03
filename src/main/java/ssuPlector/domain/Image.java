@@ -17,8 +17,9 @@ public class Image extends BaseEntity {
 
     private String imagePath;
 
+    @Builder.Default
     @Column(columnDefinition = "tinyint(1)")
-    private boolean isMainImage;
+    private boolean isMainImage = false;
 
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)

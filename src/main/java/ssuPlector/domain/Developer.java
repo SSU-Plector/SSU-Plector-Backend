@@ -39,7 +39,8 @@ public class Developer extends BaseEntity {
     @Column(columnDefinition = "varchar(50)")
     private String email;
 
-    private long hits;
+    @Builder.Default
+    private long hits = 0;
 
     @Column(columnDefinition = "varchar(20)")
     private String kakaoId;
@@ -51,14 +52,17 @@ public class Developer extends BaseEntity {
 
     @ElementCollection private List<String> linkList;
 
+    @Builder.Default
     @OneToMany(mappedBy = "developer", cascade = CascadeType.ALL)
-    private List<Image> imageList;
+    private List<Image> imageList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "developer")
-    private List<ProjectDeveloper> projectDeveloperList;
+    private List<ProjectDeveloper> projectDeveloperList = new ArrayList<>();
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
-    private List<DevLanguage> languageList;
+    private List<DevLanguage> languageList = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private List<DevTools> devToolList;
