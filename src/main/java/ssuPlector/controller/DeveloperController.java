@@ -34,7 +34,7 @@ public class DeveloperController {
     @PostMapping
     public ApiResponse createDeveloper(@RequestBody @Valid DeveloperRequestDTO requestDTO) {
         Long developerId = developerService.createDeveloper(requestDTO);
-        return ApiResponse.onSuccess("프로젝트 생성 및 저장 완료.", developerId);
+        return ApiResponse.onSuccess("개발자 생성 및 저장 완료.", developerId);
     }
 
     @Operation(summary = "개발자 상세조회 API", description = "개발자 프로필을 상세조회 합니다.")
