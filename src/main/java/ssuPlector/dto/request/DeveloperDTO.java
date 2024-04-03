@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import ssuPlector.domain.category.DevLanguage;
 import ssuPlector.domain.category.DevTools;
 import ssuPlector.domain.category.TechStack;
+import ssuPlector.validation.annotation.MaxSizeThree;
 
 public class DeveloperDTO {
 
@@ -50,12 +51,9 @@ public class DeveloperDTO {
         private String kakaoId;
 
         private String githubLink;
-
-        private List<DevLanguage> languageList;
-
-        private List<DevTools> devToolList;
-
-        private List<TechStack> techStackList;
+        @MaxSizeThree private List<DevLanguage> languageList;
+        @MaxSizeThree private List<DevTools> devToolList;
+        @MaxSizeThree private List<TechStack> techStackList;
 
         private List<ImageDTO.ImageRequestDTO> imageList;
     }
