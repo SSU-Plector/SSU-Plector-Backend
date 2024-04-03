@@ -36,11 +36,9 @@ public class DeveloperServiceImpl implements DeveloperService {
 
         Developer newDeveloper = DeveloperConverter.toDeveloper(requestDTO);
 
-        List<Image> imageList = createImageList(requestDTO.getImageList());
-        if (imageList.size() == 1) { // 이미지가 1개인 경우 mainImage 설정
-            imageList.get(0).setMainImage();
-        }
-        imageList.forEach(newDeveloper::addImage);
+        Image image = ImageConverter.toImage(requestDTO.getImage());
+
+        newDeveloper.addImage(image);
         developerRepository.save(newDeveloper);
 
         return newDeveloper.getId();

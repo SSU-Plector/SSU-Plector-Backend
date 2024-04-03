@@ -22,10 +22,7 @@ public class ProjectConverter {
                 .name(project.getName())
                 .shortIntro(project.getShortIntro())
                 .category(project.getCategory())
-                .imageList(
-                        project.getImageList().stream()
-                                .map(ImageConverter::toImagePreviewDTO)
-                                .collect(Collectors.toList()))
+                .imageLink(project.getImageList().get(0).getImagePath())
                 .build();
     }
 
@@ -33,10 +30,7 @@ public class ProjectConverter {
         return ProjectDetailDTO.builder()
                 .id(project.getId())
                 .name(project.getName())
-                .imageList(
-                        project.getImageList().stream()
-                                .map(ImageConverter::toImagePreviewDTO)
-                                .collect(Collectors.toList()))
+                .imageLink(project.getImageList().get(0).getImagePath())
                 .hits(project.getHits())
                 .githubLink(project.getGithubLink())
                 .developerList(

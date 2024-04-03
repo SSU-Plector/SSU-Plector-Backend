@@ -87,11 +87,9 @@ public class ProjectServiceImpl implements ProjectService {
                 createProjectDeveloperList(requestDTO.getProjectDevloperList());
         projectDeveloperList.forEach(newProject::addProjectDeveloper);
 
-        List<Image> imageList = createImageList(requestDTO.getImageList());
-        if (imageList.size() == 1) { // 이미지가 1개인 경우 mainImage 설정
-            imageList.get(0).setMainImage();
-        }
-        imageList.forEach(newProject::addImage);
+        Image image = ImageConverter.toImage(requestDTO.getImage());
+
+        newProject.addImage(image);
 
         projectRepository.save(newProject);
         projectDeveloperRepository.saveAll(projectDeveloperList);

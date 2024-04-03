@@ -10,7 +10,6 @@ import ssuPlector.domain.category.DevLanguage;
 import ssuPlector.domain.category.DevTools;
 import ssuPlector.domain.category.Part;
 import ssuPlector.domain.category.TechStack;
-import ssuPlector.dto.response.ImageDTO.ImagePreviewDTO;
 import ssuPlector.dto.response.ProjectDTO.ProjectPreviewDTO;
 
 public class DeveloperDTO {
@@ -31,7 +30,7 @@ public class DeveloperDTO {
         String githubLink;
         boolean isDeveloper;
         List<String> linkList;
-        List<ImagePreviewDTO> imageList;
+        String imageLink;
         List<ProjectPreviewDTO> projectList;
         List<DevLanguage> languageList;
         List<DevTools> devToolList;

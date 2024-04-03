@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import ssuPlector.domain.category.DevLanguage;
 import ssuPlector.domain.category.DevTools;
 import ssuPlector.domain.category.TechStack;
+import ssuPlector.dto.request.ImageDTO.ImageRequestDTO;
 import ssuPlector.validation.annotation.MaxSizeThree;
 
 public class DeveloperDTO {
@@ -55,6 +56,6 @@ public class DeveloperDTO {
         @MaxSizeThree private List<DevTools> devToolList;
         @MaxSizeThree private List<TechStack> techStackList;
 
-        private List<ImageDTO.ImageRequestDTO> imageList;
+        private ImageRequestDTO image;
     }
 }
