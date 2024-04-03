@@ -8,10 +8,10 @@ import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.stereotype.Component;
 
 import ssuPlector.global.response.code.GlobalErrorCode;
-import ssuPlector.validation.annotation.MaxSizeConstraint;
+import ssuPlector.validation.annotation.MaxSizeUnderFour;
 
 @Component
-public class MaxSizeConstraintValidator implements ConstraintValidator<MaxSizeConstraint, List<?>> {
+public class MaxSizeUnderFourValidator implements ConstraintValidator<MaxSizeUnderFour, List<?>> {
     @Override
     public boolean isValid(List<?> value, ConstraintValidatorContext context) {
         boolean isValid = value.size() < 4;

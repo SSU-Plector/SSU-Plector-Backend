@@ -18,7 +18,7 @@ import ssuPlector.domain.category.DevLanguage;
 import ssuPlector.domain.category.DevTools;
 import ssuPlector.domain.category.Part;
 import ssuPlector.domain.category.TechStack;
-import ssuPlector.validation.annotation.MaxSizeConstraint;
+import ssuPlector.validation.annotation.MaxSizeUnderFour;
 
 public class ProjectDTO {
     @Data
@@ -54,9 +54,9 @@ public class ProjectDTO {
         private String appLink;
 
         private Category category;
-        @MaxSizeConstraint private List<DevLanguage> languageList;
-        @MaxSizeConstraint private List<DevTools> devToolList;
-        @MaxSizeConstraint private List<TechStack> techStackList;
+        @MaxSizeUnderFour private List<DevLanguage> languageList;
+        @MaxSizeUnderFour private List<DevTools> devToolList;
+        @MaxSizeUnderFour private List<TechStack> techStackList;
 
         private List<ImageRequestDTO> imageList;
 

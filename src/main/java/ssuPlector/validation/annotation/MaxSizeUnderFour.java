@@ -9,14 +9,14 @@ import java.lang.annotation.Target;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
-import ssuPlector.validation.validator.MaxSizeConstraintValidator;
+import ssuPlector.validation.validator.MaxSizeUnderFourValidator;
 
 @Documented
-@Constraint(validatedBy = MaxSizeConstraintValidator.class)
+@Constraint(validatedBy = MaxSizeUnderFourValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface MaxSizeConstraint {
-    String message() default " 최대 사이즈를 넘었습니다.";
+public @interface MaxSizeUnderFour {
+    String message() default " 최소 0개 최대 3개 범위를 넘었습니다.";
 
     Class<?>[] groups() default {};
 
