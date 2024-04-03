@@ -12,7 +12,6 @@ import ssuPlector.dto.response.DeveloperDTO.DeveloperPreviewDTO;
 
 @Component
 public class DeveloperConverter {
-
     public static DeveloperDetailDTO toDeveloperDetailDTO(Developer developer) {
         return DeveloperDetailDTO.builder()
                 .id(developer.getId())
@@ -26,7 +25,6 @@ public class DeveloperConverter {
                 .kakaoId(developer.getKakaoId())
                 .githubLink(developer.getGithubLink())
                 .isDeveloper(developer.getIsDeveloper())
-                .linkList(developer.getLinkList())
                 .imageList(
                         developer.getImageList().stream()
                                 .map(ImageConverter::toImagePreviewDTO)

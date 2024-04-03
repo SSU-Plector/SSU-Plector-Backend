@@ -1,5 +1,9 @@
 package ssuPlector.global.exception;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Optional;
+
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 
@@ -44,13 +48,40 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     }
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+    public ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException e,
             HttpHeaders headers,
             HttpStatusCode status,
             WebRequest request) {
-        return ResponseEntity.badRequest()
-                .body(ApiResponse.onFailure(GlobalErrorCode._BAD_REQUEST, ""));
+
+        Map<String, String> errors = new LinkedHashMap<>();
+
+        e.getBindingResult().getFieldErrors().stream()
+                .forEach(
+                        fieldError -> {
+                            String fieldName = fieldError.getField();
+                            String errorMessage =
+                                    Optional.ofNullable(fieldError.getDefaultMessage()).orElse("");
+                            errors.merge(
+                                    fieldName,
+                                    errorMessage,
+                                    (existingErrorMessage, newErrorMessage) ->
+                                            existingErrorMessage + ", " + newErrorMessage);
+                        });
+
+        return handleExceptionInternalArgs(
+                e, HttpHeaders.EMPTY, GlobalErrorCode.valueOf("_BAD_REQUEST"), request, errors);
+    }
+
+    private ResponseEntity<Object> handleExceptionInternalArgs(
+            Exception e,
+            HttpHeaders headers,
+            GlobalErrorCode errorCommonStatus,
+            WebRequest request,
+            Map<String, String> errorArgs) {
+        ApiResponse<Object> body = ApiResponse.onFailure(errorCommonStatus, errorArgs);
+        return super.handleExceptionInternal(
+                e, body, headers, errorCommonStatus.getHttpStatus(), request);
     }
 
     private ResponseEntity<Object> handleExceptionInternalConstraint(
@@ -62,6 +93,4 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
         return super.handleExceptionInternal(
                 e, body, headers, errorCommonStatus.getHttpStatus(), request);
     }
-
-    /** MethodArgumentNotValidException 등의 추가 예외 처리 핸들러 작성 필요 */
 }

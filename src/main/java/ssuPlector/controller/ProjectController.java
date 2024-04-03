@@ -26,7 +26,7 @@ import ssuPlector.validation.annotation.ExistProject;
 public class ProjectController {
     private final ProjectService projectService;
 
-    @Operation(summary = "프로젝트 상세조회 API", description = "프로젝트를 상세조회 합니다.")
+    @Operation(summary = "프로젝트 상세조회 API", description = "프로젝트를 상세조회합니다._숙희")
     @GetMapping("{projectId}")
     public ApiResponse<ProjectDetailDTO> getProjectDetail(
             @ExistProject @PathVariable("projectId") Long projectId) {
@@ -34,7 +34,7 @@ public class ProjectController {
         return ApiResponse.onSuccess("프로젝트 상세조회 완료.", ProjectConverter.toProjectDetailDTO(project));
     }
 
-    @Operation(summary = "프로젝트 리스트 조회")
+    @Operation(summary = "프로젝트 리스트 조회", description = "프로젝트 리스트 조회합니다._현근")
     @GetMapping("/list")
     public ApiResponse getProjectList(
             @Valid @ModelAttribute ProjectDTO.ProjectListRequestDto requestDto,
@@ -43,7 +43,7 @@ public class ProjectController {
                 "프로젝트 리스트 조회 성공", projectService.getProjectList(requestDto, page));
     }
 
-    @Operation(summary = "프로젝트 생성, 저장 API", description = "프로젝트를 생성 후 저장합니다.")
+    @Operation(summary = "프로젝트 생성, 저장 API", description = "프로젝트를 생성 후 저장합니다._찬민")
     @PostMapping
     public ApiResponse createProject(@RequestBody @Valid ProjectRequestDTO requestDTO) {
         Long projectId = projectService.createProject(requestDTO);

@@ -38,6 +38,7 @@ public class ProjectConverter {
                                 .map(ImageConverter::toImagePreviewDTO)
                                 .collect(Collectors.toList()))
                 .hits(project.getHits())
+                .githubLink(project.getGithubLink())
                 .developerList(
                         project.getProjectDeveloperList().stream()
                                 .map(DeveloperConverter::toDeveloperPreviewDTO)
@@ -60,6 +61,7 @@ public class ProjectConverter {
                 .shortIntro(requestDTO.getShortIntro())
                 .longIntro(requestDTO.getLongIntro())
                 .infoPageLink(requestDTO.getInfoPageLink())
+                .githubLink(requestDTO.getGithubLink())
                 .webLink(requestDTO.getWebLink())
                 .appLink(requestDTO.getAppLink())
                 .category(requestDTO.getCategory())
