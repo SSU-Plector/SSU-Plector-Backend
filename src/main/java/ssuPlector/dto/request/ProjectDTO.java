@@ -18,7 +18,8 @@ import ssuPlector.domain.category.DevLanguage;
 import ssuPlector.domain.category.DevTools;
 import ssuPlector.domain.category.Part;
 import ssuPlector.domain.category.TechStack;
-import ssuPlector.validation.annotation.MaxSizeUnderFour;
+import ssuPlector.validation.annotation.MaxSizeThree;
+import ssuPlector.validation.annotation.MaxSizeTwo;
 
 public class ProjectDTO {
     @Data
@@ -54,9 +55,9 @@ public class ProjectDTO {
         private String appLink;
 
         private Category category;
-        @MaxSizeUnderFour private List<DevLanguage> languageList;
-        @MaxSizeUnderFour private List<DevTools> devToolList;
-        @MaxSizeUnderFour private List<TechStack> techStackList;
+        @MaxSizeThree private List<DevLanguage> languageList;
+        @MaxSizeThree private List<DevTools> devToolList;
+        @MaxSizeThree private List<TechStack> techStackList;
 
         private List<ImageRequestDTO> imageList;
 
@@ -73,8 +74,7 @@ public class ProjectDTO {
         private String name;
 
         private String email; // 계정 존재 여부 확인
-
-        private List<Part> partList;
+        @MaxSizeTwo private List<Part> partList;
 
         @NotNull private boolean isTeamLeader;
 
