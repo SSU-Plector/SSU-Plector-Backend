@@ -61,6 +61,7 @@ public class ProjectConverter {
                 .shortIntro(requestDTO.getShortIntro())
                 .longIntro(requestDTO.getLongIntro())
                 .infoPageLink(requestDTO.getInfoPageLink())
+                .githubLink(requestDTO.getGithubLink())
                 .webLink(requestDTO.getWebLink())
                 .appLink(requestDTO.getAppLink())
                 .category(requestDTO.getCategory())

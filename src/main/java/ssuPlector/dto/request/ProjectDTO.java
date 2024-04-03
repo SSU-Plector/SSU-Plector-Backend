@@ -48,6 +48,8 @@ public class ProjectDTO {
         @Size(max = 500, message = "최대 500자")
         private String longIntro;
 
+        private String githubLink;
+
         private String infoPageLink;
 
         private String webLink;
