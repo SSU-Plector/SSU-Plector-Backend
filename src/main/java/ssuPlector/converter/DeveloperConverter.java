@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import ssuPlector.domain.Developer;
 import ssuPlector.domain.ProjectDeveloper;
+import ssuPlector.dto.request.DeveloperDTO.DeveloperRequestDTO;
 import ssuPlector.dto.response.DeveloperDTO.DeveloperDetailDTO;
 import ssuPlector.dto.response.DeveloperDTO.DeveloperPreviewDTO;
 
@@ -45,6 +46,24 @@ public class DeveloperConverter {
                 .id(projectDeveloper.getId())
                 .name(projectDeveloper.getName())
                 .partList(projectDeveloper.getPartList())
+                .build();
+    }
+
+    public static Developer toDeveloper(DeveloperRequestDTO requestDTO) {
+        return Developer.builder()
+                .name(requestDTO.getName())
+                .shortIntro(requestDTO.getShortIntro())
+                .university(requestDTO.getUniversity())
+                .major(requestDTO.getMajor())
+                .studentNumber(requestDTO.getStudentNumber())
+                .email(requestDTO.getEmail())
+                .hits(0)
+                .kakaoId(requestDTO.getKakaoId())
+                .githubLink(requestDTO.getGithubLink())
+                .isDeveloper(true)
+                .languageList(requestDTO.getLanguageList())
+                .devToolList(requestDTO.getDevToolList())
+                .techStackList(requestDTO.getTechStackList())
                 .build();
     }
 }

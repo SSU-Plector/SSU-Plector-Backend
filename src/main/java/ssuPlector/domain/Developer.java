@@ -51,7 +51,7 @@ public class Developer extends BaseEntity {
 
     @ElementCollection private List<String> linkList;
 
-    @OneToMany(mappedBy = "developer")
+    @OneToMany(mappedBy = "developer", cascade = CascadeType.ALL)
     private List<Image> imageList;
 
     @OneToMany(mappedBy = "developer")
