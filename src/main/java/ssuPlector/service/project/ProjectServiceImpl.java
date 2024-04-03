@@ -64,7 +64,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectListResponseDto getProjectList(ProjectListRequestDto requestDto, int page) {
-        Pageable pageable = PageRequest.of(page, 30);
+        Pageable pageable = PageRequest.of(page, 4);
         String category = requestDto.getCategory();
         if (category != null && !EnumUtils.isValidEnum(Category.class, category))
             throw new GlobalException(GlobalErrorCode.CATEGORY_NOT_FOUND);
