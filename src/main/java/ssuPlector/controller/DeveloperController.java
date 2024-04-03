@@ -24,7 +24,7 @@ import ssuPlector.validation.annotation.ExistDeveloper;
 public class DeveloperController {
     private final DeveloperService developerService;
 
-    @Operation(summary = "개발자 상세조회 API", description = "개발자 프로필을 상세조회 합니다.")
+    @Operation(summary = "개발자 상세조회 API", description = "개발자 프로필을 상세조회 합니다._숙희")
     @GetMapping("{developerId}")
     public ApiResponse<DeveloperDetailDTO> getDeveloperDetail(
             @ExistDeveloper @PathVariable("developerId") Long developerId) {

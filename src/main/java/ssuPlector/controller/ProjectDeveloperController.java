@@ -19,7 +19,7 @@ import ssuPlector.validation.annotation.ExistProject;
 public class ProjectDeveloperController {
     private final ProjectDeveloperService projectDeveloperService;
 
-    @Operation(summary = "개발자-프로젝트 연결 API", description = "개발자와 프로젝트를 연결합니다.")
+    @Operation(summary = "개발자-프로젝트 연결 API", description = "개발자와 프로젝트를 연결합니다._숙희")
     @PostMapping("/connect")
     public ApiResponse<Long> connectDeveloperProject(
             @ExistProject @RequestParam("projectId") Long projectId) {
