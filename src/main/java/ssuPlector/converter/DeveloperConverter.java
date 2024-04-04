@@ -25,10 +25,7 @@ public class DeveloperConverter {
                 .kakaoId(developer.getKakaoId())
                 .githubLink(developer.getGithubLink())
                 .isDeveloper(developer.getIsDeveloper())
-                .imageList(
-                        developer.getImageList().stream()
-                                .map(ImageConverter::toImagePreviewDTO)
-                                .collect(Collectors.toList()))
+                .imageLink(developer.getImageList().get(0).getImagePath())
                 .languageList(developer.getLanguageList())
                 .devToolList(developer.getDevToolList())
                 .techStackList(developer.getTechStackList())

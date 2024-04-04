@@ -1,7 +1,6 @@
 package ssuPlector.service.developer;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +11,6 @@ import ssuPlector.converter.ImageConverter;
 import ssuPlector.domain.Developer;
 import ssuPlector.domain.Image;
 import ssuPlector.dto.request.DeveloperDTO.DeveloperRequestDTO;
-import ssuPlector.dto.request.ImageDTO;
 import ssuPlector.global.exception.GlobalException;
 import ssuPlector.global.response.code.GlobalErrorCode;
 import ssuPlector.redis.service.DeveloperHitsService;
@@ -36,20 +34,19 @@ public class DeveloperServiceImpl implements DeveloperService {
 
         Developer newDeveloper = DeveloperConverter.toDeveloper(requestDTO);
 
-        List<Image> imageList = createImageList(requestDTO.getImageList());
-        if (imageList.size() == 1) { // 이미지가 1개인 경우 mainImage 설정
-            imageList.get(0).setMainImage();
-        }
-        imageList.forEach(newDeveloper::addImage);
+        Image image = ImageConverter.toImage(requestDTO.getImageLink());
+
+        newDeveloper.addImage(image);
         developerRepository.save(newDeveloper);
 
         return newDeveloper.getId();
     }
 
-    @Transactional
-    public List<Image> createImageList(List<ImageDTO.ImageRequestDTO> requestDTOList) {
-        return requestDTOList.stream().map(ImageConverter::toImage).collect(Collectors.toList());
-    }
+    //    @Transactional
+    //    public List<Image> createImageList(List<ImageDTO.ImageRequestDTO> requestDTOList) {
+    //        return
+    // requestDTOList.stream().map(ImageConverter::toImage).collect(Collectors.toList());
+    //    }
 
     @Override
     public Developer getDeveloper(Long id) {

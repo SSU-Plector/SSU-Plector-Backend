@@ -11,8 +11,6 @@ public class ImageDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class ImagePreviewDTO {
-        Long id;
         String imagePath;
-        boolean isMainImage;
     }
 }

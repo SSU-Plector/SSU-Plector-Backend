@@ -1,6 +1,6 @@
 package ssuPlector.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +20,7 @@ public class ProjectDeveloperController {
     private final ProjectDeveloperService projectDeveloperService;
 
     @Operation(summary = "개발자-프로젝트 연결 API", description = "개발자와 프로젝트를 연결합니다._숙희")
-    @PostMapping("/connect")
+    @PatchMapping("/connect")
     public ApiResponse<Long> connectDeveloperProject(
             @ExistProject @RequestParam("projectId") Long projectId) {
         projectDeveloperService.connectProjectDeveloper(projectId);

@@ -1,6 +1,5 @@
 package ssuPlector.service.project;
 
-import static ssuPlector.dto.request.ImageDTO.*;
 import static ssuPlector.dto.request.ProjectDTO.*;
 
 import java.util.List;
@@ -65,7 +64,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectListResponseDto getProjectList(ProjectListRequestDto requestDto, int page) {
-        Pageable pageable = PageRequest.of(page, 30);
+        Pageable pageable = PageRequest.of(page, 4);
         String category = requestDto.getCategory();
         if (category != null && !EnumUtils.isValidEnum(Category.class, category))
             throw new GlobalException(GlobalErrorCode.CATEGORY_NOT_FOUND);
@@ -87,11 +86,9 @@ public class ProjectServiceImpl implements ProjectService {
                 createProjectDeveloperList(requestDTO.getProjectDevloperList());
         projectDeveloperList.forEach(newProject::addProjectDeveloper);
 
-        List<Image> imageList = createImageList(requestDTO.getImageList());
-        if (imageList.size() == 1) { // 이미지가 1개인 경우 mainImage 설정
-            imageList.get(0).setMainImage();
-        }
-        imageList.forEach(newProject::addImage);
+        Image image = ImageConverter.toImage(requestDTO.getImageLink());
+
+        newProject.addImage(image);
 
         projectRepository.save(newProject);
         projectDeveloperRepository.saveAll(projectDeveloperList);
@@ -107,10 +104,11 @@ public class ProjectServiceImpl implements ProjectService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional
-    public List<Image> createImageList(List<ImageRequestDTO> requestDTOList) {
-        return requestDTOList.stream().map(ImageConverter::toImage).collect(Collectors.toList());
-    }
+    //    @Transactional
+    //    public List<Image> createImageList(List<ImageRequestDTO> requestDTOList) {
+    //        return
+    // requestDTOList.stream().map(ImageConverter::toImage).collect(Collectors.toList());
+    //    }
 
     @Transactional
     public ProjectDeveloper createProjectDeveloper(ProjectDeveloperRequestDTO requestDTO) {

@@ -25,11 +25,13 @@ public class Project extends BaseEntity {
     @Column(columnDefinition = "varchar(30)")
     private String name;
 
+    @Builder.Default
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    private List<Image> imageList;
+    private List<Image> imageList = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "project")
-    private List<ProjectDeveloper> projectDeveloperList;
+    private List<ProjectDeveloper> projectDeveloperList = new ArrayList<>();
 
     @Column(columnDefinition = "varchar(101)")
     private String shortIntro;
@@ -40,8 +42,9 @@ public class Project extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Category category;
 
+    @Builder.Default
     @Column(name = "hits", columnDefinition = "BIGINT DEFAULT 0")
-    private long hits;
+    private long hits = 0;
 
     private String githubLink;
     private String infoPageLink;

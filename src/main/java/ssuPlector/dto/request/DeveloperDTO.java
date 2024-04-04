@@ -55,6 +55,6 @@ public class DeveloperDTO {
         @MaxSizeThree private List<DevTools> devToolList;
         @MaxSizeThree private List<TechStack> techStackList;
 
-        private List<ImageDTO.ImageRequestDTO> imageList;
+        private String imageLink;
     }
 }
