@@ -4,6 +4,8 @@ import static ssuPlector.dto.request.DeveloperDTO.*;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import ssuPlector.domain.Developer;
 
 public interface DeveloperService {
@@ -16,4 +18,6 @@ public interface DeveloperService {
     void updateDeveloperHits(Long developerId, Long hit);
 
     List<Long> getUpdateTargetDeveloperIds(List<Long> DeveloperIdList);
+
+    Page<Developer> getDeveloperList(DeveloperListRequestDTO requestDTO, int page);
 }

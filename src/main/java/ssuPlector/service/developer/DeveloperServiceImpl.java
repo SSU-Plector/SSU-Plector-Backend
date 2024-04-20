@@ -2,6 +2,9 @@ package ssuPlector.service.developer;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +13,7 @@ import ssuPlector.converter.DeveloperConverter;
 import ssuPlector.converter.ImageConverter;
 import ssuPlector.domain.Developer;
 import ssuPlector.domain.Image;
+import ssuPlector.dto.request.DeveloperDTO;
 import ssuPlector.dto.request.DeveloperDTO.DeveloperRequestDTO;
 import ssuPlector.global.exception.GlobalException;
 import ssuPlector.global.response.code.GlobalErrorCode;
@@ -75,5 +79,12 @@ public class DeveloperServiceImpl implements DeveloperService {
         return developerRepository.findAllByIdIn(developerIdList).stream()
                 .map(Developer::getId)
                 .toList();
+    }
+
+    @Override
+    public Page<Developer> getDeveloperList(
+            DeveloperDTO.DeveloperListRequestDTO requestDTO, int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        return developerRepository.findDevelopers(requestDTO.getSortType(), pageable);
     }
 }

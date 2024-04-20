@@ -2,11 +2,13 @@ package ssuPlector.converter;
 
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import ssuPlector.domain.Developer;
 import ssuPlector.domain.ProjectDeveloper;
 import ssuPlector.dto.request.DeveloperDTO.DeveloperRequestDTO;
+import ssuPlector.dto.response.DeveloperDTO;
 import ssuPlector.dto.response.DeveloperDTO.DeveloperDetailDTO;
 import ssuPlector.dto.response.DeveloperDTO.DeveloperPreviewDTO;
 
@@ -41,6 +43,31 @@ public class DeveloperConverter {
                 .id(projectDeveloper.getId())
                 .name(projectDeveloper.getName())
                 .partList(projectDeveloper.getPartList())
+                .build();
+    }
+
+    public static DeveloperDTO.DeveloperListResponseDTO toDeveloperResponseListDTO(
+            Page<Developer> developerList) {
+        return DeveloperDTO.DeveloperListResponseDTO.builder()
+                .currentPage(developerList.getNumber())
+                .pageSize(developerList.getSize())
+                .totalPage(developerList.getTotalPages())
+                .currentElement(developerList.getNumberOfElements())
+                .totalElement(developerList.getTotalElements())
+                .developerResponseDTOList(
+                        developerList.getContent().stream()
+                                .map(DeveloperConverter::toDeveloperResponseDTO)
+                                .collect(Collectors.toList()))
+                .build();
+    }
+
+    public static DeveloperDTO.DeveloperResponseDTO toDeveloperResponseDTO(Developer developer) {
+        return DeveloperDTO.DeveloperResponseDTO.builder()
+                .id(developer.getId())
+                .name(developer.getName())
+                .githubLink(developer.getGithubLink())
+                .hits(developer.getHits())
+                .techStackList(developer.getTechStackList())
                 .build();
     }
 

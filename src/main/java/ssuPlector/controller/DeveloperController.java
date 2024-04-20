@@ -2,12 +2,14 @@ package ssuPlector.controller;
 
 import jakarta.validation.Valid;
 
+import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,6 +17,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import ssuPlector.converter.DeveloperConverter;
 import ssuPlector.domain.Developer;
+import ssuPlector.dto.request.DeveloperDTO;
 import ssuPlector.dto.request.DeveloperDTO.DeveloperRequestDTO;
 import ssuPlector.dto.response.DeveloperDTO.DeveloperDetailDTO;
 import ssuPlector.global.response.ApiResponse;
@@ -43,5 +46,15 @@ public class DeveloperController {
         Developer developer = developerService.getDeveloper(developerId);
         return ApiResponse.onSuccess(
                 "개발자 상세조회 완료.", DeveloperConverter.toDeveloperDetailDTO(developer));
+    }
+
+    @Operation(summary = "개발자 리스트 조회", description = "개발자 리스트를 조회합니다._찬민")
+    @PostMapping("/list")
+    public ApiResponse getDeveloperList(
+            @Valid @RequestBody DeveloperDTO.DeveloperListRequestDTO requestDTO,
+            @RequestParam(value = "page", defaultValue = "0", required = false) int page) {
+        Page<Developer> developerList = developerService.getDeveloperList(requestDTO, page);
+        return ApiResponse.onSuccess(
+                "개발자 리스트 조회 성공", DeveloperConverter.toDeveloperResponseListDTO(developerList));
     }
 }

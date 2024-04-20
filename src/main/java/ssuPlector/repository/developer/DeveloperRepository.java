@@ -12,7 +12,8 @@ import org.springframework.stereotype.Repository;
 import ssuPlector.domain.Developer;
 
 @Repository
-public interface DeveloperRepository extends JpaRepository<Developer, Long> {
+public interface DeveloperRepository
+        extends JpaRepository<Developer, Long>, DeveloperRepositoryCustom {
     @Modifying
     @Query("UPDATE Developer d SET d.hits = :hits WHERE d.id = :id")
     void updateHitsById(@Param("id") Long id, @Param("hits") Long hits);
