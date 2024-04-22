@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ssuPlector.config.AmazonConfig;
 import ssuPlector.domain.Uuid;
+import ssuPlector.global.exception.GlobalException;
+import ssuPlector.global.response.code.GlobalErrorCode;
 import ssuPlector.repository.UuidRepository;
 
 @Slf4j
@@ -53,6 +55,7 @@ public class AmazonS3Manager {
                             amazonConfig.getBucket(), keyName, file.getInputStream(), metadata));
         } catch (IOException e) {
             log.error("error at AmazonS3Manager uploadFile : {}", (Object) e.getStackTrace());
+            throw new GlobalException(GlobalErrorCode._BAD_REQUEST);
         }
 
         return amazonS3.getUrl(amazonConfig.getBucket(), keyName).toString();
