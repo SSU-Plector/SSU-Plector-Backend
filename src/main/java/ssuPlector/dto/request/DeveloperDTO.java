@@ -19,6 +19,14 @@ public class DeveloperDTO {
     @Getter
     @AllArgsConstructor
     @NoArgsConstructor
+    public static class DeveloperListRequestDTO {
+
+        private String sortType; // recent, old, high, low
+    }
+
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class DeveloperRequestDTO {
 
         @NotBlank(message = "필수 입력값")

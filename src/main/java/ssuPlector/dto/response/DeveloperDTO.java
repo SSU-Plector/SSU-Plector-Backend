@@ -46,4 +46,27 @@ public class DeveloperDTO {
         String name;
         List<Part> partList;
     }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class DeveloperResponseDTO {
+        Long id;
+        String name;
+        List<TechStack> techStackList;
+        String githubLink;
+        Long hits;
+    }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class DeveloperListResponseDTO {
+        int currentElement; // 현재 페이지 아이템 개수
+        int totalPage; // 전체 페이지
+        long totalElement; // 전체 아이템 개수
+        List<DeveloperResponseDTO> developerResponseDTOList;
+    }
 }
