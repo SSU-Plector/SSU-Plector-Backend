@@ -3,6 +3,7 @@ package ssuPlector.service.project;
 import static ssuPlector.dto.request.ProjectDTO.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.EnumUtils;
@@ -10,20 +11,24 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
+import ssuPlector.aws.s3.AmazonS3Manager;
 import ssuPlector.converter.ImageConverter;
 import ssuPlector.converter.ProjectConverter;
 import ssuPlector.domain.Developer;
 import ssuPlector.domain.Image;
 import ssuPlector.domain.Project;
 import ssuPlector.domain.ProjectDeveloper;
+import ssuPlector.domain.Uuid;
 import ssuPlector.domain.category.Category;
 import ssuPlector.dto.request.ProjectDTO.ProjectListRequestDto;
 import ssuPlector.dto.response.ProjectDTO.ProjectListResponseDto;
 import ssuPlector.global.exception.GlobalException;
 import ssuPlector.global.response.code.GlobalErrorCode;
 import ssuPlector.redis.service.ProjectHitsService;
+import ssuPlector.repository.UuidRepository;
 import ssuPlector.repository.developer.DeveloperRepository;
 import ssuPlector.repository.project.ProjectRepository;
 import ssuPlector.repository.projectDevloper.ProjectDeveloperRepository;
@@ -35,6 +40,8 @@ public class ProjectServiceImpl implements ProjectService {
     private final ProjectDeveloperRepository projectDeveloperRepository;
     private final DeveloperRepository developerRepository;
     private final ProjectHitsService projectHitsService;
+    private final AmazonS3Manager s3Manager;
+    private final UuidRepository uuidRepository;
 
     @Override
     public Project getProject(Long projectId) {
@@ -78,7 +85,10 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     @Transactional
-    public Long createProject(ProjectRequestDTO requestDTO) {
+    public Long createProject(ProjectRequestDTO requestDTO, MultipartFile image) {
+
+        String uuid = UUID.randomUUID().toString();
+        Uuid savedUuid = uuidRepository.save(Uuid.builder().uuid(uuid).build());
 
         Project newProject = ProjectConverter.toProject(requestDTO);
 
@@ -86,9 +96,10 @@ public class ProjectServiceImpl implements ProjectService {
                 createProjectDeveloperList(requestDTO.getProjectDevloperList());
         projectDeveloperList.forEach(newProject::addProjectDeveloper);
 
-        Image image = ImageConverter.toImage(requestDTO.getImageLink());
-
-        newProject.addImage(image);
+        String projectImageUrl =
+                s3Manager.uploadFile(s3Manager.generateProjectKeyName(savedUuid), image);
+        Image projectImage = ImageConverter.toImage(projectImageUrl);
+        newProject.addImage(projectImage);
 
         projectRepository.save(newProject);
         projectDeveloperRepository.saveAll(projectDeveloperList);

@@ -4,13 +4,15 @@ import static ssuPlector.dto.request.ProjectDTO.*;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import ssuPlector.domain.Project;
 import ssuPlector.dto.request.ProjectDTO.ProjectListRequestDto;
 import ssuPlector.dto.response.ProjectDTO.ProjectListResponseDto;
 
 public interface ProjectService {
 
-    Long createProject(ProjectRequestDTO requestDTO);
+    Long createProject(ProjectRequestDTO requestDTO, MultipartFile image);
 
     Project getProject(Long projectId);
 

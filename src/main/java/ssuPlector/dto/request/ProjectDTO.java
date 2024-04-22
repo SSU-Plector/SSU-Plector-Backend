@@ -55,11 +55,10 @@ public class ProjectDTO {
         private String appLink;
 
         private Category category;
+
         @MaxSizeThree private List<DevLanguage> languageList;
         @MaxSizeThree private List<DevTools> devToolList;
         @MaxSizeThree private List<TechStack> techStackList;
-
-        private String imageLink;
 
         private List<ProjectDeveloperRequestDTO> projectDevloperList;
     }

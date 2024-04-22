@@ -4,10 +4,12 @@ import static ssuPlector.dto.request.DeveloperDTO.*;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import ssuPlector.domain.Developer;
 
 public interface DeveloperService {
-    Long createDeveloper(DeveloperRequestDTO requestDTO);
+    Long createDeveloper(DeveloperRequestDTO requestDTO, MultipartFile image);
 
     Developer getDeveloper(Long id);
 

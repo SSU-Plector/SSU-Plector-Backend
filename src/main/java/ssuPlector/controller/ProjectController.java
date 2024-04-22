@@ -4,8 +4,10 @@ import static ssuPlector.dto.request.ProjectDTO.*;
 
 import jakarta.validation.Valid;
 
+import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -44,9 +46,11 @@ public class ProjectController {
     }
 
     @Operation(summary = "프로젝트 생성, 저장 API", description = "프로젝트를 생성 후 저장합니다._찬민")
-    @PostMapping
-    public ApiResponse createProject(@RequestBody @Valid ProjectRequestDTO requestDTO) {
-        Long projectId = projectService.createProject(requestDTO);
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ApiResponse createProject(
+            @RequestPart @Valid ProjectRequestDTO requestDTO,
+            @RequestPart(value = "image", required = false) MultipartFile image) {
+        Long projectId = projectService.createProject(requestDTO, image);
         return ApiResponse.onSuccess("프로젝트 생성 및 저장 완료.", projectId);
     }
 }
