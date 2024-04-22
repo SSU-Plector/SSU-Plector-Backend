@@ -49,8 +49,6 @@ public class DeveloperConverter {
     public static DeveloperDTO.DeveloperListResponseDTO toDeveloperResponseListDTO(
             Page<Developer> developerList) {
         return DeveloperDTO.DeveloperListResponseDTO.builder()
-                .currentPage(developerList.getNumber())
-                .pageSize(developerList.getSize())
                 .totalPage(developerList.getTotalPages())
                 .currentElement(developerList.getNumberOfElements())
                 .totalElement(developerList.getTotalElements())

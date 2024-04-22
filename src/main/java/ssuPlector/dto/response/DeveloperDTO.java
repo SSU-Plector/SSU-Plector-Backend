@@ -64,9 +64,7 @@ public class DeveloperDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class DeveloperListResponseDTO {
-        int currentPage; // 현재 페이지
         int currentElement; // 현재 페이지 아이템 개수
-        int pageSize; // 페이지 사이즈
         int totalPage; // 전체 페이지
         long totalElement; // 전체 아이템 개수
         List<DeveloperResponseDTO> developerResponseDTOList;
