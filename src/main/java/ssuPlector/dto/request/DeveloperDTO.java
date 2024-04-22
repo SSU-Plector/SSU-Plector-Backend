@@ -59,10 +59,9 @@ public class DeveloperDTO {
         private String kakaoId;
 
         private String githubLink;
+
         @MaxSizeThree private List<DevLanguage> languageList;
         @MaxSizeThree private List<DevTools> devToolList;
         @MaxSizeThree private List<TechStack> techStackList;
-
-        private String imageLink;
     }
 }
