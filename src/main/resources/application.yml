@@ -12,9 +12,6 @@ springdoc:
 ---
 # LOCAL
 spring:
-  config:
-    activate:
-      on-profile: local
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${SPRING_DATASOURCE_URL}
@@ -29,22 +26,3 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  data:
-    redis:
-      host: localhost
-      port: 6379
-
-cloud:
-  aws:
-    s3:
-      bucket: ssuplector
-      path:
-        project: project
-        developer: developer
-    region:
-      static: ap-northeast-2
-    stack:
-      auto: false
-    credentials:
-      accessKey: ${AWS_ACCESS_KEY_ID}
-      secretKey: ${AWS_SECRET_ACCESS_KEY}
