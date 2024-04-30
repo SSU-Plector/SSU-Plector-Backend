@@ -48,3 +48,12 @@ cloud:
     credentials:
       accessKey: ${AWS_ACCESS_KEY_ID}
       secretKey: ${AWS_SECRET_ACCESS_KEY}
+jwt:
+  secret: ${JWT_SECRET_KEY}
+  access-token-validity: ${JWT_ACCESS_TOKEN_TIME}
+  refresh-token-validity: ${JWT_REFRESH_TOKEN_TIME}
+kakao:
+  auth:
+    client: ${KAKAO_CLIENT_ID}
+    redirect-uri: ${KAKAO_REDIRECT_URI}
+---
