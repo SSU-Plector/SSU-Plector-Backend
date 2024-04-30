@@ -20,7 +20,7 @@ public class ApiResponse<T> {
     }
 
     // 성공 시 응답
-    public static ApiResponse onSuccess(String message) {
+    public static <T>ApiResponse<T> onSuccess(String message) {
         return new ApiResponse<>(true, SuccessCode._OK.getCode(), message, null);
     }
 
@@ -31,7 +31,7 @@ public class ApiResponse<T> {
     }
 
     // 실패 시 응답
-    public static ApiResponse onFailure(GlobalErrorCode globalErrorCode) {
+    public static <T>ApiResponse<T> onFailure(GlobalErrorCode globalErrorCode) {
         return new ApiResponse<>(
                 false, globalErrorCode.getCode(), globalErrorCode.getMessage(), null);
     }
