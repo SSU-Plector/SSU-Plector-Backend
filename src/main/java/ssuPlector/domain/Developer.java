@@ -1,22 +1,24 @@
 package ssuPlector.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
+
 import lombok.*;
 import ssuPlector.domain.category.DevLanguage;
 import ssuPlector.domain.category.DevTools;
 import ssuPlector.domain.category.TechStack;
-
-import java.util.List;
 
 @Entity
 @Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User extends BaseEntity {
+public class Developer extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "developer_id")
     private Long id;
 
     @Column(columnDefinition = "varchar(20)")
@@ -36,38 +38,51 @@ public class User extends BaseEntity {
 
     @Column(columnDefinition = "varchar(50)")
     private String email;
-    private long hits;
+
+    @Builder.Default private long hits = 0;
 
     @Column(columnDefinition = "varchar(20)")
     private String kakaoId;
+
     private String githubLink;
+
     @Column(columnDefinition = "tinyint(1)")
     private boolean isDeveloper;
 
-    @ElementCollection
-    private List<String> linkList;
+    @ElementCollection private List<String> linkList;
 
-    @OneToMany(mappedBy = "user")
-    private List<Image> imageList;
+    @Builder.Default
+    @OneToMany(mappedBy = "developer", cascade = CascadeType.ALL)
+    private List<Image> imageList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
-    private List<ProjectUser> projectUserList;
+    @Builder.Default
+    @OneToMany(mappedBy = "developer")
+    private List<ProjectDeveloper> projectDeveloperList = new ArrayList<>();
+
+    @Builder.Default
     @Enumerated(EnumType.STRING)
-    private List<DevLanguage> languageList;
+    private List<DevLanguage> languageList = new ArrayList<>();
+
     @Enumerated(EnumType.STRING)
     private List<DevTools> devToolList;
+
     @Enumerated(EnumType.STRING)
     private List<TechStack> techStackList;
 
-
-    //==연관관계 메서드==//
-    public void addProjectUser(ProjectUser projectUser) {
-        projectUser.setUser(this);
-        this.projectUserList.add(projectUser);
+    // ==연관관계 메서드==//
+    public void addProjectDeveloper(ProjectDeveloper projectDeveloper) {
+        projectDeveloper.setDeveloper(this);
+        if (this.projectDeveloperList == null) this.projectDeveloperList = new ArrayList<>();
+        this.projectDeveloperList.add(projectDeveloper);
     }
 
     public void addImage(Image image) {
-        image.setUser(this);
+        image.setDeveloper(this);
+        if (this.imageList == null) this.imageList = new ArrayList<>();
         this.imageList.add(image);
+    }
+
+    public boolean getIsDeveloper() {
+        return this.isDeveloper;
     }
 }
