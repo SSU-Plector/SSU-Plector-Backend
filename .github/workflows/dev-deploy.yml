@@ -3,7 +3,7 @@ name: SSU-Plector dev CI/CD
 on:
   pull_request:
     branches:
-      - main
+      - develop
     types:
       - closed
   workflow_dispatch: # (2).수동 실행도 가능하도록
