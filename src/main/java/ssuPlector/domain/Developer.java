@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import ssuPlector.domain.category.DevLanguage;
 import ssuPlector.domain.category.DevTools;
+import ssuPlector.domain.category.SocialType;
 import ssuPlector.domain.category.TechStack;
 
 @Entity
@@ -46,8 +47,7 @@ public class Developer extends BaseEntity {
 
     private String githubLink;
 
-    @Column(columnDefinition = "tinyint(1)")
-    private boolean isDeveloper;
+    @Builder.Default private boolean isDeveloper = true;
 
     @ElementCollection private List<String> linkList;
 
@@ -68,6 +68,10 @@ public class Developer extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private List<TechStack> techStackList;
+
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "VARCHAR(10)")
+    private SocialType socialType;
 
     // ==연관관계 메서드==//
     public void addProjectDeveloper(ProjectDeveloper projectDeveloper) {
