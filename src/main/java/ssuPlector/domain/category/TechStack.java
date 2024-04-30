@@ -1,10 +1,5 @@
 package ssuPlector.domain.category;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-
-import ssuPlector.global.exception.GlobalException;
-import ssuPlector.global.response.code.GlobalErrorCode;
-
 public enum TechStack {
     DJANGO,
     RUBY_ON_RAILS,
@@ -39,15 +34,5 @@ public enum TechStack {
     JENKINS,
     TRAVIS_CI,
     CIRCLECI,
-    GITLAB_CI;
-
-    @JsonCreator
-    public static TechStack fromTechStack(String techStackString) {
-        for (TechStack techStack : TechStack.values()) {
-            if (techStack.name().equals(techStackString)) {
-                return techStack;
-            }
-        }
-        throw new GlobalException(GlobalErrorCode.TECH_STACK_NOT_FOUND);
-    }
+    GITLAB_CI
 }
