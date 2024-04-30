@@ -1,10 +1,5 @@
 package ssuPlector.domain.category;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-
-import ssuPlector.global.exception.GlobalException;
-import ssuPlector.global.response.code.GlobalErrorCode;
-
 public enum Category {
     SERVICE,
     SECURITY,
@@ -31,15 +26,5 @@ public enum Category {
     VR,
     AUTOMATION,
     ROBOTICS,
-    OTHER;
-
-    @JsonCreator
-    public static Category fromCategory(String categoryString) {
-        for (Category category : Category.values()) {
-            if (category.name().equals(categoryString)) {
-                return category;
-            }
-        }
-        throw new GlobalException(GlobalErrorCode.CATEGORY_NOT_FOUND);
-    }
+    OTHER
 }
