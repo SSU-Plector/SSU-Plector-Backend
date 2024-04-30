@@ -33,7 +33,7 @@ public class AuthUserArgumentResolver implements HandlerMethodArgumentResolver {
             MethodParameter parameter,
             ModelAndViewContainer mavContainer,
             NativeWebRequest webRequest,
-            WebDataBinderFactory binderFactory){
+            WebDataBinderFactory binderFactory) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object principal = null;
 
