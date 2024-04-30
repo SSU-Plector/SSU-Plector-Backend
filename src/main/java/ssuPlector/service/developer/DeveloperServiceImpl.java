@@ -16,8 +16,8 @@ import ssuPlector.converter.DeveloperConverter;
 import ssuPlector.converter.ImageConverter;
 import ssuPlector.domain.Developer;
 import ssuPlector.domain.Image;
-import ssuPlector.dto.request.DeveloperDTO;
 import ssuPlector.domain.Uuid;
+import ssuPlector.dto.request.DeveloperDTO;
 import ssuPlector.dto.request.DeveloperDTO.DeveloperRequestDTO;
 import ssuPlector.global.exception.GlobalException;
 import ssuPlector.global.response.code.GlobalErrorCode;
@@ -57,12 +57,6 @@ public class DeveloperServiceImpl implements DeveloperService {
 
         return newDeveloper.getId();
     }
-
-    //    @Transactional
-    //    public List<Image> createImageList(List<ImageDTO.ImageRequestDTO> requestDTOList) {
-    //        return
-    // requestDTOList.stream().map(ImageConverter::toImage).collect(Collectors.toList());
-    //    }
 
     @Override
     public Developer getDeveloper(Long id) {
