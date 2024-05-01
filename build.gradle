@@ -94,3 +94,7 @@ spotless {
 		importOrder('java', 'javax', 'jakarta', 'org', 'com')
 	}
 }
+
+jar {
+	enabled = false
+}
