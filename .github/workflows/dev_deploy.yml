@@ -15,7 +15,6 @@ env: # 새로 추가한 부분
 jobs:
   build:
     runs-on: ubuntu-latest # (3).OS환경
-    if: github.event.pull_request.merged == true
 
     steps:
       - name: Checkout
