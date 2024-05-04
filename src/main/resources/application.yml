@@ -38,14 +38,16 @@ cloud:
   aws:
     s3:
       bucket: ssuplector
-    credentials:
-      access-key: ${S3_ACCESS_KEY}
-      secret-key: ${S3_SECRET_KEY}
+      path:
+        project: project
+        developer: developer
     region:
-      static: ${REGION}
-      auto: false
+      static: ap-northeast-2
     stack:
       auto: false
+    credentials:
+      accessKey: ${AWS_ACCESS_KEY_ID}
+      secretKey: ${AWS_SECRET_ACCESS_KEY}
 ---
 # DEV
 spring:
@@ -78,11 +80,13 @@ cloud:
   aws:
     s3:
       bucket: ssuplector
-    credentials:
-      access-key: ${S3_ACCESS_KEY}
-      secret-key: ${S3_SECRET_KEY}
+      path:
+        project: project
+        developer: developer
     region:
-      static: ${REGION}
-      auto: false
+      static: ap-northeast-2
     stack:
       auto: false
+    credentials:
+      accessKey: ${AWS_ACCESS_KEY_ID}
+      secretKey: ${AWS_SECRET_ACCESS_KEY}

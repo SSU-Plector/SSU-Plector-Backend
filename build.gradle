@@ -18,6 +18,16 @@ configurations {
 	}
 }
 
+ext {
+	set('springCloudVersion', "2022.0.3")
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
 repositories {
 	mavenCentral()
 }
@@ -45,8 +55,7 @@ dependencies {
 	//s3
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 	//parameter store
-	implementation 'org.springframework.cloud:spring-cloud-starter-aws-parameter-store-config'
-}
+	}
 
 tasks.named('test') {
 	useJUnitPlatform()
