@@ -60,3 +60,16 @@ spring:
     redis:
       host: ${REDIS_URL}
       port: 6379
+
+cloud:
+  aws:
+    s3:
+      bucket: ssuplector
+    credentials:
+      access-key: ${S3_ACCESS_KEY}
+      secret-key: ${S3_SECRET_KEY}
+    region:
+      static: ${REGION}
+      auto: false
+    stack:
+      auto: false
