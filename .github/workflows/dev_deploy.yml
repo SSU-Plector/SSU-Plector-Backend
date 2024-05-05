@@ -57,6 +57,10 @@ jobs:
           cp -r .platform deploy/.platform
           cd deploy && zip -r deploy.zip .
 
+      - name: Show Current Time
+        run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}"
+        shell: bash
+
       - name: Beanstalk Deploy
         uses: einaregilsson/beanstalk-deploy@v21
         with:
