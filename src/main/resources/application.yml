@@ -33,6 +33,21 @@ spring:
     redis:
       host: localhost
       port: 6379
+
+cloud:
+  aws:
+    s3:
+      bucket: ssuplector
+      path:
+        project: project
+        developer: developer
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+    credentials:
+      accessKey: ${AWS_ACCESS_KEY_ID}
+      secretKey: ${AWS_SECRET_ACCESS_KEY}
 ---
 # DEV
 spring:
@@ -60,3 +75,18 @@ spring:
     redis:
       host: ${REDIS_URL}
       port: 6379
+
+cloud:
+  aws:
+    s3:
+      bucket: ssuplector
+      path:
+        project: project
+        developer: developer
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+    credentials:
+      accessKey: ${AWS_ACCESS_KEY_ID}
+      secretKey: ${AWS_SECRET_ACCESS_KEY}

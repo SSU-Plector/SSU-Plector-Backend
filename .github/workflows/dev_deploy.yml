@@ -8,10 +8,13 @@ on:
       - closed
   workflow_dispatch: # (2).수동 실행도 가능하도록
 
+env: # 새로 추가한 부분
+  S3_BUCKET_NAME: ssu-plector-deploy
+  PROJECT_NAME: ssu-plector
+
 jobs:
   build:
     runs-on: ubuntu-latest # (3).OS환경
-    if: github.event.pull_request.merged == true
 
     steps:
       - name: Checkout
@@ -31,16 +34,19 @@ jobs:
         run: ./gradlew clean build -x test
         shell: bash # (7).build 시작
 
-      - name: Get current time
-        uses: 1466587594/get-current-time@v2
-        id: current-time
-        with:
-          format: YYYY-MM-DDTHH-mm-ss
-          utcOffset: "+09:00" # (8).build 시점의 시간확보
+      - name: Make zip file
+        run: zip -r ./$GITHUB_SHA.zip .
+        shell: bash
 
-      - name: Show Current Time
-        run: echo "CurrentTime=$"
-        shell: bash # (9).확보한 시간 보여주기
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Upload to S3
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
 
       - name: Generate deployment package
         run: |
