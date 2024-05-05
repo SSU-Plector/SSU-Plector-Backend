@@ -13,6 +13,6 @@ public class RootController {
     @GetMapping("/health")
     @Operation(summary = "Health Check API", description = "배포 서버 헬스 체크 API")
     public String healthCheck() {
-        return "I'm Healthy!";
+        return "I'm Healthy~!";
     }
 }
