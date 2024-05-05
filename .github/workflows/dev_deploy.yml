@@ -57,9 +57,12 @@ jobs:
           cp -r .platform deploy/.platform
           cd deploy && zip -r deploy.zip .
 
-      - name: Show Current Time
-        run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}"
-        shell: bash
+      - name: Get current time # 한국 시간으로 설정
+        uses: 1466587594/get-current-time@v2
+        id: current-time
+        with:
+          format: YYYY-MM-DDTHH-mm-ss
+          utcOffset: "+09:00"
 
       - name: Beanstalk Deploy
         uses: einaregilsson/beanstalk-deploy@v21
