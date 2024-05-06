@@ -3,7 +3,7 @@ spring:
   application:
     name: SSUPlector
   profiles:
-    active: local
+    active: dev
 springdoc:
   swagger-ui:
     tags-sorter: alpha
@@ -57,3 +57,44 @@ kakao:
     client: ${KAKAO_CLIENT_ID}
     redirect-uri: ${KAKAO_REDIRECT_URI}
 ---
+# DEV
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
+    url: ${DATASOURCE_URL}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: never
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+        hbm2ddl:
+          auto: update
+        default_batch_fetch_size: 1000
+  data:
+    redis:
+      host: ${REDIS_URL}
+      port: 6379
+
+cloud:
+  aws:
+    s3:
+      bucket: ssuplector
+      path:
+        project: project
+        developer: developer
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+    credentials:
+      accessKey: ${AWS_ACCESS_KEY_ID}
+      secretKey: ${AWS_SECRET_ACCESS_KEY}
