@@ -7,9 +7,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ssuPlector.domain.category.DevLanguage;
 import ssuPlector.domain.category.DevTools;
 import ssuPlector.domain.category.Part;
@@ -18,7 +18,8 @@ import ssuPlector.validation.annotation.MaxSizeThree;
 
 public class DeveloperDTO {
 
-    @Data
+    @Setter
+    @Getter
     @AllArgsConstructor
     @NoArgsConstructor
     public static class DeveloperListRequestDTO {
