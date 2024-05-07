@@ -32,7 +32,7 @@ public class DeveloperController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse createDeveloper(
             @RequestPart @Valid DeveloperRequestDTO requestDTO,
-            @RequestPart(value = "image", required = false) MultipartFile image) {
+            @RequestPart(value = "image", required = true) MultipartFile image) {
         Long developerId = developerService.createDeveloper(requestDTO, image);
         return ApiResponse.onSuccess("개발자 생성 및 저장 완료.", developerId);
     }
@@ -47,10 +47,11 @@ public class DeveloperController {
     }
 
     @Operation(summary = "개발자 리스트 조회", description = "개발자 리스트를 조회합니다._찬민")
-    @PostMapping("/list")
-    public ApiResponse getDeveloperList(
-            @Valid @RequestBody DeveloperDTO.DeveloperListRequestDTO requestDTO,
-            @RequestParam(value = "page", defaultValue = "0", required = false) int page) {
+    @GetMapping("/list")
+    public ApiResponse<ssuPlector.dto.response.DeveloperDTO.DeveloperListResponseDTO>
+            getDeveloperList(
+                    @Valid @ModelAttribute DeveloperDTO.DeveloperListRequestDTO requestDTO,
+                    @RequestParam(value = "page", defaultValue = "0", required = false) int page) {
         Page<Developer> developerList = developerService.getDeveloperList(requestDTO, page);
         return ApiResponse.onSuccess(
                 "개발자 리스트 조회 성공", DeveloperConverter.toDeveloperResponseListDTO(developerList));

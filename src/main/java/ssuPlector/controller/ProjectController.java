@@ -38,7 +38,7 @@ public class ProjectController {
 
     @Operation(summary = "프로젝트 리스트 조회", description = "프로젝트 리스트 조회합니다._현근")
     @GetMapping("/list")
-    public ApiResponse getProjectList(
+    public ApiResponse<ssuPlector.dto.response.ProjectDTO.ProjectListResponseDto> getProjectList(
             @Valid @ModelAttribute ProjectDTO.ProjectListRequestDto requestDto,
             @RequestParam(value = "page", defaultValue = "0", required = false) int page) {
         return ApiResponse.onSuccess(
