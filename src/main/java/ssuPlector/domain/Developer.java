@@ -8,8 +8,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import ssuPlector.domain.category.DevLanguage;
 import ssuPlector.domain.category.DevTools;
-import ssuPlector.domain.category.SocialType;
 import ssuPlector.domain.category.Part;
+import ssuPlector.domain.category.SocialType;
 import ssuPlector.domain.category.TechStack;
 
 @Entity
