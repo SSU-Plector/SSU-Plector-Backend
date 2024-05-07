@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import ssuPlector.converter.DeveloperConverter;
@@ -39,9 +38,9 @@ public class DeveloperController {
 
     @Operation(summary = "개발자 생성, 저장 API", description = "개발자를 생성합니다._찬민")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ApiResponse createDeveloper(
-            @RequestPart @Valid DeveloperRequestDTO requestDTO,
-            @RequestPart(value = "image", required = true) MultipartFile image) {
+    public ApiResponse<Long> createDeveloper(
+            @RequestPart(value="requestDTO") @Valid DeveloperRequestDTO requestDTO,
+            @RequestPart(value = "image") MultipartFile image) {
         Long developerId = developerService.createDeveloper(requestDTO, image);
         return ApiResponse.onSuccess("개발자 생성 및 저장 완료.", developerId);
     }
