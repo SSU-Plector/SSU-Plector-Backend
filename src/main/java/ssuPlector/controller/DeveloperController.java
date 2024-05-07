@@ -13,9 +13,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import ssuPlector.converter.DeveloperConverter;
 import ssuPlector.domain.Developer;
-import ssuPlector.dto.request.DeveloperDTO;
+import ssuPlector.dto.request.DeveloperDTO.DeveloperListRequestDTO;
 import ssuPlector.dto.request.DeveloperDTO.DeveloperRequestDTO;
 import ssuPlector.dto.response.DeveloperDTO.DeveloperDetailDTO;
+import ssuPlector.dto.response.DeveloperDTO.DeveloperListResponseDTO;
 import ssuPlector.global.response.ApiResponse;
 import ssuPlector.service.developer.DeveloperService;
 import ssuPlector.validation.annotation.ExistDeveloper;
@@ -48,10 +49,9 @@ public class DeveloperController {
 
     @Operation(summary = "개발자 리스트 조회", description = "개발자 리스트를 조회합니다._찬민")
     @GetMapping("/list")
-    public ApiResponse<ssuPlector.dto.response.DeveloperDTO.DeveloperListResponseDTO>
-            getDeveloperList(
-                    @Valid @ModelAttribute DeveloperDTO.DeveloperListRequestDTO requestDTO,
-                    @RequestParam(value = "page", defaultValue = "0", required = false) int page) {
+    public ApiResponse<DeveloperListResponseDTO> getDeveloperList(
+            @Valid @ModelAttribute DeveloperListRequestDTO requestDTO,
+            @RequestParam(value = "page", defaultValue = "0", required = false) int page) {
         Page<Developer> developerList = developerService.getDeveloperList(requestDTO, page);
         return ApiResponse.onSuccess(
                 "개발자 리스트 조회 성공", DeveloperConverter.toDeveloperResponseListDTO(developerList));

@@ -14,8 +14,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import ssuPlector.converter.ProjectConverter;
 import ssuPlector.domain.Project;
-import ssuPlector.dto.request.ProjectDTO;
 import ssuPlector.dto.response.ProjectDTO.ProjectDetailDTO;
+import ssuPlector.dto.response.ProjectDTO.ProjectListResponseDto;
 import ssuPlector.global.response.ApiResponse;
 import ssuPlector.service.project.ProjectService;
 import ssuPlector.validation.annotation.ExistProject;
@@ -38,8 +38,8 @@ public class ProjectController {
 
     @Operation(summary = "프로젝트 리스트 조회", description = "프로젝트 리스트 조회합니다._현근")
     @GetMapping("/list")
-    public ApiResponse<ssuPlector.dto.response.ProjectDTO.ProjectListResponseDto> getProjectList(
-            @Valid @ModelAttribute ProjectDTO.ProjectListRequestDto requestDto,
+    public ApiResponse<ProjectListResponseDto> getProjectList(
+            @Valid @ModelAttribute ProjectListRequestDto requestDto,
             @RequestParam(value = "page", defaultValue = "0", required = false) int page) {
         return ApiResponse.onSuccess(
                 "프로젝트 리스트 조회 성공", projectService.getProjectList(requestDto, page));
