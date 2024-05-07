@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import ssuPlector.domain.category.DevLanguage;
 import ssuPlector.domain.category.DevTools;
+import ssuPlector.domain.category.Part;
 import ssuPlector.domain.category.TechStack;
 
 @Entity
@@ -68,6 +69,12 @@ public class Developer extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private List<TechStack> techStackList;
+
+    @Enumerated(EnumType.STRING)
+    private Part part1;
+
+    @Enumerated(EnumType.STRING)
+    private Part part2;
 
     // ==연관관계 메서드==//
     public void addProjectDeveloper(ProjectDeveloper projectDeveloper) {

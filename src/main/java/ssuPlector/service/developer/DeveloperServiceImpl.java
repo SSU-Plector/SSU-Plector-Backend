@@ -52,7 +52,6 @@ public class DeveloperServiceImpl implements DeveloperService {
                 s3Manager.uploadFile(s3Manager.generateDeveloperKeyName(savedUuid), image);
         Image developerImage = ImageConverter.toImage(developerImageUrl);
         newDeveloper.addImage(developerImage);
-
         developerRepository.save(newDeveloper);
 
         return newDeveloper.getId();
@@ -97,6 +96,7 @@ public class DeveloperServiceImpl implements DeveloperService {
     public Page<Developer> getDeveloperList(
             DeveloperDTO.DeveloperListRequestDTO requestDTO, int page) {
         Pageable pageable = PageRequest.of(page, 10);
-        return developerRepository.findDevelopers(requestDTO.getSortType(), pageable);
+        return developerRepository.findDevelopers(
+                requestDTO.getSortType(), requestDTO.getPart(), pageable);
     }
 }
