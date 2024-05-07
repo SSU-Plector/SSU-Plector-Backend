@@ -31,6 +31,8 @@ public class DeveloperConverter {
                 .languageList(developer.getLanguageList())
                 .devToolList(developer.getDevToolList())
                 .techStackList(developer.getTechStackList())
+                .part1(developer.getPart1())
+                .part2(developer.getPart2())
                 .projectList(
                         developer.getProjectDeveloperList().stream()
                                 .map(ProjectConverter::toProjectPreviewDTO)
@@ -65,7 +67,8 @@ public class DeveloperConverter {
                 .name(developer.getName())
                 .githubLink(developer.getGithubLink())
                 .hits(developer.getHits())
-                .techStackList(developer.getTechStackList())
+                .part1(developer.getPart1())
+                .part2(developer.getPart2())
                 .build();
     }
 
@@ -84,6 +87,8 @@ public class DeveloperConverter {
                 .languageList(requestDTO.getLanguageList())
                 .devToolList(requestDTO.getDevToolList())
                 .techStackList(requestDTO.getTechStackList())
+                .part1(requestDTO.getPart1())
+                .part2(requestDTO.getPart2())
                 .build();
     }
 }

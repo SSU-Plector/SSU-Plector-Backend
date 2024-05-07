@@ -35,6 +35,8 @@ public class DeveloperDTO {
         List<DevLanguage> languageList;
         List<DevTools> devToolList;
         List<TechStack> techStackList;
+        Part part1;
+        Part part2;
     }
 
     @Getter
@@ -54,7 +56,8 @@ public class DeveloperDTO {
     public static class DeveloperResponseDTO {
         Long id;
         String name;
-        List<TechStack> techStackList;
+        Part part1;
+        Part part2;
         String githubLink;
         Long hits;
     }
