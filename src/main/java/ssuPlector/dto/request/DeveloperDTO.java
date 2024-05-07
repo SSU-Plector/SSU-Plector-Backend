@@ -7,21 +7,24 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import ssuPlector.domain.category.DevLanguage;
 import ssuPlector.domain.category.DevTools;
+import ssuPlector.domain.category.Part;
 import ssuPlector.domain.category.TechStack;
 import ssuPlector.validation.annotation.MaxSizeThree;
 
 public class DeveloperDTO {
 
-    @Getter
+    @Data
     @AllArgsConstructor
     @NoArgsConstructor
     public static class DeveloperListRequestDTO {
 
         private String sortType; // recent, old, high, low
+        private Part part; // 개발자 키워드 검색
     }
 
     @Getter
@@ -60,6 +63,8 @@ public class DeveloperDTO {
 
         private String githubLink;
 
+        private Part part1;
+        private Part part2;
         @MaxSizeThree private List<DevLanguage> languageList;
         @MaxSizeThree private List<DevTools> devToolList;
         @MaxSizeThree private List<TechStack> techStackList;
