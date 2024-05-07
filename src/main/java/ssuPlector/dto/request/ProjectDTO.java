@@ -8,9 +8,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ssuPlector.domain.category.Category;
 import ssuPlector.domain.category.DevLanguage;
 import ssuPlector.domain.category.DevTools;
@@ -20,7 +20,8 @@ import ssuPlector.validation.annotation.MaxSizeThree;
 import ssuPlector.validation.annotation.MaxSizeTwo;
 
 public class ProjectDTO {
-    @Data
+    @Setter
+    @Getter
     @AllArgsConstructor
     @NoArgsConstructor
     public static class ProjectListRequestDto {

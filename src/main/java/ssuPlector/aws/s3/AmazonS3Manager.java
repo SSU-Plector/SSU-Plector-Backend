@@ -31,6 +31,9 @@ public class AmazonS3Manager {
 
     public String uploadFile(String keyName, MultipartFile file) {
         ObjectMetadata metadata = new ObjectMetadata();
+        if (file.isEmpty()) {
+            throw new GlobalException(GlobalErrorCode._BAD_REQUEST);
+        }
         metadata.setContentLength(file.getSize());
 
         String originalFilename = file.getOriginalFilename();
