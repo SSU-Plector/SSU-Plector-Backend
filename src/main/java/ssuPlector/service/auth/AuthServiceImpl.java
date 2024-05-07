@@ -36,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
 
         Optional<Developer> developer =
                 developerRepository.findByEmailAndSocialType(
-                        kakaoProfile.getKakaoAccount().getEmail(), SocialType.kakao);
+                        kakaoProfile.getKakaoAccount().getEmail(), SocialType.KAKAO);
         Developer newDeveloper;
         boolean isLogin = false;
 

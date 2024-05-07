@@ -30,7 +30,7 @@ public class AuthConverter {
                 .email(kakaoProfile.getKakaoAccount().getEmail())
                 .name(kakaoProfile.getKakaoAccount().getName())
                 .imageList(Collections.singletonList(image))
-                .socialType(SocialType.kakao)
+                .socialType(SocialType.KAKAO)
                 .build();
     }
 
