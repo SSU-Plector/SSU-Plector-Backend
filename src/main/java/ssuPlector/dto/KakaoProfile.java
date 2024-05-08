@@ -8,7 +8,7 @@ import lombok.Getter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class KakaoProfile {
     private Properties properties;
-    private KakaoAccount kakaoAccount;
+    private KakaoAccount kakao_account;
 
     @Getter
     @JsonIgnoreProperties(ignoreUnknown = true)
