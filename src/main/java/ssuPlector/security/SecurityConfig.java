@@ -12,6 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import lombok.RequiredArgsConstructor;
+import ssuPlector.security.filter.AuthExceptionHandlingFilter;
 import ssuPlector.security.filter.JwtAuthenticationFilter;
 import ssuPlector.security.handler.JwtAccessDeniedHandler;
 import ssuPlector.security.handler.JwtAuthenticationEntryPoint;
@@ -24,6 +25,7 @@ public class SecurityConfig {
 
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    private final AuthExceptionHandlingFilter authExceptionHandlingFilter;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -53,16 +55,24 @@ public class SecurityConfig {
                 authorize ->
                         authorize
                                 .requestMatchers(
-                                        "/api/**",
+                                        "/api/login",
+                                        "/health",
+                                        "/error",
                                         "/swagger-ui/**",
                                         "/swagger-resources/**",
                                         "/v3/api-docs/**",
-                                        "/error")
+                                        "/api/auth/kakao/login",
+                                        "api/developers/{developerId}",
+                                        "/api/developers/list",
+                                        "/api/developers",
+                                        "/api/projects/{projectId}",
+                                        "/api/projects/list",
+                                        "/api/projects")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated());
-
-        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(authExceptionHandlingFilter, JwtAuthenticationFilter.class);
         return http.build();
     }
 }
