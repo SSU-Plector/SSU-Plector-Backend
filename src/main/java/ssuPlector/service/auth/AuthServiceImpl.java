@@ -31,12 +31,12 @@ public class AuthServiceImpl implements AuthService {
     @Override
     @Transactional
     public OAuthResponse KakaoLogin(String code) {
-        OAuthToken oAuthToken = kakaoAuthProvider.getAccessToken(code); // oAuthToken으로 사용자 정보 받아오기
+        OAuthToken oAuthToken = kakaoAuthProvider.getAccessToken(code);
         KakaoProfile kakaoProfile = kakaoAuthProvider.getProfile(oAuthToken.getAccess_token());
 
         Optional<Developer> developer =
                 developerRepository.findByEmailAndSocialType(
-                        kakaoProfile.getKakaoAccount().getEmail(), SocialType.KAKAO);
+                        kakaoProfile.getKakao_account().getEmail(), SocialType.KAKAO);
         Developer newDeveloper;
         boolean isLogin = false;
 

@@ -25,10 +25,10 @@ public class AuthConverter {
 
     public static Developer toDeveloper(KakaoProfile kakaoProfile) {
         Image image =
-                Image.builder().imagePath(kakaoProfile.getKakao_account().getImageUrl()).build();
+                Image.builder().imagePath(kakaoProfile.getProperties().getProfile_image()).build();
         return Developer.builder()
                 .email(kakaoProfile.getKakao_account().getEmail())
-                .name(kakaoProfile.getKakao_account().getName())
+                .name(kakaoProfile.getProperties().getNickname())
                 .imageList(Collections.singletonList(image))
                 .socialType(SocialType.KAKAO)
                 .build();

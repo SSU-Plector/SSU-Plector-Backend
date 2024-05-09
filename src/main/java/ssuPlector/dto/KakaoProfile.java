@@ -14,13 +14,12 @@ public class KakaoProfile {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public class Properties {
         private String nickname;
+        private String profile_image;
     }
 
     @Getter
     @JsonIgnoreProperties(ignoreUnknown = true)
     public class KakaoAccount {
-        private String name;
         private String email;
-        private String imageUrl;
     }
 }
