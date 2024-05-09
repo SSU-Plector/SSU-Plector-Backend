@@ -16,6 +16,7 @@ import ssuPlector.dto.response.AuthResponseDTO.OAuthResponse;
 import ssuPlector.dto.response.AuthResponseDTO.TokenRefreshResponse;
 import ssuPlector.global.response.ApiResponse;
 import ssuPlector.security.handler.annotation.AuthUser;
+import ssuPlector.security.handler.annotation.ExtractToken;
 import ssuPlector.service.auth.AuthService;
 
 @RestController
@@ -41,8 +42,7 @@ public class AuthController {
 
     @Operation(summary = "토큰 재발급", description = "토큰을 재발급 합니다._숙희")
     @PostMapping("/kakao/refresh")
-    public ApiResponse<TokenRefreshResponse> refresh(
-            @RequestParam("refreshToken") String refreshToken) {
+    public ApiResponse<TokenRefreshResponse> refresh(@ExtractToken String refreshToken) {
         return ApiResponse.onSuccess("토큰 재발급 완료", authService.refresh(refreshToken));
     }
 }
