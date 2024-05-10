@@ -57,12 +57,6 @@ public class DeveloperServiceImpl implements DeveloperService {
         return newDeveloper.getId();
     }
 
-    //    @Transactional
-    //    public List<Image> createImageList(List<ImageDTO.ImageRequestDTO> requestDTOList) {
-    //        return
-    // requestDTOList.stream().map(ImageConverter::toImage).collect(Collectors.toList());
-    //    }
-
     @Override
     public Developer getDeveloper(Long id) {
         Developer developer =

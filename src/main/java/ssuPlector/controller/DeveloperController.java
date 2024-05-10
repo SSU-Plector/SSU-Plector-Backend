@@ -6,6 +6,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,9 +38,9 @@ public class DeveloperController {
 
     @Operation(summary = "개발자 생성, 저장 API", description = "개발자를 생성합니다._찬민")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ApiResponse createDeveloper(
-            @RequestPart @Valid DeveloperRequestDTO requestDTO,
-            @RequestPart(value = "image", required = true) MultipartFile image) {
+    public ApiResponse<Long> createDeveloper(
+            @RequestPart(value = "requestDTO") @Valid DeveloperRequestDTO requestDTO,
+            @RequestPart(value = "image") MultipartFile image) {
         Long developerId = developerService.createDeveloper(requestDTO, image);
         return ApiResponse.onSuccess("개발자 생성 및 저장 완료.", developerId);
     }

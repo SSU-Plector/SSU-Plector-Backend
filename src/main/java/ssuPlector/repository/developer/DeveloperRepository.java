@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import ssuPlector.domain.Developer;
+import ssuPlector.domain.category.SocialType;
 
 @Repository
 public interface DeveloperRepository
@@ -23,4 +24,6 @@ public interface DeveloperRepository
     Optional<Developer> findByEmail(String email);
 
     Developer findByKakaoId(String kakaoId);
+
+    Optional<Developer> findByEmailAndSocialType(String email, SocialType socialType);
 }

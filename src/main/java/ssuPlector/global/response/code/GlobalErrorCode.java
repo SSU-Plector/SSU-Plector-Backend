@@ -28,7 +28,17 @@ public enum GlobalErrorCode {
     TECH_STACK_NOT_FOUND(HttpStatus.NOT_FOUND, "TECHSTACK4001", "해당 기술 스택을 찾을 수 없습니다"),
 
     // size관련
-    ESCAPE_MAX_LIST_SIZE(HttpStatus.NOT_FOUND, "LISTSIZE4001", "리스트 사이즈를 벗어났습니다.");
+    ESCAPE_MAX_LIST_SIZE(HttpStatus.NOT_FOUND, "LISTSIZE4001", "리스트 사이즈를 벗어났습니다."),
+
+    // AUTH
+    AUTH_EXPIRED_TOKEN(HttpStatus.UNAUTHORIZED, "AUTH4001", "토큰이 만료되었습니다."),
+    AUTH_INVALID_TOKEN(HttpStatus.NOT_FOUND, "AUTH4002", "토큰이 유효하지 않습니다."),
+    INVALID_REQUEST_INFO(HttpStatus.UNAUTHORIZED, "AUTH_4003", "카카오 정보 불러오기에 실패하였습니다."),
+    NOT_CONTAIN_TOKEN(HttpStatus.NOT_FOUND, "AUTH_4004", "해당하는 토큰이 저장되어있지 않습니다."),
+    NOT_EQUAL_TOKEN(HttpStatus.UNAUTHORIZED, "AUTH_4005", "리프레시 토큰이 다릅니다."),
+    USER_NOT_FOUND(HttpStatus.BAD_REQUEST, "AUTH_4006", "사용자를 찾을 수 없습니다."),
+    UNSUPPORTED_TOKEN(HttpStatus.BAD_REQUEST, "AUTH_4007", "지원하지 않는 토큰입니다.");
+
     private final HttpStatus httpStatus;
 
     private final String code;
