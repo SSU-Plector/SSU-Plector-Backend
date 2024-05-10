@@ -8,6 +8,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 import lombok.RequiredArgsConstructor;
+import ssuPlector.security.handler.annotation.ExtractToken;
 import ssuPlector.security.provider.JwtTokenProvider;
 
 @Component
@@ -18,7 +19,8 @@ public class ExtractTokenArgumentResolver implements HandlerMethodArgumentResolv
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.getParameterType().equals(String.class);
+        return parameter.getParameterType().equals(String.class)
+                && parameter.hasParameterAnnotation(ExtractToken.class);
     }
 
     @Override

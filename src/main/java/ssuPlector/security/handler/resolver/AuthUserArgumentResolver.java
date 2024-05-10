@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import ssuPlector.domain.Developer;
 import ssuPlector.global.exception.GlobalException;
 import ssuPlector.global.response.code.GlobalErrorCode;
+import ssuPlector.security.handler.annotation.AuthUser;
 import ssuPlector.service.developer.DeveloperService;
 
 @Component
@@ -25,7 +26,8 @@ public class AuthUserArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.getParameterType().equals(Developer.class);
+        return parameter.getParameterType().equals(Developer.class)
+                && parameter.hasParameterAnnotation(AuthUser.class);
     }
 
     @Override
