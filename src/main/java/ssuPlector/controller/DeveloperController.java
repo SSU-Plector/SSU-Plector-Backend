@@ -64,11 +64,11 @@ public class DeveloperController {
                 "개발자 리스트 조회 성공", DeveloperConverter.toDeveloperResponseListDTO(developerList));
     }
 
-    @Operation(summary = "개발자 삭제", description = "개발자를 삭제합니다(soft delete)._현근")
+    @Operation(summary = "회원 탈퇴", description = "회원을 비활성화 합니다(soft delete)._현근")
     @DeleteMapping("/{developerId}")
     public ApiResponse<String> withdrawDeveloper(
             @ExistDeveloper @PathVariable("developerId") Long developerId) {
         developerService.withdrawDeveloper(developerId);
-        return ApiResponse.onSuccess("개발자 삭제 성공");
+        return ApiResponse.onSuccess("회원 탈퇴 성공");
     }
 }
