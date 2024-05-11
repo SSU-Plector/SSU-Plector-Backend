@@ -21,4 +21,6 @@ public interface DeveloperService {
     List<Long> getUpdateTargetDeveloperIds(List<Long> DeveloperIdList);
 
     Page<Developer> getDeveloperList(DeveloperListRequestDTO requestDTO, int page);
+
+    void withdrawDeveloper(Long developerId);
 }

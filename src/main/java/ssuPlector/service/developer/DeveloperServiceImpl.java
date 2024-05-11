@@ -22,6 +22,7 @@ import ssuPlector.dto.request.DeveloperDTO.DeveloperRequestDTO;
 import ssuPlector.global.exception.GlobalException;
 import ssuPlector.global.response.code.GlobalErrorCode;
 import ssuPlector.redis.service.DeveloperHitsService;
+import ssuPlector.redis.service.RefreshTokenService;
 import ssuPlector.repository.UuidRepository;
 import ssuPlector.repository.developer.DeveloperRepository;
 
@@ -32,6 +33,7 @@ public class DeveloperServiceImpl implements DeveloperService {
     private final DeveloperHitsService developerHitsService;
     private final AmazonS3Manager s3Manager;
     private final UuidRepository uuidRepository;
+    private final RefreshTokenService refreshTokenService;
 
     @Override
     @Transactional
@@ -92,5 +94,13 @@ public class DeveloperServiceImpl implements DeveloperService {
         Pageable pageable = PageRequest.of(page, 10);
         return developerRepository.findDevelopers(
                 requestDTO.getSortType(), requestDTO.getPart(), pageable);
+    }
+
+    @Override
+    public void withdrawDeveloper(Long id) {
+        Developer developer = developerRepository.findById(id).get();
+        developer.setDelete();
+        refreshTokenService.deleteToken(id);
+        developerRepository.save(developer);
     }
 }

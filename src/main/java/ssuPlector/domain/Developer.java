@@ -1,9 +1,12 @@
 package ssuPlector.domain;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
+
+import org.hibernate.annotations.SQLRestriction;
 
 import lombok.*;
 import ssuPlector.domain.category.DevLanguage;
@@ -17,6 +20,7 @@ import ssuPlector.domain.category.TechStack;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SQLRestriction("is_deleted = false")
 public class Developer extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,6 +84,12 @@ public class Developer extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Part part2;
 
+    @Column(columnDefinition = "tinyint(1)")
+    @Builder.Default
+    private boolean isDeleted = false;
+
+    private LocalDateTime deletedAt;
+
     // ==연관관계 메서드==//
     public void addProjectDeveloper(ProjectDeveloper projectDeveloper) {
         projectDeveloper.setDeveloper(this);
@@ -95,5 +105,10 @@ public class Developer extends BaseEntity {
 
     public boolean getIsDeveloper() {
         return this.isDeveloper;
+    }
+
+    public void setDelete() {
+        this.isDeleted = true;
+        this.deletedAt = LocalDateTime.now();
     }
 }
