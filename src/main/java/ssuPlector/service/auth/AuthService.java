@@ -9,4 +9,6 @@ public interface AuthService {
     TokenRefreshResponse refresh(String refreshToken);
 
     void KakaoLogout(Long developerId);
+
+    void withdrawDeveloper(Long developerId);
 }

@@ -74,12 +74,4 @@ public class DeveloperServiceImpl implements DeveloperService {
         return developerRepository.findDevelopers(
                 requestDTO.getSortType(), requestDTO.getPart(), pageable);
     }
-
-    @Override
-    public void withdrawDeveloper(Long id) {
-        Developer developer = developerRepository.findById(id).get();
-        developer.softDelete();
-        refreshTokenService.deleteToken(id);
-        developerRepository.save(developer);
-    }
 }

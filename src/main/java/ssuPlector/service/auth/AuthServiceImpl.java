@@ -72,4 +72,12 @@ public class AuthServiceImpl implements AuthService {
     public void KakaoLogout(Long developerId) {
         refreshTokenService.deleteToken(developerId);
     }
+
+    @Override
+    public void withdrawDeveloper(Long id) {
+        Developer developer = developerRepository.findById(id).get();
+        developer.softDelete();
+        refreshTokenService.deleteToken(id);
+        developerRepository.save(developer);
+    }
 }
