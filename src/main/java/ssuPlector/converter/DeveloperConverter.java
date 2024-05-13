@@ -69,17 +69,16 @@ public class DeveloperConverter {
                 .hits(developer.getHits())
                 .part1(developer.getPart1())
                 .part2(developer.getPart2())
+                .imageLink(developer.getImageList().get(0).getImagePath())
                 .build();
     }
 
     public static Developer toDeveloper(DeveloperRequestDTO requestDTO) {
         return Developer.builder()
-                .name(requestDTO.getName())
                 .shortIntro(requestDTO.getShortIntro())
                 .university(requestDTO.getUniversity())
                 .major(requestDTO.getMajor())
                 .studentNumber(requestDTO.getStudentNumber())
-                .email(requestDTO.getEmail())
                 .hits(0)
                 .kakaoId(requestDTO.getKakaoId())
                 .githubLink(requestDTO.getGithubLink())
