@@ -59,6 +59,7 @@ public class DeveloperDTO {
         Part part1;
         Part part2;
         String githubLink;
+        String imageLink;
         Long hits;
     }
 

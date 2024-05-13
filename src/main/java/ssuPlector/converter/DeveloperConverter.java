@@ -69,6 +69,7 @@ public class DeveloperConverter {
                 .hits(developer.getHits())
                 .part1(developer.getPart1())
                 .part2(developer.getPart2())
+                .imageLink(developer.getImageList().get(0).getImagePath())
                 .build();
     }
 
