@@ -38,13 +38,13 @@ public class DeveloperServiceImpl implements DeveloperService {
     }
 
     @Override
-    public Developer getDeveloper(Long id) {
+    public Developer getDeveloper(Long id, boolean isHit) {
         Developer developer =
                 developerRepository
                         .findById(id)
                         .orElseThrow(
                                 () -> new GlobalException(GlobalErrorCode.DEVELOPER_NOT_FOUND));
-        developerHitsService.incrementHits(id);
+        if (isHit) developerHitsService.incrementHits(id);
         return developer;
     }
 

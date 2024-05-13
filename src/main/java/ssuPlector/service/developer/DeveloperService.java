@@ -11,7 +11,7 @@ import ssuPlector.domain.Developer;
 public interface DeveloperService {
     Long createDeveloper(String email, DeveloperRequestDTO requestDTO);
 
-    Developer getDeveloper(Long id);
+    Developer getDeveloper(Long id, boolean isHit);
 
     boolean existsByDeveloperId(Long id);
 

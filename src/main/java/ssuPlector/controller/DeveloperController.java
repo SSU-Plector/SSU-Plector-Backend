@@ -47,7 +47,7 @@ public class DeveloperController {
     @GetMapping("{developerId}")
     public ApiResponse<DeveloperDetailDTO> getDeveloperDetail(
             @ExistDeveloper @PathVariable("developerId") Long developerId) {
-        Developer developer = developerService.getDeveloper(developerId);
+        Developer developer = developerService.getDeveloper(developerId, true);
         return ApiResponse.onSuccess(
                 "개발자 상세조회 완료.", DeveloperConverter.toDeveloperDetailDTO(developer));
     }
@@ -66,7 +66,7 @@ public class DeveloperController {
     @GetMapping("/mypage")
     public ApiResponse<DeveloperDetailDTO> getMyDeveloperPage(
             @Parameter(name = "developer", hidden = true) @AuthUser Developer developer) {
-        Developer developerSelf = developerService.getDeveloper(developer.getId());
+        Developer developerSelf = developerService.getDeveloper(developer.getId(), true);
         return ApiResponse.onSuccess(
                 "내 개발자 페이지 조회 완료", DeveloperConverter.toDeveloperDetailDTO(developerSelf));
     }
