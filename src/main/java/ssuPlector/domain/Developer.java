@@ -11,6 +11,7 @@ import ssuPlector.domain.category.DevTools;
 import ssuPlector.domain.category.Part;
 import ssuPlector.domain.category.SocialType;
 import ssuPlector.domain.category.TechStack;
+import ssuPlector.dto.request.DeveloperDTO.DeveloperRequestDTO;
 
 @Entity
 @Getter
@@ -95,5 +96,38 @@ public class Developer extends BaseEntity {
 
     public boolean getIsDeveloper() {
         return this.isDeveloper;
+    }
+
+    public void setStartDeveloper(DeveloperRequestDTO requestDTO) {
+        this.shortIntro = requestDTO.getShortIntro();
+        this.university = requestDTO.getUniversity();
+        this.major = requestDTO.getMajor();
+        this.studentNumber = requestDTO.getStudentNumber();
+        this.kakaoId = requestDTO.getKakaoId();
+        this.githubLink = requestDTO.getGithubLink();
+        this.part1 = requestDTO.getPart1();
+        this.part2 = requestDTO.getPart2();
+
+        if (requestDTO.getLanguageList().size() < 3) {
+            this.languageList = fillList(requestDTO.getLanguageList());
+        }
+        if (requestDTO.getDevToolList().size() < 3) {
+            this.devToolList = fillList(requestDTO.getDevToolList());
+        }
+        if (requestDTO.getTechStackList().size() < 3) {
+            this.techStackList = fillList(requestDTO.getTechStackList());
+        }
+    }
+
+    private <T> ArrayList<T> fillList(List<T> sourceList) {
+        ArrayList<T> list = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            if (i < sourceList.size()) {
+                list.add(sourceList.get(i));
+            } else {
+                list.add(null);
+            }
+        }
+        return list;
     }
 }
