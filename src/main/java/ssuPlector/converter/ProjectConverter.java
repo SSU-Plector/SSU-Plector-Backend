@@ -18,7 +18,6 @@ public class ProjectConverter {
 
         return ProjectPreviewDTO.builder()
                 .id(project.getId())
-                .hits(project.getHits())
                 .name(project.getName())
                 .shortIntro(project.getShortIntro())
                 .category(project.getCategory())
