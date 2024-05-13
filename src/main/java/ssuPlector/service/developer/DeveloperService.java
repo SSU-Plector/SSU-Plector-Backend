@@ -11,7 +11,7 @@ import ssuPlector.domain.Developer;
 public interface DeveloperService {
     Long createDeveloper(String email, DeveloperRequestDTO requestDTO);
 
-    Developer getDeveloper(Long id);
+    Developer getDeveloper(Long id, boolean isHit);
 
     boolean existsByDeveloperId(Long id);
 
@@ -20,6 +20,4 @@ public interface DeveloperService {
     List<Long> getUpdateTargetDeveloperIds(List<Long> DeveloperIdList);
 
     Page<Developer> getDeveloperList(DeveloperListRequestDTO requestDTO, int page);
-
-    void withdrawDeveloper(Long developerId);
 }

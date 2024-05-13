@@ -20,7 +20,6 @@ public class TestAuthService {
 
     @Transactional
     public TestAuthResponse login(String email) {
-        System.out.println(email);
         Developer developer =
                 developerRepository
                         .findByEmail(email)

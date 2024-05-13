@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import ssuPlector.converter.DeveloperConverter;
@@ -21,6 +22,7 @@ import ssuPlector.dto.request.DeveloperDTO.DeveloperRequestDTO;
 import ssuPlector.dto.response.DeveloperDTO.DeveloperDetailDTO;
 import ssuPlector.dto.response.DeveloperDTO.DeveloperListResponseDTO;
 import ssuPlector.global.response.ApiResponse;
+import ssuPlector.security.handler.annotation.AuthUser;
 import ssuPlector.service.developer.DeveloperService;
 import ssuPlector.validation.annotation.ExistDeveloper;
 
@@ -45,7 +47,7 @@ public class DeveloperController {
     @GetMapping("{developerId}")
     public ApiResponse<DeveloperDetailDTO> getDeveloperDetail(
             @ExistDeveloper @PathVariable("developerId") Long developerId) {
-        Developer developer = developerService.getDeveloper(developerId);
+        Developer developer = developerService.getDeveloper(developerId, true);
         return ApiResponse.onSuccess(
                 "개발자 상세조회 완료.", DeveloperConverter.toDeveloperDetailDTO(developer));
     }
@@ -60,11 +62,12 @@ public class DeveloperController {
                 "개발자 리스트 조회 성공", DeveloperConverter.toDeveloperResponseListDTO(developerList));
     }
 
-    @Operation(summary = "회원 탈퇴", description = "회원을 비활성화 합니다(soft delete)._현근")
-    @DeleteMapping("/{developerId}")
-    public ApiResponse<String> withdrawDeveloper(
-            @ExistDeveloper @PathVariable("developerId") Long developerId) {
-        developerService.withdrawDeveloper(developerId);
-        return ApiResponse.onSuccess("회원 탈퇴 성공");
+    @Operation(summary = "내 개발자 페이지 조회", description = "내 개발자 페이지를 조회합니다._숙희")
+    @GetMapping("/mypage")
+    public ApiResponse<DeveloperDetailDTO> getMyDeveloperPage(
+            @Parameter(name = "developer", hidden = true) @AuthUser Developer developer) {
+        Developer developerSelf = developerService.getDeveloper(developer.getId(), true);
+        return ApiResponse.onSuccess(
+                "내 개발자 페이지 조회 완료", DeveloperConverter.toDeveloperDetailDTO(developerSelf));
     }
 }

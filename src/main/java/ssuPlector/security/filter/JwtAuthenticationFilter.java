@@ -36,11 +36,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 Long userId = jwtTokenProvider.getId(token);
                 UserDetails userDetails =
                         principalDetailsService.loadUserByUsername(userId.toString());
-
                 if (userDetails != null) {
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                             new UsernamePasswordAuthenticationToken(
-                                    userDetails, "" + userDetails.getAuthorities());
+                                    userDetails, "", userDetails.getAuthorities());
                     SecurityContextHolder.getContext()
                             .setAuthentication(usernamePasswordAuthenticationToken);
                 } else {
@@ -49,8 +48,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             } else {
                 throw new GlobalException(GlobalErrorCode.AUTH_INVALID_TOKEN);
             }
-        } else {
-            filterChain.doFilter(request, response);
         }
+        filterChain.doFilter(request, response);
     }
 }

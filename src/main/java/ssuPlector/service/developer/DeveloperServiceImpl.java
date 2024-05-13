@@ -40,13 +40,13 @@ public class DeveloperServiceImpl implements DeveloperService {
     }
 
     @Override
-    public Developer getDeveloper(Long id) {
+    public Developer getDeveloper(Long id, boolean isHit) {
         Developer developer =
                 developerRepository
                         .findById(id)
                         .orElseThrow(
                                 () -> new GlobalException(GlobalErrorCode.DEVELOPER_NOT_FOUND));
-        developerHitsService.incrementHits(id);
+        if (isHit) developerHitsService.incrementHits(id);
         return developer;
     }
 
@@ -73,13 +73,5 @@ public class DeveloperServiceImpl implements DeveloperService {
         Pageable pageable = PageRequest.of(page, 10);
         return developerRepository.findDevelopers(
                 requestDTO.getSortType(), requestDTO.getPart(), pageable);
-    }
-
-    @Override
-    public void withdrawDeveloper(Long id) {
-        Developer developer = developerRepository.findById(id).get();
-        developer.softDelete();
-        refreshTokenService.deleteToken(id);
-        developerRepository.save(developer);
     }
 }
