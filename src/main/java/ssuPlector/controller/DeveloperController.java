@@ -70,4 +70,12 @@ public class DeveloperController {
         return ApiResponse.onSuccess(
                 "내 개발자 페이지 조회 완료", DeveloperConverter.toDeveloperDetailDTO(developerSelf));
     }
+
+    @Operation(summary = "회원 탈퇴", description = "회원을 비활성화 합니다(soft delete)._현근")
+    @DeleteMapping("/{developerId}")
+    public ApiResponse<String> withdrawDeveloper(
+            @ExistDeveloper @PathVariable("developerId") Long developerId) {
+        developerService.withdrawDeveloper(developerId);
+        return ApiResponse.onSuccess("회원 탈퇴 성공");
+    }
 }
