@@ -16,7 +16,6 @@ import ssuPlector.global.exception.GlobalException;
 import ssuPlector.global.response.code.GlobalErrorCode;
 import ssuPlector.redis.service.DeveloperHitsService;
 import ssuPlector.redis.service.RefreshTokenService;
-import ssuPlector.repository.UuidRepository;
 import ssuPlector.repository.developer.DeveloperRepository;
 
 @Service
