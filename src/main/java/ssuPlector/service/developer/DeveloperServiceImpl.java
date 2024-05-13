@@ -99,7 +99,7 @@ public class DeveloperServiceImpl implements DeveloperService {
     @Override
     public void withdrawDeveloper(Long id) {
         Developer developer = developerRepository.findById(id).get();
-        developer.setDelete();
+        developer.softDelete();
         refreshTokenService.deleteToken(id);
         developerRepository.save(developer);
     }

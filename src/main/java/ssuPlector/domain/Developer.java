@@ -107,7 +107,7 @@ public class Developer extends BaseEntity {
         return this.isDeveloper;
     }
 
-    public void setDelete() {
+    public void softDelete() {
         this.isDeleted = true;
         this.deletedAt = LocalDateTime.now();
     }
