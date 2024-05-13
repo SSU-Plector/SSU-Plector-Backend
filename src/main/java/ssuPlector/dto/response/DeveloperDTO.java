@@ -29,7 +29,6 @@ public class DeveloperDTO {
         String kakaoId;
         String githubLink;
         boolean isDeveloper;
-        List<String> linkList;
         String imageLink;
         List<ProjectPreviewDTO> projectList;
         List<DevLanguage> languageList;
@@ -59,6 +58,7 @@ public class DeveloperDTO {
         Part part1;
         Part part2;
         String githubLink;
+        String imageLink;
         Long hits;
     }
 

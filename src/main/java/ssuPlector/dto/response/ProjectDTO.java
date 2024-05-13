@@ -28,7 +28,6 @@ public class ProjectDTO {
         String imageLink;
         String shortIntro;
         Category category;
-        long hits;
     }
 
     @Getter
