@@ -1,7 +1,5 @@
 package ssuPlector.converter;
 
-import java.util.Collections;
-
 import org.springframework.stereotype.Component;
 
 import ssuPlector.domain.Developer;
@@ -24,14 +22,19 @@ public class AuthConverter {
     }
 
     public static Developer toDeveloper(KakaoProfile kakaoProfile) {
+        Developer developer =
+                Developer.builder()
+                        .email(kakaoProfile.getKakao_account().getEmail())
+                        .name(kakaoProfile.getProperties().getNickname())
+                        .socialType(SocialType.KAKAO)
+                        .build();
         Image image =
-                Image.builder().imagePath(kakaoProfile.getProperties().getProfile_image()).build();
-        return Developer.builder()
-                .email(kakaoProfile.getKakao_account().getEmail())
-                .name(kakaoProfile.getProperties().getNickname())
-                .imageList(Collections.singletonList(image))
-                .socialType(SocialType.KAKAO)
-                .build();
+                Image.builder()
+                        .imagePath(kakaoProfile.getProperties().getProfile_image())
+                        .developer(developer)
+                        .build();
+        developer.addImage(image);
+        return developer;
     }
 
     public static TokenRefreshResponse tokenRefreshResponse(
