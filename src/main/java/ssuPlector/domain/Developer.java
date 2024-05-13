@@ -51,8 +51,6 @@ public class Developer extends BaseEntity {
 
     @Builder.Default private boolean isDeveloper = true;
 
-    @ElementCollection private List<String> linkList;
-
     @Builder.Default
     @OneToMany(mappedBy = "developer", cascade = CascadeType.ALL)
     private List<Image> imageList = new ArrayList<>();
