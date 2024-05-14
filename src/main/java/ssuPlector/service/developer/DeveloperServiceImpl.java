@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import ssuPlector.domain.Developer;
 import ssuPlector.dto.request.DeveloperDTO.DeveloperListRequestDTO;
 import ssuPlector.dto.request.DeveloperDTO.DeveloperRequestDTO;
+import ssuPlector.dto.request.DeveloperDTO.DeveloperUpdateRequestDTO;
 import ssuPlector.global.exception.GlobalException;
 import ssuPlector.global.response.code.GlobalErrorCode;
 import ssuPlector.redis.service.DeveloperHitsService;
@@ -37,6 +38,20 @@ public class DeveloperServiceImpl implements DeveloperService {
         startDeveloper.setStartDeveloper(requestDTO);
 
         return startDeveloper.getId();
+    }
+
+    @Override
+    @Transactional
+    public Long updateDeveloper(Long id, DeveloperUpdateRequestDTO requestDTO) {
+        Developer developer =
+                developerRepository
+                        .findById(id)
+                        .orElseThrow(
+                                () -> new GlobalException(GlobalErrorCode.DEVELOPER_NOT_FOUND));
+
+        developer.updateDeveloper(requestDTO);
+
+        return developer.getId();
     }
 
     @Override
