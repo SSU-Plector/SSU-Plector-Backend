@@ -49,7 +49,7 @@ public class ProjectController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse<Long> createProject(
             @RequestPart(value = "requestDTO") @Valid ProjectRequestDTO requestDTO,
-            @RequestPart(value = "image", required = false) MultipartFile image) {
+            @RequestPart(value = "image", required = true) MultipartFile image) {
         Long projectId = projectService.createProject(requestDTO, image);
         return ApiResponse.onSuccess("프로젝트 생성 및 저장 완료.", projectId);
     }

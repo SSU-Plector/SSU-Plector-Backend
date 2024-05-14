@@ -19,6 +19,7 @@ import ssuPlector.converter.DeveloperConverter;
 import ssuPlector.domain.Developer;
 import ssuPlector.dto.request.DeveloperDTO.DeveloperListRequestDTO;
 import ssuPlector.dto.request.DeveloperDTO.DeveloperRequestDTO;
+import ssuPlector.dto.request.DeveloperDTO.DeveloperUpdateRequestDTO;
 import ssuPlector.dto.response.DeveloperDTO.DeveloperDetailDTO;
 import ssuPlector.dto.response.DeveloperDTO.DeveloperListResponseDTO;
 import ssuPlector.global.response.ApiResponse;
@@ -41,6 +42,15 @@ public class DeveloperController {
             @RequestBody DeveloperRequestDTO requestDTO) {
         Long developerId = developerService.createDeveloper(email, requestDTO);
         return ApiResponse.onSuccess("개발자 프로필 생성 완료.", developerId);
+    }
+
+    @Operation(summary = "개발자 프로필 수정", description = "개발자 프로필을 수정합니다._찬민")
+    @PatchMapping("/update")
+    public ApiResponse<Long> updateDeveloper(
+            @Parameter(name = "developer", hidden = true) @AuthUser Developer developer,
+            @RequestBody DeveloperUpdateRequestDTO requestDTO) {
+        Long developerId = developerService.updateDeveloper(developer.getId(), requestDTO);
+        return ApiResponse.onSuccess("개발자 프로필 수정 완료.", developerId);
     }
 
     @Operation(summary = "개발자 상세조회 API", description = "개발자 프로필을 상세조회 합니다._숙희")
