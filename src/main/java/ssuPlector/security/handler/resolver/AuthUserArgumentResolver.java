@@ -1,7 +1,5 @@
 package ssuPlector.security.handler.resolver;
 
-import java.util.Optional;
-
 import org.springframework.core.MethodParameter;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -41,7 +39,7 @@ public class AuthUserArgumentResolver implements HandlerMethodArgumentResolver {
 
         if (authentication != null) {
             if (authentication.getName().equals("anonymousUser")) {
-                return Optional.empty();
+                throw new GlobalException(GlobalErrorCode._BAD_REQUEST);
             }
             principal = authentication.getPrincipal();
         }

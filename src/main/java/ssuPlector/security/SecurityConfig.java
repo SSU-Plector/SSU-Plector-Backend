@@ -64,7 +64,6 @@ public class SecurityConfig {
                                         "/api/auth/kakao/login",
                                         "api/developers/{developerId}",
                                         "/api/developers/list",
-                                        "/api/developers",
                                         "/api/projects/{projectId}",
                                         "/api/projects/list",
                                         "/api/projects")
