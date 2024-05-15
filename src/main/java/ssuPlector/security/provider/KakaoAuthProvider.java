@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -39,13 +40,17 @@ public class KakaoAuthProvider {
 
         HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest =
                 new HttpEntity<>(params, headers);
-        ResponseEntity<String> response =
-                restTemplate.exchange(
-                        "https://kauth.kakao.com/oauth/token",
-                        HttpMethod.POST,
-                        kakaoTokenRequest,
-                        String.class);
-
+        ResponseEntity<String> response;
+        try {
+            response =
+                    restTemplate.exchange(
+                            "https://kauth.kakao.com/oauth/token",
+                            HttpMethod.POST,
+                            kakaoTokenRequest,
+                            String.class);
+        } catch (HttpClientErrorException e) {
+            throw new GlobalException(GlobalErrorCode._BAD_REQUEST);
+        }
         ObjectMapper objectMapper = new ObjectMapper();
         OAuthToken oAuthToken;
 
