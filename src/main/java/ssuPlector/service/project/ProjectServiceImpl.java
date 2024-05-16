@@ -125,12 +125,6 @@ public class ProjectServiceImpl implements ProjectService {
                 .collect(Collectors.toList());
     }
 
-    //    @Transactional
-    //    public List<Image> createImageList(List<ImageRequestDTO> requestDTOList) {
-    //        return
-    // requestDTOList.stream().map(ImageConverter::toImage).collect(Collectors.toList());
-    //    }
-
     @Transactional
     public ProjectDeveloper createProjectDeveloper(ProjectDeveloperRequestDTO requestDTO) {
 
