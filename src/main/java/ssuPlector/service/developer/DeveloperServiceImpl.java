@@ -1,5 +1,6 @@
 package ssuPlector.service.developer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -10,21 +11,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import ssuPlector.domain.Developer;
+import ssuPlector.domain.category.DevLanguage;
+import ssuPlector.domain.category.DevTools;
+import ssuPlector.domain.category.TechStack;
 import ssuPlector.dto.request.DeveloperDTO.DeveloperListRequestDTO;
 import ssuPlector.dto.request.DeveloperDTO.DeveloperRequestDTO;
 import ssuPlector.dto.request.DeveloperDTO.DeveloperUpdateRequestDTO;
 import ssuPlector.global.exception.GlobalException;
 import ssuPlector.global.response.code.GlobalErrorCode;
 import ssuPlector.redis.service.DeveloperHitsService;
-import ssuPlector.redis.service.RefreshTokenService;
 import ssuPlector.repository.developer.DeveloperRepository;
+import ssuPlector.service.BaseMethod;
 
 @Service
 @RequiredArgsConstructor
 public class DeveloperServiceImpl implements DeveloperService {
     private final DeveloperRepository developerRepository;
     private final DeveloperHitsService developerHitsService;
-    private final RefreshTokenService refreshTokenService;
+    private final BaseMethod baseMethod;
 
     @Override
     @Transactional
@@ -34,8 +38,11 @@ public class DeveloperServiceImpl implements DeveloperService {
                         .findByEmail(email)
                         .orElseThrow(
                                 () -> new GlobalException(GlobalErrorCode.DEVELOPER_NOT_FOUND));
+        ArrayList<DevLanguage> newLanguage = baseMethod.fillList(requestDTO.getLanguageList());
+        ArrayList<DevTools> newDevTool = baseMethod.fillList(requestDTO.getDevToolList());
+        ArrayList<TechStack> newTechStack = baseMethod.fillList(requestDTO.getTechStackList());
 
-        startDeveloper.setStartDeveloper(requestDTO);
+        startDeveloper.setStartDeveloper(requestDTO, newLanguage, newDevTool, newTechStack);
 
         return startDeveloper.getId();
     }
@@ -48,8 +55,11 @@ public class DeveloperServiceImpl implements DeveloperService {
                         .findById(id)
                         .orElseThrow(
                                 () -> new GlobalException(GlobalErrorCode.DEVELOPER_NOT_FOUND));
+        ArrayList<DevLanguage> newLanguage = baseMethod.fillList(requestDTO.getLanguageList());
+        ArrayList<DevTools> newDevTool = baseMethod.fillList(requestDTO.getDevToolList());
+        ArrayList<TechStack> newTechStack = baseMethod.fillList(requestDTO.getTechStackList());
 
-        developer.updateDeveloper(requestDTO);
+        developer.updateDeveloper(requestDTO, newLanguage, newDevTool, newTechStack);
 
         return developer.getId();
     }

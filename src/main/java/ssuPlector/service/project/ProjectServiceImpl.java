@@ -2,6 +2,7 @@ package ssuPlector.service.project;
 
 import static ssuPlector.dto.request.ProjectDTO.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -23,6 +24,9 @@ import ssuPlector.domain.Project;
 import ssuPlector.domain.ProjectDeveloper;
 import ssuPlector.domain.Uuid;
 import ssuPlector.domain.category.Category;
+import ssuPlector.domain.category.DevLanguage;
+import ssuPlector.domain.category.DevTools;
+import ssuPlector.domain.category.TechStack;
 import ssuPlector.dto.request.ProjectDTO.ProjectListRequestDto;
 import ssuPlector.dto.response.ProjectDTO.ProjectListResponseDto;
 import ssuPlector.global.exception.GlobalException;
@@ -32,6 +36,7 @@ import ssuPlector.repository.UuidRepository;
 import ssuPlector.repository.developer.DeveloperRepository;
 import ssuPlector.repository.project.ProjectRepository;
 import ssuPlector.repository.projectDevloper.ProjectDeveloperRepository;
+import ssuPlector.service.BaseMethod;
 
 @Service
 @RequiredArgsConstructor
@@ -42,6 +47,7 @@ public class ProjectServiceImpl implements ProjectService {
     private final ProjectHitsService projectHitsService;
     private final AmazonS3Manager s3Manager;
     private final UuidRepository uuidRepository;
+    private final BaseMethod baseMethod;
 
     @Override
     public Project getProject(Long projectId) {
@@ -90,7 +96,11 @@ public class ProjectServiceImpl implements ProjectService {
         String uuid = UUID.randomUUID().toString();
         Uuid savedUuid = uuidRepository.save(Uuid.builder().uuid(uuid).build());
 
-        Project newProject = ProjectConverter.toProject(requestDTO);
+        ArrayList<DevLanguage> newLanguage = baseMethod.fillList(requestDTO.getLanguageList());
+        ArrayList<DevTools> newDevTool = baseMethod.fillList(requestDTO.getDevToolList());
+        ArrayList<TechStack> newTechStack = baseMethod.fillList(requestDTO.getTechStackList());
+        Project newProject =
+                ProjectConverter.toProject(requestDTO, newLanguage, newDevTool, newTechStack);
 
         List<ProjectDeveloper> projectDeveloperList =
                 createProjectDeveloperList(requestDTO.getProjectDevloperList());
@@ -114,12 +124,6 @@ public class ProjectServiceImpl implements ProjectService {
                 .map(this::createProjectDeveloper)
                 .collect(Collectors.toList());
     }
-
-    //    @Transactional
-    //    public List<Image> createImageList(List<ImageRequestDTO> requestDTOList) {
-    //        return
-    // requestDTOList.stream().map(ImageConverter::toImage).collect(Collectors.toList());
-    //    }
 
     @Transactional
     public ProjectDeveloper createProjectDeveloper(ProjectDeveloperRequestDTO requestDTO) {

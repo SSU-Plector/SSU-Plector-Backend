@@ -1,12 +1,16 @@
 package ssuPlector.converter;
 
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
 import ssuPlector.domain.Project;
 import ssuPlector.domain.ProjectDeveloper;
-import ssuPlector.dto.request.ProjectDTO;
+import ssuPlector.domain.category.DevLanguage;
+import ssuPlector.domain.category.DevTools;
+import ssuPlector.domain.category.TechStack;
+import ssuPlector.dto.request.ProjectDTO.ProjectRequestDTO;
 import ssuPlector.dto.response.ProjectDTO.ProjectDetailDTO;
 import ssuPlector.dto.response.ProjectDTO.ProjectPreviewDTO;
 
@@ -48,7 +52,11 @@ public class ProjectConverter {
                 .build();
     }
 
-    public static Project toProject(ProjectDTO.ProjectRequestDTO requestDTO) {
+    public static Project toProject(
+            ProjectRequestDTO requestDTO,
+            ArrayList<DevLanguage> devLanguages,
+            ArrayList<DevTools> devTools,
+            ArrayList<TechStack> techStacks) {
         return Project.builder()
                 .name(requestDTO.getName())
                 .shortIntro(requestDTO.getShortIntro())
@@ -58,9 +66,9 @@ public class ProjectConverter {
                 .webLink(requestDTO.getWebLink())
                 .appLink(requestDTO.getAppLink())
                 .category(requestDTO.getCategory())
-                .languageList(requestDTO.getLanguageList())
-                .devToolList(requestDTO.getDevToolList())
-                .techStackList(requestDTO.getTechStackList())
+                .languageList(devLanguages)
+                .devToolList(devTools)
+                .techStackList(techStacks)
                 .build();
     }
 }
