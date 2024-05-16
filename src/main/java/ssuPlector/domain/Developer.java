@@ -112,7 +112,11 @@ public class Developer extends BaseEntity {
         this.deletedAt = LocalDateTime.now();
     }
 
-    public void setStartDeveloper(DeveloperRequestDTO requestDTO) {
+    public void setStartDeveloper(
+            DeveloperRequestDTO requestDTO,
+            ArrayList<DevLanguage> newLanguage,
+            ArrayList<DevTools> newDevTool,
+            ArrayList<TechStack> newTechStack) {
         this.shortIntro = requestDTO.getShortIntro();
         this.university = requestDTO.getUniversity();
         this.major = requestDTO.getMajor();
@@ -121,19 +125,16 @@ public class Developer extends BaseEntity {
         this.githubLink = requestDTO.getGithubLink();
         this.part1 = requestDTO.getPart1();
         this.part2 = requestDTO.getPart2();
-
-        if (requestDTO.getLanguageList().size() < 3) {
-            this.languageList = fillList(requestDTO.getLanguageList());
-        }
-        if (requestDTO.getDevToolList().size() < 3) {
-            this.devToolList = fillList(requestDTO.getDevToolList());
-        }
-        if (requestDTO.getTechStackList().size() < 3) {
-            this.techStackList = fillList(requestDTO.getTechStackList());
-        }
+        this.languageList = newLanguage;
+        this.devToolList = newDevTool;
+        this.techStackList = newTechStack;
     }
 
-    public void updateDeveloper(DeveloperUpdateRequestDTO requestDTO) {
+    public void updateDeveloper(
+            DeveloperUpdateRequestDTO requestDTO,
+            ArrayList<DevLanguage> newLanguage,
+            ArrayList<DevTools> newDevTool,
+            ArrayList<TechStack> newTechStack) {
         this.shortIntro = requestDTO.getShortIntro();
         this.university = requestDTO.getUniversity();
         this.major = requestDTO.getMajor();
@@ -141,27 +142,8 @@ public class Developer extends BaseEntity {
         this.githubLink = requestDTO.getGithubLink();
         this.part1 = requestDTO.getPart1();
         this.part2 = requestDTO.getPart2();
-
-        if (requestDTO.getLanguageList().size() < 3) {
-            this.languageList = fillList(requestDTO.getLanguageList());
-        }
-        if (requestDTO.getDevToolList().size() < 3) {
-            this.devToolList = fillList(requestDTO.getDevToolList());
-        }
-        if (requestDTO.getTechStackList().size() < 3) {
-            this.techStackList = fillList(requestDTO.getTechStackList());
-        }
-    }
-
-    private <T> ArrayList<T> fillList(List<T> sourceList) {
-        ArrayList<T> list = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            if (i < sourceList.size()) {
-                list.add(sourceList.get(i));
-            } else {
-                list.add(null);
-            }
-        }
-        return list;
+        this.languageList = newLanguage;
+        this.devToolList = newDevTool;
+        this.techStackList = newTechStack;
     }
 }
