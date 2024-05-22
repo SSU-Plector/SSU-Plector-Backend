@@ -2,7 +2,6 @@ package ssuPlector.dto.request;
 
 import java.util.List;
 
-import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -25,9 +24,9 @@ public class ProjectDTO {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class ProjectListRequestDto {
-        @Nullable private String searchString;
-        @Nullable private String category;
-        @Nullable private String sortType; // recent, old, high, low
+        private String searchString;
+        private String category;
+        private String sortType; // recent, old, high, low
     }
 
     @Getter
