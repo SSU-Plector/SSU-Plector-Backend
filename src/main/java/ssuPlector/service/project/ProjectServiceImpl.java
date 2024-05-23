@@ -79,13 +79,13 @@ public class ProjectServiceImpl implements ProjectService {
     public ProjectListResponseDto getProjectList(ProjectListRequestDto requestDto, int page) {
         Pageable pageable = PageRequest.of(page, 4);
         String category = requestDto.getCategory();
-        if (category != null && category.isEmpty()) category = null;
-        if (category != null && !EnumUtils.isValidEnum(Category.class, category))
+        if ((category != null && !category.isBlank())
+                && !EnumUtils.isValidEnum(Category.class, category))
             throw new GlobalException(GlobalErrorCode.CATEGORY_NOT_FOUND);
         return new ProjectListResponseDto(
                 projectRepository.findProjects(
                         requestDto.getSearchString(),
-                        category,
+                        requestDto.getCategory(),
                         requestDto.getSortType(),
                         pageable));
     }
