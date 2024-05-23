@@ -24,15 +24,15 @@ public class ProjectRepositoryCustomImpl implements ProjectRepositoryCustom {
         QProject project = QProject.project;
         JPAQuery<Project> query = queryFactory.selectFrom(project);
 
-        if (searchString != null) {
+        if (searchString != null && !searchString.isBlank()) {
             query.where(project.name.containsIgnoreCase(searchString));
         }
 
-        if (category != null) {
+        if (category != null && !category.isBlank()) {
             query.where(project.category.eq(Category.valueOf(category)));
         }
 
-        if (sortType != null) {
+        if (sortType != null && !sortType.isBlank()) {
             if (sortType.equals("recent")) {
                 query.orderBy(project.updatedDate.desc());
             } else if (sortType.equals("old")) {
