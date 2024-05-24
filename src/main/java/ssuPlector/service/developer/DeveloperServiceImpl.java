@@ -95,7 +95,7 @@ public class DeveloperServiceImpl implements DeveloperService {
 
     @Override
     public Page<Developer> getDeveloperList(DeveloperListRequestDTO requestDTO, int page) {
-        Pageable pageable = PageRequest.of(page, 10);
+        Pageable pageable = PageRequest.of(page, 6);
         return developerRepository.findDevelopers(
                 requestDTO.getSortType(), requestDTO.getPart(), pageable);
     }
