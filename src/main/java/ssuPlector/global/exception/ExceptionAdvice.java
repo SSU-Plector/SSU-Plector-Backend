@@ -67,7 +67,6 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
                                     (existingErrorMessage, newErrorMessage) ->
                                             existingErrorMessage + ", " + newErrorMessage);
                         });
-        log.error(e.getMessage());
         return handleExceptionInternalArgs(
                 e, HttpHeaders.EMPTY, GlobalErrorCode.valueOf("_BAD_REQUEST"), request, errors);
     }
