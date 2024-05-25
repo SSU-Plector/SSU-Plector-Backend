@@ -42,7 +42,6 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
                                 () ->
                                         new RuntimeException(
                                                 "ConstraintViolationException 추출 도중 에러 발생"));
-
         return handleExceptionInternalConstraint(
                 e, GlobalErrorCode.valueOf(errorMessage), HttpHeaders.EMPTY, request);
     }
@@ -68,7 +67,6 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
                                     (existingErrorMessage, newErrorMessage) ->
                                             existingErrorMessage + ", " + newErrorMessage);
                         });
-
         return handleExceptionInternalArgs(
                 e, HttpHeaders.EMPTY, GlobalErrorCode.valueOf("_BAD_REQUEST"), request, errors);
     }

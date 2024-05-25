@@ -19,6 +19,8 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import ssuPlector.domain.Developer;
 import ssuPlector.domain.category.Part;
+import ssuPlector.global.exception.GlobalException;
+import ssuPlector.global.response.code.GlobalErrorCode;
 
 @RequiredArgsConstructor
 public class DeveloperRepositoryImpl implements DeveloperRepositoryCustom {
@@ -57,7 +59,10 @@ public class DeveloperRepositoryImpl implements DeveloperRepositoryCustom {
             orderSpecifiers.add(new OrderSpecifier<>(Order.DESC, developer.hits));
         } else if (sortType.equals("low")) {
             orderSpecifiers.add(new OrderSpecifier<>(Order.ASC, developer.hits));
+        } else {
+            throw new GlobalException(GlobalErrorCode._BAD_REQUEST);
         }
+
         return orderSpecifiers.get(0);
     }
 
