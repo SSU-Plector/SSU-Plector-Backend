@@ -26,7 +26,7 @@ public class DeveloperHitsRepositoryImpl implements DeveloperHitsRepository {
 
     @Override
     public void createHits(String key) {
-        redisTemplate.opsForValue().set(PREFIX + ":" + key, "0", 10, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(PREFIX + ":" + key, "0", 30, TimeUnit.MINUTES);
     }
 
     @Override

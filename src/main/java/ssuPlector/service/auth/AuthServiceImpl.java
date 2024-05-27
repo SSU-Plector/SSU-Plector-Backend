@@ -10,7 +10,6 @@ import ssuPlector.converter.AuthConverter;
 import ssuPlector.domain.Developer;
 import ssuPlector.domain.category.SocialType;
 import ssuPlector.dto.KakaoProfile;
-import ssuPlector.dto.OAuthToken;
 import ssuPlector.dto.response.AuthResponseDTO.OAuthResponse;
 import ssuPlector.dto.response.AuthResponseDTO.TokenRefreshResponse;
 import ssuPlector.global.exception.GlobalException;
@@ -31,8 +30,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     @Transactional
     public OAuthResponse KakaoLogin(String code) {
-        OAuthToken oAuthToken = kakaoAuthProvider.getAccessToken(code);
-        KakaoProfile kakaoProfile = kakaoAuthProvider.getProfile(oAuthToken.getAccess_token());
+        KakaoProfile kakaoProfile = kakaoAuthProvider.getProfile(code);
 
         Optional<Developer> developer =
                 developerRepository.findByEmailAndSocialType(
