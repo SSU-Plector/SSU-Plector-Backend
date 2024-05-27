@@ -24,7 +24,7 @@ public class SchedulerConfig {
     private final ProjectHitsService projectHitsService;
     private final ProjectService projectService;
 
-    @Scheduled(cron = "0 */10 * * * *") // 10분 마다 수행
+    @Scheduled(cron = "0 */30 * * * *") // 30분 마다 수행
     public void updateDeveloperViewCount() {
 
         List<Long> developerIdList = developerHitsService.getAllDeveloperIds();
@@ -45,7 +45,7 @@ public class SchedulerConfig {
         log.info("Developer 조회수 업데이트 완료");
     }
 
-    @Scheduled(cron = "0 */10 * * * *") // 10분 마다 수행
+    @Scheduled(cron = "0 */30 * * * *") // 30분 마다 수행
     public void updateProjectViewCount() {
 
         List<Long> projectIdList = projectHitsService.getAllProjectIds();
