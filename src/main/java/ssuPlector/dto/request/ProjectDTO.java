@@ -31,6 +31,7 @@ public class ProjectDTO {
     }
 
     @Getter
+    @Setter
     @AllArgsConstructor
     @NoArgsConstructor
     public static class ProjectRequestDTO {

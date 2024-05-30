@@ -53,4 +53,13 @@ public class ProjectController {
         Long projectId = projectService.createProject(requestDTO, image);
         return ApiResponse.onSuccess("프로젝트 생성 및 저장 완료.", projectId);
     }
+
+    @Operation(summary = "더미 프로젝트 생성", description = "프로젝트 더미 데이터를 생성합니다._현근")
+    @PostMapping(value = "/dummy", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ApiResponse<Long> createDummyProject(
+            @RequestPart(value = "requestDTO") @Valid ProjectRequestDTO requestDTO,
+            @RequestPart(value = "image", required = true) MultipartFile image) {
+        Long projectId = projectService.createDummyProject(requestDTO, image);
+        return ApiResponse.onSuccess("더미 프로젝트 생성 성공.", projectId);
+    }
 }

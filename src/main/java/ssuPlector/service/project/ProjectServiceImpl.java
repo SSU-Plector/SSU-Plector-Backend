@@ -142,4 +142,10 @@ public class ProjectServiceImpl implements ProjectService {
         }
         return newProjectDeveloper;
     }
+
+    @Override
+    public Long createDummyProject(ProjectRequestDTO requestDTO, MultipartFile image) {
+        requestDTO.setName(requestDTO.getName() + "_dummy");
+        return createProject(requestDTO, image);
+    }
 }
