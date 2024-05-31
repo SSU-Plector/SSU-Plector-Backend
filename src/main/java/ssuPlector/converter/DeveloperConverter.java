@@ -1,5 +1,6 @@
 package ssuPlector.converter;
 
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
@@ -7,10 +8,15 @@ import org.springframework.stereotype.Component;
 
 import ssuPlector.domain.Developer;
 import ssuPlector.domain.ProjectDeveloper;
+import ssuPlector.domain.category.DevLanguage;
+import ssuPlector.domain.category.DevTools;
+import ssuPlector.domain.category.TechStack;
 import ssuPlector.dto.request.DeveloperDTO.DeveloperRequestDTO;
+import ssuPlector.dto.request.DeveloperDTO.DummyDeveloperRequestDTO;
 import ssuPlector.dto.response.DeveloperDTO;
 import ssuPlector.dto.response.DeveloperDTO.DeveloperDetailDTO;
 import ssuPlector.dto.response.DeveloperDTO.DeveloperPreviewDTO;
+import ssuPlector.service.BaseMethod;
 
 @Component
 public class DeveloperConverter {
@@ -88,6 +94,28 @@ public class DeveloperConverter {
                 .techStackList(requestDTO.getTechStackList())
                 .part1(requestDTO.getPart1())
                 .part2(requestDTO.getPart2())
+                .build();
+    }
+
+    public static Developer toDeveloper(DummyDeveloperRequestDTO requestDTO) {
+        BaseMethod baseMethod = new BaseMethod();
+        ArrayList<DevLanguage> newLanguage = baseMethod.fillList(requestDTO.getLanguageList());
+        ArrayList<DevTools> newDevTool = baseMethod.fillList(requestDTO.getDevToolList());
+        ArrayList<TechStack> newTechStack = baseMethod.fillList(requestDTO.getTechStackList());
+        return Developer.builder()
+                .name(requestDTO.getName())
+                .email(requestDTO.getEmail())
+                .shortIntro(requestDTO.getShortIntro())
+                .university(requestDTO.getUniversity())
+                .major(requestDTO.getMajor())
+                .studentNumber(requestDTO.getStudentNumber())
+                .kakaoId(requestDTO.getKakaoId())
+                .githubLink(requestDTO.getGithubLink())
+                .part1(requestDTO.getPart1())
+                .part2(requestDTO.getPart2())
+                .languageList(newLanguage)
+                .devToolList(newDevTool)
+                .techStackList(newTechStack)
                 .build();
     }
 }

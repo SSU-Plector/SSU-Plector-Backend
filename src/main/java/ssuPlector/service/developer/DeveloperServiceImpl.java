@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import ssuPlector.aws.s3.AmazonS3Manager;
+import ssuPlector.converter.DeveloperConverter;
 import ssuPlector.converter.ImageConverter;
 import ssuPlector.domain.Developer;
 import ssuPlector.domain.Image;
@@ -117,26 +118,7 @@ public class DeveloperServiceImpl implements DeveloperService {
         if (developerRepository.findByEmail(requestDTO.getEmail()).isPresent())
             throw new GlobalException(GlobalErrorCode.DEVELOPER_DUPLICATE);
 
-        ArrayList<DevLanguage> newLanguage = baseMethod.fillList(requestDTO.getLanguageList());
-        ArrayList<DevTools> newDevTool = baseMethod.fillList(requestDTO.getDevToolList());
-        ArrayList<TechStack> newTechStack = baseMethod.fillList(requestDTO.getTechStackList());
-
-        Developer dummyDeveloper =
-                Developer.builder()
-                        .name(requestDTO.getName() + "_dummy")
-                        .email(requestDTO.getEmail())
-                        .shortIntro(requestDTO.getShortIntro())
-                        .university(requestDTO.getUniversity())
-                        .major(requestDTO.getMajor())
-                        .studentNumber(requestDTO.getStudentNumber())
-                        .kakaoId(requestDTO.getKakaoId())
-                        .githubLink(requestDTO.getGithubLink())
-                        .part1(requestDTO.getPart1())
-                        .part2(requestDTO.getPart2())
-                        .languageList(newLanguage)
-                        .devToolList(newDevTool)
-                        .techStackList(newTechStack)
-                        .build();
+        Developer dummyDeveloper = DeveloperConverter.toDeveloper(requestDTO);
 
         String uuid = UUID.randomUUID().toString();
         Uuid savedUuid = uuidRepository.save(Uuid.builder().uuid(uuid).build());
