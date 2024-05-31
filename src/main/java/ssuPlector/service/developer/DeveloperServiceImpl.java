@@ -2,24 +2,33 @@ package ssuPlector.service.developer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
+import ssuPlector.aws.s3.AmazonS3Manager;
+import ssuPlector.converter.DeveloperConverter;
+import ssuPlector.converter.ImageConverter;
 import ssuPlector.domain.Developer;
+import ssuPlector.domain.Image;
+import ssuPlector.domain.Uuid;
 import ssuPlector.domain.category.DevLanguage;
 import ssuPlector.domain.category.DevTools;
 import ssuPlector.domain.category.TechStack;
+import ssuPlector.dto.request.DeveloperDTO;
 import ssuPlector.dto.request.DeveloperDTO.DeveloperListRequestDTO;
 import ssuPlector.dto.request.DeveloperDTO.DeveloperRequestDTO;
 import ssuPlector.dto.request.DeveloperDTO.DeveloperUpdateRequestDTO;
 import ssuPlector.global.exception.GlobalException;
 import ssuPlector.global.response.code.GlobalErrorCode;
 import ssuPlector.redis.service.DeveloperHitsService;
+import ssuPlector.repository.UuidRepository;
 import ssuPlector.repository.developer.DeveloperRepository;
 import ssuPlector.service.BaseMethod;
 
@@ -29,6 +38,8 @@ public class DeveloperServiceImpl implements DeveloperService {
     private final DeveloperRepository developerRepository;
     private final DeveloperHitsService developerHitsService;
     private final BaseMethod baseMethod;
+    private final AmazonS3Manager s3Manager;
+    private final UuidRepository uuidRepository;
 
     @Override
     @Transactional
@@ -98,5 +109,25 @@ public class DeveloperServiceImpl implements DeveloperService {
         Pageable pageable = PageRequest.of(page, 6);
         return developerRepository.findDevelopers(
                 requestDTO.getSortType(), requestDTO.getPart(), pageable);
+    }
+
+    @Override
+    @Transactional
+    public Long createDummyDeveloper(
+            DeveloperDTO.DummyDeveloperRequestDTO requestDTO, MultipartFile image) {
+        if (developerRepository.findByEmail(requestDTO.getEmail()).isPresent())
+            throw new GlobalException(GlobalErrorCode.DEVELOPER_DUPLICATE);
+
+        Developer dummyDeveloper = DeveloperConverter.toDeveloper(requestDTO);
+
+        String uuid = UUID.randomUUID().toString();
+        Uuid savedUuid = uuidRepository.save(Uuid.builder().uuid(uuid).build());
+
+        String developerImageUrl =
+                s3Manager.uploadFile(s3Manager.generateProjectKeyName(savedUuid), image);
+        Image developerImage = ImageConverter.toImage(developerImageUrl);
+        dummyDeveloper.addImage(developerImage);
+
+        return developerRepository.save(dummyDeveloper).getId();
     }
 }

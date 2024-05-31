@@ -1,6 +1,0 @@
-aws:
-  paramstore:
-    enabled: true
-    prefix: ssu-plector
-    name: cloud-parameter-store
-    profileSeparator: _

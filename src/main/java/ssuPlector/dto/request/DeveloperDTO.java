@@ -87,4 +87,45 @@ public class DeveloperDTO {
         @MaxSizeThree private List<DevTools> devToolList;
         @MaxSizeThree private List<TechStack> techStackList;
     }
+
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class DummyDeveloperRequestDTO {
+
+        @NotBlank(message = "필수 입력값")
+        @Size(max = 20, message = "최대 20자")
+        private String name;
+
+        @NotBlank(message = "필수 입력값")
+        @Size(max = 52, message = "최대 52자")
+        private String email;
+
+        @NotBlank(message = "필수 입력값")
+        @Size(max = 100, message = "최대 100자")
+        private String shortIntro;
+
+        @NotBlank(message = "필수 입력값")
+        @Size(max = 30, message = "최대 30자")
+        private String university;
+
+        @NotBlank(message = "필수 입력값")
+        @Size(max = 30, message = "최대 30자")
+        private String major;
+
+        @NotBlank(message = "필수 입력값")
+        @Size(max = 20, message = "최대 20자")
+        private String studentNumber;
+
+        @NotBlank(message = "필수 입력값")
+        @Size(max = 20, message = "최대 20자")
+        private String kakaoId;
+
+        private String githubLink;
+        private Part part1;
+        private Part part2;
+        @MaxSizeThree private List<DevLanguage> languageList;
+        @MaxSizeThree private List<DevTools> devToolList;
+        @MaxSizeThree private List<TechStack> techStackList;
+    }
 }
