@@ -142,9 +142,4 @@ public class ProjectServiceImpl implements ProjectService {
         }
         return newProjectDeveloper;
     }
-
-    @Override
-    public Long createDummyProject(ProjectRequestDTO requestDTO, MultipartFile image) {
-        return createProject(requestDTO, image);
-    }
 }

@@ -23,6 +23,4 @@ public interface ProjectService {
     boolean existsByProjectId(Long id);
 
     ProjectListResponseDto getProjectList(ProjectListRequestDto requestDto, int page);
-
-    Long createDummyProject(ProjectRequestDTO requestDTO, MultipartFile image);
 }
