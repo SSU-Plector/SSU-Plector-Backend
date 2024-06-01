@@ -2,7 +2,6 @@ package ssuPlector.controller;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +18,6 @@ import ssuPlector.global.response.ApiResponse;
 import ssuPlector.security.handler.annotation.AuthUser;
 import ssuPlector.security.handler.annotation.ExtractToken;
 import ssuPlector.service.auth.AuthService;
-import ssuPlector.validation.annotation.ExistDeveloper;
 
 @RestController
 @RequiredArgsConstructor
@@ -49,10 +47,10 @@ public class AuthController {
     }
 
     @Operation(summary = "회원 탈퇴", description = "회원을 비활성화 합니다(soft delete)._현근")
-    @DeleteMapping("/{developerId}")
+    @DeleteMapping("/withdraw")
     public ApiResponse<String> withdrawDeveloper(
-            @ExistDeveloper @PathVariable("developerId") Long developerId) {
-        authService.withdrawDeveloper(developerId);
+            @Parameter(name = "developer", hidden = true) @AuthUser Developer developer) {
+        authService.withdrawDeveloper(developer.getId());
         return ApiResponse.onSuccess("회원 탈퇴 성공");
     }
 }
