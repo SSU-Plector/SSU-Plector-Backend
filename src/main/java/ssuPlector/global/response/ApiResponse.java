@@ -1,5 +1,8 @@
 package ssuPlector.global.response;
 
+import java.util.Collections;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import ssuPlector.global.response.code.GlobalErrorCode;
@@ -20,8 +23,8 @@ public class ApiResponse<T> {
     }
 
     // 성공 시 응답
-    public static <T> ApiResponse<T> onSuccess(String message) {
-        return new ApiResponse<>(true, SuccessCode._OK.getCode(), message, null);
+    public static <T> ApiResponse<List<T>> onSuccess(String message) {
+        return new ApiResponse<>(true, SuccessCode._OK.getCode(), message, Collections.emptyList());
     }
 
     // 실패 시  응답
@@ -31,8 +34,11 @@ public class ApiResponse<T> {
     }
 
     // 실패 시 응답
-    public static <T> ApiResponse<T> onFailure(GlobalErrorCode globalErrorCode) {
+    public static <T> ApiResponse<List<T>> onFailure(GlobalErrorCode globalErrorCode) {
         return new ApiResponse<>(
-                false, globalErrorCode.getCode(), globalErrorCode.getMessage(), null);
+                false,
+                globalErrorCode.getCode(),
+                globalErrorCode.getMessage(),
+                Collections.emptyList());
     }
 }
