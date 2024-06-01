@@ -47,7 +47,7 @@ public class AuthController {
     }
 
     @Operation(summary = "회원 탈퇴", description = "회원을 비활성화 합니다(soft delete)._현근")
-    @DeleteMapping("/{developerId}")
+    @DeleteMapping("/withdraw")
     public ApiResponse<String> withdrawDeveloper(
             @Parameter(name = "developer", hidden = true) @AuthUser Developer developer) {
         authService.withdrawDeveloper(developer.getId());
