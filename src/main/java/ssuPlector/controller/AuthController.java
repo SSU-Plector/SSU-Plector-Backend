@@ -1,7 +1,5 @@
 package ssuPlector.controller;
 
-import java.util.List;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +34,7 @@ public class AuthController {
 
     @Operation(summary = "카카오 로그아웃", description = "카카오 로그아웃 합니다._숙희")
     @DeleteMapping("/kakao/logout")
-    public ApiResponse<List<Object>> kakaoLogout(
+    public ApiResponse<?> kakaoLogout(
             @Parameter(name = "developer", hidden = true) @AuthUser Developer developer) {
         authService.KakaoLogout(developer.getId());
         return ApiResponse.onSuccess("카카오 로그아웃 완료");
@@ -50,7 +48,7 @@ public class AuthController {
 
     @Operation(summary = "회원 탈퇴", description = "회원을 비활성화 합니다(soft delete)._현근")
     @DeleteMapping("/withdraw")
-    public ApiResponse<List<Object>> withdrawDeveloper(
+    public ApiResponse<?> withdrawDeveloper(
             @Parameter(name = "developer", hidden = true) @AuthUser Developer developer) {
         authService.withdrawDeveloper(developer.getId());
         return ApiResponse.onSuccess("회원 탈퇴 성공");

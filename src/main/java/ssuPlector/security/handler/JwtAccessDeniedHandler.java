@@ -1,6 +1,7 @@
 package ssuPlector.security.handler;
 
 import java.io.IOException;
+import java.util.Collections;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import ssuPlector.global.exception.GlobalException;
 import ssuPlector.global.response.ApiResponse;
 import ssuPlector.global.response.code.GlobalErrorCode;
 
@@ -27,8 +27,8 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
         response.setContentType("application/json; charset=UTF-8");
         response.setStatus(403);
 
-        ApiResponse<GlobalException> errorResponse =
-                ApiResponse.onFailure(GlobalErrorCode._FORBIDDEN, null);
+        ApiResponse<Object> errorResponse =
+                ApiResponse.onFailure(GlobalErrorCode._FORBIDDEN, Collections.emptyMap());
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(response.getOutputStream(), errorResponse);
