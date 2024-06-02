@@ -1,7 +1,7 @@
 package ssuPlector.security.handler;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Collections;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,7 +27,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         response.setStatus(401);
 
         ApiResponse<Object> errorResponse =
-                ApiResponse.onFailure(GlobalErrorCode._UNAUTHORIZED, new HashMap<>());
+                ApiResponse.onFailure(GlobalErrorCode._UNAUTHORIZED, Collections.emptyMap());
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(response.getOutputStream(), errorResponse); // json 변환

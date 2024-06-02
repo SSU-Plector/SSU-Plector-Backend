@@ -1,7 +1,7 @@
 package ssuPlector.security.handler;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Collections;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,7 +28,7 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
         response.setStatus(403);
 
         ApiResponse<Object> errorResponse =
-                ApiResponse.onFailure(GlobalErrorCode._FORBIDDEN, new HashMap<>());
+                ApiResponse.onFailure(GlobalErrorCode._FORBIDDEN, Collections.emptyMap());
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(response.getOutputStream(), errorResponse);
