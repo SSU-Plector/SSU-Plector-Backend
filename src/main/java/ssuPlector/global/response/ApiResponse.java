@@ -1,7 +1,6 @@
 package ssuPlector.global.response;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,8 +22,8 @@ public class ApiResponse<T> {
     }
 
     // 성공 시 응답
-    public static <T> ApiResponse<List<T>> onSuccess(String message) {
-        return new ApiResponse<>(true, SuccessCode._OK.getCode(), message, Collections.emptyList());
+    public static ApiResponse<?> onSuccess(String message) {
+        return new ApiResponse<>(true, SuccessCode._OK.getCode(), message, new HashMap<>());
     }
 
     // 실패 시  응답
@@ -34,11 +33,8 @@ public class ApiResponse<T> {
     }
 
     // 실패 시 응답
-    public static <T> ApiResponse<List<T>> onFailure(GlobalErrorCode globalErrorCode) {
+    public static ApiResponse<?> onFailure(GlobalErrorCode globalErrorCode) {
         return new ApiResponse<>(
-                false,
-                globalErrorCode.getCode(),
-                globalErrorCode.getMessage(),
-                Collections.emptyList());
+                false, globalErrorCode.getCode(), globalErrorCode.getMessage(), new HashMap<>());
     }
 }

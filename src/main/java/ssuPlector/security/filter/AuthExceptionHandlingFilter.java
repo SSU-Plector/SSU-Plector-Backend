@@ -1,6 +1,7 @@
 package ssuPlector.security.filter;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -32,7 +33,7 @@ public class AuthExceptionHandlingFilter extends OncePerRequestFilter {
 
             GlobalErrorCode code = e.getGlobalErrorCode();
 
-            ApiResponse<Object> errorResponse = ApiResponse.onFailure(code, null);
+            ApiResponse<Object> errorResponse = ApiResponse.onFailure(code, new HashMap<>());
 
             ObjectMapper mapper = new ObjectMapper();
             mapper.writeValue(response.getOutputStream(), errorResponse);
