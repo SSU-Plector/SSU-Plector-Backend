@@ -85,6 +85,8 @@ public class ProjectDTO {
             this.id = project.getId();
             this.name = project.getName();
             if (project.getImageList() == null) this.imagePath = null;
+            else if (project.getImageList().size() == 1)
+                this.imagePath = project.getImageList().get(0).getImagePath();
             else
                 for (Image image : project.getImageList())
                     if (image.getIsMainImage()) this.imagePath = image.getImagePath();
