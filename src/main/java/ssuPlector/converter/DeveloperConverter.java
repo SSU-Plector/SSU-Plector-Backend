@@ -1,6 +1,7 @@
 package ssuPlector.converter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
@@ -47,10 +48,11 @@ public class DeveloperConverter {
     }
 
     public static DeveloperPreviewDTO toDeveloperPreviewDTO(ProjectDeveloper projectDeveloper) {
+        Developer developer = projectDeveloper.getDeveloper();
         return DeveloperPreviewDTO.builder()
-                .id(projectDeveloper.getId())
-                .name(projectDeveloper.getName())
-                .partList(projectDeveloper.getPartList())
+                .id(developer.getId())
+                .name(developer.getName())
+                .partList(Arrays.asList(developer.getPart1(), developer.getPart2()))
                 .build();
     }
 
