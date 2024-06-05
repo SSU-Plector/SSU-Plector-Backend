@@ -1,7 +1,7 @@
 package ssuPlector.converter;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
@@ -52,7 +52,7 @@ public class DeveloperConverter {
         return DeveloperPreviewDTO.builder()
                 .id(developer.getId())
                 .name(developer.getName())
-                .partList(Collections.singletonList(developer.getPart1()))
+                .partList(Arrays.asList(developer.getPart1(), developer.getPart2()))
                 .build();
     }
 
