@@ -26,7 +26,7 @@ public interface DeveloperRepository
     Developer findByKakaoId(String kakaoId);
 
     @Query(
-            value = "select * from Developer where email = :email and socialType = :socialType",
+            value = "select * from Developer where email = :email and social_type = :socialType",
             nativeQuery = true)
     Optional<Developer> findByEmailAndSocialTypeWithDeleted(
             @Param("email") String email, @Param("socialType") SocialType socialType);
