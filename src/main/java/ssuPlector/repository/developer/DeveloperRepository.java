@@ -25,5 +25,10 @@ public interface DeveloperRepository
 
     Developer findByKakaoId(String kakaoId);
 
-    Optional<Developer> findByEmailAndSocialType(String email, SocialType socialType);
+    @Query(
+            value =
+                    "select * from Developer where isdeleted = true and email = :email and socialType = :socialType",
+            nativeQuery = true)
+    Optional<Developer> findByEmailAndSocialTypeWithDeleted(
+            @Param("email") String email, @Param("socialType") SocialType socialType);
 }

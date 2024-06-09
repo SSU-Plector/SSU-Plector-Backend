@@ -146,4 +146,8 @@ public class Developer extends BaseEntity {
         this.devToolList = newDevTool;
         this.techStackList = newTechStack;
     }
+
+    public void recoverDeleted() {
+        this.isDeleted = false;
+    }
 }

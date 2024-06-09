@@ -33,13 +33,17 @@ public class AuthServiceImpl implements AuthService {
         KakaoProfile kakaoProfile = kakaoAuthProvider.getProfile(code);
 
         Optional<Developer> developer =
-                developerRepository.findByEmailAndSocialType(
+                developerRepository.findByEmailAndSocialTypeWithDeleted(
                         kakaoProfile.getKakao_account().getEmail(), SocialType.KAKAO);
         Developer newDeveloper;
         boolean isLogin = false;
 
         if (developer.isEmpty()) {
             newDeveloper = developerRepository.save(AuthConverter.toDeveloper(kakaoProfile));
+        } else if (developer.get().isDeleted()) {
+            newDeveloper = developer.get();
+            newDeveloper.recoverDeleted();
+            isLogin = true;
         } else {
             newDeveloper = developer.get();
             isLogin = true;
