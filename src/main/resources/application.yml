@@ -109,3 +109,4 @@ kakao:
 logging:
   file:
     path: /var/log
+    name: spring-boot-app.log
