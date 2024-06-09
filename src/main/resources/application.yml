@@ -106,3 +106,6 @@ kakao:
   auth:
     client: ${KAKAO_CLIENT_ID}
     redirect-uri: ${KAKAO_REDIRECT_URI}
+logging:
+  file:
+    path: /var/log
